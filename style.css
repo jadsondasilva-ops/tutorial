@@ -2,17 +2,11 @@ body {
     background-color: #121212;
     color: white;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-main {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
+    margin: 0;
     text-align: center;
 }
 
+/* NAV centralizado corretamente */
 nav {
     background: #222;
     padding: 15px;
@@ -21,14 +15,23 @@ nav {
     gap: 20px;
 }
 
+/* links */
 nav a {
     color: white;
-    margin-right: 15px;
     text-decoration: none;
 }
 
+/* conteúdo centralizado */
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* agenda centralizada */
 .agenda {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
