@@ -19,3 +19,9 @@ nav a {
     margin-right: 15px;
     text-decoration: none;
 }
+
+.agenda {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
