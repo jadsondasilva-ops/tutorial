@@ -9,10 +9,36 @@ body {
 /* NAV centralizado corretamente */
 nav {
     background: #222;
-    padding: 15px;
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    padding: 20px 0;
+    font-size: 28px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color .2s;
+}
+
+.menu a:hover {
+    color: #5aa9ff;
 }
 
 /* links */
