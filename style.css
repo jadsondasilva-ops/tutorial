@@ -259,3 +259,302 @@ nav a:hover{
     border-left:6px solid #4A90E2;
 
 }
+
+/*====================================================
+    GRÁFICO
+====================================================*/
+
+.grafico{
+
+    flex:1;
+
+    min-width:350px;
+
+    background:#1D222D;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+
+}
+
+.grafico h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+#graficoPizza{
+
+    width:100%;
+
+    height:340px;
+
+}
+
+
+/*====================================================
+    SEGUNDA LINHA
+====================================================*/
+
+.linhaMeio{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1.4fr;
+
+    gap:20px;
+
+}
+
+
+/*====================================================
+    CARDS
+====================================================*/
+
+.card{
+
+    background:#1D222D;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card h2{
+
+    margin-bottom:15px;
+
+    color:#5FAEFF;
+
+}
+
+
+/*====================================================
+    SALDO
+====================================================*/
+
+.saldo{
+
+    text-align:center;
+
+}
+
+.saldo h1{
+
+    margin-top:30px;
+
+    font-size:42px;
+
+    color:#33D17A;
+
+}
+
+
+/*====================================================
+    CARTÕES
+====================================================*/
+
+.cartoes table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.cartoes td{
+
+    padding:10px;
+
+    border-bottom:1px solid #303744;
+
+}
+
+
+/*====================================================
+    PAGAMENTOS
+====================================================*/
+
+.pagamentos table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.pagamentos td{
+
+    padding:10px;
+
+    border-bottom:1px solid #303744;
+
+}
+
+
+/*====================================================
+    TERCEIRA LINHA
+====================================================*/
+
+.linhaInferior{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:20px;
+
+}
+
+
+/*====================================================
+    AGENDA
+====================================================*/
+
+.agenda iframe{
+
+    width:100%;
+
+    height:700px;
+
+    border:none;
+
+    border-radius:10px;
+
+}
+
+
+/*====================================================
+    META DA MOTO
+====================================================*/
+
+#graficoMoto{
+
+    width:100%;
+
+    height:320px;
+
+}
+
+
+/*====================================================
+    TABELAS
+====================================================*/
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+td{
+
+    padding:10px;
+
+}
+
+
+/*====================================================
+    SCROLL
+====================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#4A90E2;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#15181F;
+
+}
+
+
+/*====================================================
+    RESPONSIVO
+====================================================*/
+
+@media(max-width:1400px){
+
+    .linhaSuperior{
+
+        flex-direction:column;
+
+    }
+
+    .financeiro{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .grafico{
+
+        width:100%;
+
+    }
+
+    .linhaMeio{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .linhaInferior{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    nav{
+
+        flex-direction:column;
+
+        height:auto;
+
+        padding:20px;
+
+        gap:20px;
+
+    }
+
+    nav ul{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+}
