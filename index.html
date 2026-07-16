@@ -14,290 +14,286 @@
 
 <body>
 
-    <!-- ========================= -->
-    <!-- NAVBAR                    -->
-    <!-- ========================= -->
+    <!-- ========================================= -->
+    <!-- NAVBAR                                   -->
+    <!-- ========================================= -->
 
     <nav>
 
         <div class="logo">
-            SAT
+            SAT Dashboard
         </div>
 
         <ul>
 
             <li><a href="#">Início</a></li>
-
             <li><a href="#">Financeiro</a></li>
-
             <li><a href="#">Agenda</a></li>
-
             <li><a href="#">Relatórios</a></li>
-
-            <li><a href="#">Configurações</a></li>
 
         </ul>
 
     </nav>
 
+    <!-- ========================================= -->
+    <!-- DASHBOARD                                -->
+    <!-- ========================================= -->
+
+    <main class="dashboard">
+
+        <!-- ========================================= -->
+        <!-- BLOCO SUPERIOR                           -->
+        <!-- ========================================= -->
+
+        <section class="topo">
+
+            <!-- 3 COLUNAS FINANCEIRAS -->
+
+            <div class="financeiro">
+
+                <!-- ESSENCIAIS -->
+
+                <section class="painel essenciais">
+
+                    <div class="cabecalho vermelho">
+
+                        <h2>Essenciais</h2>
+
+                        <span id="totalEssenciais">
+                            R$ 0,00
+                        </span>
+
+                    </div>
+
+                    <table>
+
+                        <tbody id="tbEssenciais">
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="rodape">
+
+                        <span id="saldoEssenciais">
+
+                            R$ 0,00
+
+                        </span>
+
+                    </div>
+
+                </section>
 
 
-    <!-- ========================= -->
-    <!-- DASHBOARD                 -->
-    <!-- ========================= -->
 
-    <div class="dashboard">
+                <!-- OCASIONAIS -->
 
-        <!-- ESQUERDA -->
+                <section class="painel ocasionais">
 
-        <section class="card essenciais">
+                    <div class="cabecalho laranja">
 
-            <div class="titulo">
-                Despesas Essenciais
+                        <h2>Ocasionais</h2>
+
+                        <span id="totalOcasionais">
+
+                            R$ 0,00
+
+                        </span>
+
+                    </div>
+
+                    <table>
+
+                        <tbody id="tbOcasionais">
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="rodape">
+
+                        <span id="saldoOcasionais">
+
+                            R$ 0,00
+
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- INVESTIMENTOS -->
+
+                <section class="painel investimentos">
+
+                    <div class="cabecalho azul">
+
+                        <h2>Investimentos</h2>
+
+                        <span id="totalInvestimentos">
+
+                            R$ 0,00
+
+                        </span>
+
+                    </div>
+
+                    <table>
+
+                        <tbody id="tbInvestimentos">
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="rodape">
+
+                        <span id="saldoInvestimentos">
+
+                            R$ 0,00
+
+                        </span>
+
+                    </div>
+
+                </section>
+
             </div>
 
-            <table>
+            <!-- ========================================= -->
+            <!-- GRÁFICO                                  -->
+            <!-- ========================================= -->
 
-                <thead>
+            <section class="card grafico">
 
-                    <tr>
+                <h2>
 
-                        <th>Descrição</th>
+                    Distribuição
 
-                        <th>Valor</th>
+                </h2>
 
-                    </tr>
+                <canvas id="pizza"></canvas>
 
-                </thead>
-
-                <tbody id="tbEssenciais">
-
-                </tbody>
-
-            </table>
+            </section>
 
         </section>
 
 
 
-        <section class="card ocasionais">
+        <!-- ========================================= -->
+        <!-- SEGUNDA LINHA                             -->
+        <!-- ========================================= -->
 
-            <div class="titulo">
-                Gastos Ocasionais
-            </div>
+        <section class="linha">
 
-            <table>
+            <section class="card saldo">
 
-                <thead>
+                <h2>
 
-                    <tr>
+                    Saldo
 
-                        <th>Descrição</th>
+                </h2>
 
-                        <th>Valor</th>
+                <div id="saldoAtual">
 
-                    </tr>
+                    R$ 0,00
 
-                </thead>
+                </div>
 
-                <tbody id="tbOcasionais">
+            </section>
 
-                </tbody>
+            <section class="card cartoes">
 
-            </table>
+                <h2>
 
-        </section>
+                    Cartões
 
+                </h2>
 
+                <table>
 
-        <section class="card investimentos">
+                    <tbody id="tbCartoes">
 
-            <div class="titulo">
-                Investimentos
-            </div>
+                    </tbody>
 
-            <table>
+                </table>
 
-                <thead>
+            </section>
 
-                    <tr>
+            <section class="card pagamentos">
 
-                        <th>Tipo</th>
+                <h2>
 
-                        <th>Valor</th>
+                    Pagamentos
 
-                    </tr>
+                </h2>
 
-                </thead>
+                <table>
 
-                <tbody id="tbInvestimentos">
+                    <tbody id="tbPagamentos">
 
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
 
-        </section>
-
-
-
-        <!-- CENTRO -->
-
-        <section class="card saldo">
-
-            <h2>
-
-                Saldo Atual
-
-            </h2>
-
-            <div class="valor">
-
-                R$
-                <span id="saldoAtual">
-
-                    0,00
-
-                </span>
-
-            </div>
+            </section>
 
         </section>
 
 
 
-        <section class="card cartoes">
+        <!-- ========================================= -->
+        <!-- TERCEIRA LINHA                            -->
+        <!-- ========================================= -->
 
-            <h2>
+        <section class="linha">
 
-                Cartões
+            <section class="card agenda">
 
-            </h2>
+                <h2>
 
-            <table>
+                    Agenda
 
-                <thead>
+                </h2>
 
-                    <tr>
+                <iframe
 
-                        <th>Cartão</th>
+                    src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FSao_Paulo"
 
-                        <th>Valor</th>
+                    loading="lazy">
 
-                    </tr>
+                </iframe>
 
-                </thead>
-
-                <tbody id="tbCartoes">
-
-                </tbody>
-
-            </table>
-
-        </section>
+            </section>
 
 
 
-        <section class="card pagamentos">
+            <section class="card meta">
 
-            <h2>
+                <h2>
 
-                Pagamentos
+                    Meta da Moto
 
-            </h2>
+                </h2>
 
-            <table>
+                <canvas id="moto"></canvas>
 
-                <thead>
-
-                    <tr>
-
-                        <th>Descrição</th>
-
-                        <th>Valor</th>
-
-                        <th>Pago</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="tbPagamentos">
-
-                </tbody>
-
-            </table>
+            </section>
 
         </section>
 
+    </main>
 
 
-        <!-- DIREITA -->
-
-        <section class="card graficoPizza">
-
-            <h2>
-
-                Distribuição Financeira
-
-            </h2>
-
-            <canvas id="pizza"></canvas>
-
-        </section>
-
-
-
-        <section class="card graficoMoto">
-
-            <h2>
-
-                Meta Moto
-
-            </h2>
-
-            <canvas id="moto"></canvas>
-
-        </section>
-
-
-
-        <section class="card calendario">
-
-            <h2>
-
-                Agenda
-
-            </h2>
-
-            <iframe
-
-                src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FSao_Paulo"
-
-                loading="lazy">
-
-            </iframe>
-
-        </section>
-
-    </div>
-
-
-
-    <!-- ========================= -->
-    <!-- RODAPÉ                    -->
-    <!-- ========================= -->
 
     <footer>
 
-        Dashboard SAT • 2026
+        Dashboard SAT © 2026
 
     </footer>
-
-
-
-    <!-- ========================= -->
-    <!-- JAVASCRIPT                -->
-    <!-- ========================= -->
 
     <script src="script.js"></script>
 
