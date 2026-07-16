@@ -1,51 +1,306 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Projeto</title>
+
+    <title>Dashboard SAT</title>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-    <nav>
-        <div class="logo">
-            LOGO
-         </div>
+    <!-- ========================= -->
+    <!-- NAVBAR                    -->
+    <!-- ========================= -->
 
-        <div class="menu">
-            <a href="#">Início</a>
-            <a href="#">Sobre</a>
-            <a href="#">Contato</a>
+    <nav>
+
+        <div class="logo">
+            SAT
         </div>
+
+        <ul>
+
+            <li><a href="#">Início</a></li>
+
+            <li><a href="#">Financeiro</a></li>
+
+            <li><a href="#">Agenda</a></li>
+
+            <li><a href="#">Relatórios</a></li>
+
+            <li><a href="#">Configurações</a></li>
+
+        </ul>
+
     </nav>
 
-    <header>
-        <h1>Título da Página</h1>
-    </header>
 
-    <main>
-        <section>
-            <h2>Conteúdo Principal</h2>
-            <p>Seu conteúdo aqui.</p>
+
+    <!-- ========================= -->
+    <!-- DASHBOARD                 -->
+    <!-- ========================= -->
+
+    <div class="dashboard">
+
+        <!-- ESQUERDA -->
+
+        <section class="card essenciais">
+
+            <div class="titulo">
+                Despesas Essenciais
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Descrição</th>
+
+                        <th>Valor</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbEssenciais">
+
+                </tbody>
+
+            </table>
+
         </section>
-    </main>
 
-    <div class="agenda">
-        <iframe src="https://calendar.google.com/calendar/embed?height=1800&wkst=1&ctz=America%2FSao_Paulo&src=N2JiNzk3OTk5YmYxMDkzZjU4ZWNmNzg3NmQzZGQzYWMxNjNlZWI0Njk4MTczNzdhZjAyM2IyNWNmOWQ0YmYzNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%237cb342"
-            style="border:0"
-            width="800"
-            height="600"
-            frameborder="0"
-            scrolling="no">
-            
-        </iframe>
+
+
+        <section class="card ocasionais">
+
+            <div class="titulo">
+                Gastos Ocasionais
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Descrição</th>
+
+                        <th>Valor</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbOcasionais">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <section class="card investimentos">
+
+            <div class="titulo">
+                Investimentos
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Tipo</th>
+
+                        <th>Valor</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbInvestimentos">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- CENTRO -->
+
+        <section class="card saldo">
+
+            <h2>
+
+                Saldo Atual
+
+            </h2>
+
+            <div class="valor">
+
+                R$
+                <span id="saldoAtual">
+
+                    0,00
+
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="card cartoes">
+
+            <h2>
+
+                Cartões
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Cartão</th>
+
+                        <th>Valor</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbCartoes">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <section class="card pagamentos">
+
+            <h2>
+
+                Pagamentos
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Descrição</th>
+
+                        <th>Valor</th>
+
+                        <th>Pago</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tbPagamentos">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+
+        <!-- DIREITA -->
+
+        <section class="card graficoPizza">
+
+            <h2>
+
+                Distribuição Financeira
+
+            </h2>
+
+            <canvas id="pizza"></canvas>
+
+        </section>
+
+
+
+        <section class="card graficoMoto">
+
+            <h2>
+
+                Meta Moto
+
+            </h2>
+
+            <canvas id="moto"></canvas>
+
+        </section>
+
+
+
+        <section class="card calendario">
+
+            <h2>
+
+                Agenda
+
+            </h2>
+
+            <iframe
+
+                src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FSao_Paulo"
+
+                loading="lazy">
+
+            </iframe>
+
+        </section>
+
     </div>
 
+
+
+    <!-- ========================= -->
+    <!-- RODAPÉ                    -->
+    <!-- ========================= -->
+
     <footer>
-        <p>&copy; 2026</p>
+
+        Dashboard SAT • 2026
+
     </footer>
 
+
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT                -->
+    <!-- ========================= -->
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>

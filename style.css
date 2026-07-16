@@ -1,63 +1,322 @@
-body {
-    background-color: #121212;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    text-align: center;
+/* ===========================================================
+   RESET
+=========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* NAV centralizado corretamente */
-nav {
-    background: #222;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f1117;
+    color:white;
+
 }
 
-.logo {
-    padding: 20px 0;
-    font-size: 28px;
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #333;
+/* ===========================================================
+   NAVBAR
+=========================================================== */
+
+nav{
+
+    height:70px;
+
+    background:#1b1f27;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.3);
+
 }
 
-.menu {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 15px 0;
+.logo{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#66b3ff;
+
 }
 
-.menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    transition: color .2s;
+nav ul{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:35px;
+
 }
 
-.menu a:hover {
-    color: #5aa9ff;
+nav a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+    font-size:17px;
+
 }
 
-/* links */
-nav a {
-    color: white;
-    text-decoration: none;
+nav a:hover{
+
+    color:#4ea5ff;
+
 }
 
-/* conteúdo centralizado */
-main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+/* ===========================================================
+   DASHBOARD
+=========================================================== */
+
+.dashboard{
+
+    width:95%;
+
+    margin:30px auto;
+
+    display:grid;
+
+    grid-template-columns:
+
+        350px
+        350px
+        450px;
+
+    gap:20px;
+
 }
 
-/* agenda centralizada */
-.agenda {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+/* ===========================================================
+   CARDS
+=========================================================== */
+
+.card{
+
+    background:#1a1f29;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/* ===========================================================
+   TÍTULOS
+=========================================================== */
+
+.card h2,
+.titulo{
+
+    margin-bottom:15px;
+
+    font-size:20px;
+
+    color:#6ab5ff;
+
+}
+
+/* ===========================================================
+   TABELAS
+=========================================================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#273142;
+
+    padding:12px;
+
+}
+
+td{
+
+    padding:10px;
+
+    border-bottom:1px solid #333;
+
+}
+
+tbody tr:hover{
+
+    background:#242c39;
+
+}
+
+/* ===========================================================
+   SALDO
+=========================================================== */
+
+.saldo{
+
+    text-align:center;
+
+}
+
+.valor{
+
+    margin-top:20px;
+
+    font-size:42px;
+
+    color:#4fd96d;
+
+    font-weight:bold;
+
+}
+
+/* ===========================================================
+   CORES DAS CATEGORIAS
+=========================================================== */
+
+.essenciais{
+
+    border-left:8px solid #3d8bfd;
+
+}
+
+.ocasionais{
+
+    border-left:8px solid #ff9d00;
+
+}
+
+.investimentos{
+
+    border-left:8px solid #19c37d;
+
+}
+
+.cartoes{
+
+    border-left:8px solid #9b59ff;
+
+}
+
+.pagamentos{
+
+    border-left:8px solid #ff5b5b;
+
+}
+
+.graficoPizza{
+
+    border-left:8px solid #00c6ff;
+
+}
+
+.graficoMoto{
+
+    border-left:8px solid #00d084;
+
+}
+
+.calendario{
+
+    border-left:8px solid #888;
+
+}
+
+/* ===========================================================
+   CANVAS
+=========================================================== */
+
+canvas{
+
+    width:100%;
+
+    height:320px;
+
+}
+
+/* ===========================================================
+   IFRAME
+=========================================================== */
+
+iframe{
+
+    width:100%;
+
+    height:700px;
+
+    border:none;
+
+    border-radius:10px;
+
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
+
+footer{
+
+    margin:30px 0;
+
+    text-align:center;
+
+    color:#888;
+
+}
+
+/* ===========================================================
+   RESPONSIVO
+=========================================================== */
+
+@media(max-width:1200px){
+
+.dashboard{
+
+grid-template-columns:1fr;
+
+}
+
+nav{
+
+flex-direction:column;
+
+height:auto;
+
+padding:20px;
+
+}
+
+nav ul{
+
+margin-top:20px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
 }
