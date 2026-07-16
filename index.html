@@ -14,56 +14,63 @@
 
 <body>
 
-    <!-- ========================================= -->
-    <!-- NAVBAR                                   -->
-    <!-- ========================================= -->
+    <!--========================-->
+    <!-- NAVBAR                 -->
+    <!--========================-->
 
     <nav>
 
         <div class="logo">
+
             SAT Dashboard
+
         </div>
 
         <ul>
 
             <li><a href="#">Início</a></li>
+
             <li><a href="#">Financeiro</a></li>
+
             <li><a href="#">Agenda</a></li>
+
             <li><a href="#">Relatórios</a></li>
+
+            <li><a href="#">Configurações</a></li>
 
         </ul>
 
     </nav>
 
-    <!-- ========================================= -->
-    <!-- DASHBOARD                                -->
-    <!-- ========================================= -->
+    <!--========================-->
+    <!-- DASHBOARD              -->
+    <!--========================-->
 
     <main class="dashboard">
 
-        <!-- ========================================= -->
-        <!-- BLOCO SUPERIOR                           -->
-        <!-- ========================================= -->
+        <!-- PRIMEIRA LINHA -->
 
-        <section class="topo">
+        <section class="linhaSuperior">
 
-            <!-- 3 COLUNAS FINANCEIRAS -->
+            <!-- COLUNAS FINANCEIRAS -->
 
-            <div class="financeiro">
+            <section class="financeiro">
 
                 <!-- ESSENCIAIS -->
 
-                <section class="painel essenciais">
+                <article class="painel essenciais">
 
-                    <div class="cabecalho vermelho">
+                    <header>
 
                         <h2>Essenciais</h2>
 
                         <span id="totalEssenciais">
+
                             R$ 0,00
+
                         </span>
 
-                    </div>
+                    </header>
 
                     <table>
 
@@ -73,7 +80,7 @@
 
                     </table>
 
-                    <div class="rodape">
+                    <footer>
 
                         <span id="saldoEssenciais">
 
@@ -81,17 +88,15 @@
 
                         </span>
 
-                    </div>
+                    </footer>
 
-                </section>
-
-
+                </article>
 
                 <!-- OCASIONAIS -->
 
-                <section class="painel ocasionais">
+                <article class="painel ocasionais">
 
-                    <div class="cabecalho laranja">
+                    <header>
 
                         <h2>Ocasionais</h2>
 
@@ -101,7 +106,7 @@
 
                         </span>
 
-                    </div>
+                    </header>
 
                     <table>
 
@@ -111,7 +116,7 @@
 
                     </table>
 
-                    <div class="rodape">
+                    <footer>
 
                         <span id="saldoOcasionais">
 
@@ -119,17 +124,15 @@
 
                         </span>
 
-                    </div>
+                    </footer>
 
-                </section>
-
-
+                </article>
 
                 <!-- INVESTIMENTOS -->
 
-                <section class="painel investimentos">
+                <article class="painel investimentos">
 
-                    <div class="cabecalho azul">
+                    <header>
 
                         <h2>Investimentos</h2>
 
@@ -139,7 +142,7 @@
 
                         </span>
 
-                    </div>
+                    </header>
 
                     <table>
 
@@ -149,7 +152,7 @@
 
                     </table>
 
-                    <div class="rodape">
+                    <footer>
 
                         <span id="saldoInvestimentos">
 
@@ -157,17 +160,15 @@
 
                         </span>
 
-                    </div>
+                    </footer>
 
-                </section>
+                </article>
 
-            </div>
+            </section>
 
-            <!-- ========================================= -->
-            <!-- GRÁFICO                                  -->
-            <!-- ========================================= -->
+            <!-- GRÁFICO -->
 
-            <section class="card grafico">
+            <aside class="grafico card">
 
                 <h2>
 
@@ -175,37 +176,33 @@
 
                 </h2>
 
-                <canvas id="pizza"></canvas>
+                <canvas id="graficoPizza"></canvas>
 
-            </section>
+            </aside>
 
         </section>
 
+        <!-- SEGUNDA LINHA -->
 
+        <section class="linhaMeio">
 
-        <!-- ========================================= -->
-        <!-- SEGUNDA LINHA                             -->
-        <!-- ========================================= -->
-
-        <section class="linha">
-
-            <section class="card saldo">
+            <article class="saldo card">
 
                 <h2>
 
-                    Saldo
+                    Saldo Atual
 
                 </h2>
 
-                <div id="saldoAtual">
+                <h1 id="saldo">
 
                     R$ 0,00
 
-                </div>
+                </h1>
 
-            </section>
+            </article>
 
-            <section class="card cartoes">
+            <article class="cartoes card">
 
                 <h2>
 
@@ -221,9 +218,9 @@
 
                 </table>
 
-            </section>
+            </article>
 
-            <section class="card pagamentos">
+            <article class="pagamentos card">
 
                 <h2>
 
@@ -239,19 +236,15 @@
 
                 </table>
 
-            </section>
+            </article>
 
         </section>
 
+        <!-- TERCEIRA LINHA -->
 
+        <section class="linhaInferior">
 
-        <!-- ========================================= -->
-        <!-- TERCEIRA LINHA                            -->
-        <!-- ========================================= -->
-
-        <section class="linha">
-
-            <section class="card agenda">
+            <article class="agenda card">
 
                 <h2>
 
@@ -260,18 +253,13 @@
                 </h2>
 
                 <iframe
-
-                    src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FSao_Paulo"
-
-                    loading="lazy">
+                    src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FSao_Paulo">
 
                 </iframe>
 
-            </section>
+            </article>
 
-
-
-            <section class="card meta">
+            <article class="moto card">
 
                 <h2>
 
@@ -279,21 +267,15 @@
 
                 </h2>
 
-                <canvas id="moto"></canvas>
+                <canvas id="graficoMoto">
 
-            </section>
+                </canvas>
+
+            </article>
 
         </section>
 
     </main>
-
-
-
-    <footer>
-
-        Dashboard SAT © 2026
-
-    </footer>
 
     <script src="script.js"></script>
 

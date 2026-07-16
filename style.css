@@ -1,6 +1,6 @@
-/* ===========================================================
-   RESET
-=========================================================== */
+/*====================================================
+    RESET
+====================================================*/
 
 *{
     margin:0;
@@ -10,21 +10,21 @@
 
 body{
 
+    background:#111318;
     font-family:Arial, Helvetica, sans-serif;
-    background:#0f1117;
-    color:white;
+    color:#FFF;
 
 }
 
-/* ===========================================================
-   NAVBAR
-=========================================================== */
+/*====================================================
+    NAVBAR
+====================================================*/
 
 nav{
 
     height:70px;
 
-    background:#1b1f27;
+    background:#1B1F27;
 
     display:flex;
 
@@ -34,7 +34,7 @@ nav{
 
     padding:0 40px;
 
-    box-shadow:0 4px 12px rgba(0,0,0,.3);
+    box-shadow:0 5px 15px rgba(0,0,0,.35);
 
 }
 
@@ -44,7 +44,7 @@ nav{
 
     font-weight:bold;
 
-    color:#66b3ff;
+    color:#4DA3FF;
 
 }
 
@@ -60,88 +60,141 @@ nav ul{
 
 nav a{
 
-    color:white;
-
     text-decoration:none;
 
-    transition:.3s;
+    color:white;
 
-    font-size:17px;
+    transition:.3s;
 
 }
 
 nav a:hover{
 
-    color:#4ea5ff;
+    color:#4DA3FF;
 
 }
 
-/* ===========================================================
-   DASHBOARD
-=========================================================== */
+/*====================================================
+    DASHBOARD
+====================================================*/
 
 .dashboard{
 
-    width:95%;
+    width:96%;
 
-    margin:30px auto;
+    margin:25px auto;
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
+    flex-direction:column;
 
-        350px
-        350px
-        450px;
+    gap:25px;
+
+}
+
+/*====================================================
+    PRIMEIRA LINHA
+====================================================*/
+
+.linhaSuperior{
+
+    display:flex;
 
     gap:20px;
 
-}
-
-/* ===========================================================
-   CARDS
-=========================================================== */
-
-.card{
-
-    background:#1a1f29;
-
-    border-radius:15px;
-
-    padding:20px;
-
-    box-shadow:0 8px 18px rgba(0,0,0,.25);
-
-    transition:.3s;
+    align-items:flex-start;
 
 }
 
-.card:hover{
+/*====================================================
+    TRÊS COLUNAS FINANCEIRAS
+====================================================*/
 
-    transform:translateY(-4px);
+.financeiro{
 
-}
+    flex:3;
 
-/* ===========================================================
-   TÍTULOS
-=========================================================== */
+    display:grid;
 
-.card h2,
-.titulo{
+    grid-template-columns:repeat(3,1fr);
 
-    margin-bottom:15px;
-
-    font-size:20px;
-
-    color:#6ab5ff;
+    gap:18px;
 
 }
 
-/* ===========================================================
-   TABELAS
-=========================================================== */
+/*====================================================
+    PAINÉIS
+====================================================*/
 
-table{
+.painel{
+
+    background:#1D222D;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+
+}
+
+/*====================================================
+    CABEÇALHO
+====================================================*/
+
+.painel header{
+
+    text-align:center;
+
+    padding:10px;
+
+    color:white;
+
+}
+
+.painel header h2{
+
+    font-size:18px;
+
+}
+
+.painel header span{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:15px;
+
+}
+
+/*====================================================
+    CORES
+====================================================*/
+
+.essenciais header{
+
+    background:#D76B6B;
+
+}
+
+.ocasionais header{
+
+    background:#D8A15C;
+
+}
+
+.investimentos header{
+
+    background:#6B87D8;
+
+}
+
+/*====================================================
+    TABELA
+====================================================*/
+
+.painel table{
 
     width:100%;
 
@@ -149,184 +202,60 @@ table{
 
 }
 
-th{
+.painel td{
 
-    background:#273142;
+    padding:8px 12px;
 
-    padding:12px;
+    border-bottom:1px dashed #3B4353;
 
-}
-
-td{
-
-    padding:10px;
-
-    border-bottom:1px solid #333;
+    font-size:14px;
 
 }
 
-tbody tr:hover{
+.painel td:last-child{
 
-    background:#242c39;
+    text-align:right;
 
-}
-
-/* ===========================================================
-   SALDO
-=========================================================== */
-
-.saldo{
-
-    text-align:center;
-
-}
-
-.valor{
-
-    margin-top:20px;
-
-    font-size:42px;
-
-    color:#4fd96d;
+    color:#FF7272;
 
     font-weight:bold;
 
 }
 
-/* ===========================================================
-   CORES DAS CATEGORIAS
-=========================================================== */
+/*====================================================
+    RODAPÉ
+====================================================*/
+
+.painel footer{
+
+    text-align:center;
+
+    padding:10px;
+
+    font-weight:bold;
+
+    background:#171B22;
+
+}
+
+/*====================================================
+    BORDAS COLORIDAS
+====================================================*/
 
 .essenciais{
 
-    border-left:8px solid #3d8bfd;
+    border-left:6px solid #E53935;
 
 }
 
 .ocasionais{
 
-    border-left:8px solid #ff9d00;
+    border-left:6px solid #FB8C00;
 
 }
 
 .investimentos{
 
-    border-left:8px solid #19c37d;
-
-}
-
-.cartoes{
-
-    border-left:8px solid #9b59ff;
-
-}
-
-.pagamentos{
-
-    border-left:8px solid #ff5b5b;
-
-}
-
-.graficoPizza{
-
-    border-left:8px solid #00c6ff;
-
-}
-
-.graficoMoto{
-
-    border-left:8px solid #00d084;
-
-}
-
-.calendario{
-
-    border-left:8px solid #888;
-
-}
-
-/* ===========================================================
-   CANVAS
-=========================================================== */
-
-canvas{
-
-    width:100%;
-
-    height:320px;
-
-}
-
-/* ===========================================================
-   IFRAME
-=========================================================== */
-
-iframe{
-
-    width:100%;
-
-    height:700px;
-
-    border:none;
-
-    border-radius:10px;
-
-}
-
-/* ===========================================================
-   FOOTER
-=========================================================== */
-
-footer{
-
-    margin:30px 0;
-
-    text-align:center;
-
-    color:#888;
-
-}
-
-/* ===========================================================
-   RESPONSIVO
-=========================================================== */
-
-@media(max-width:1200px){
-
-.dashboard{
-
-grid-template-columns:1fr;
-
-}
-
-nav{
-
-flex-direction:column;
-
-height:auto;
-
-padding:20px;
-
-}
-
-nav ul{
-
-margin-top:20px;
-
-flex-wrap:wrap;
-
-justify-content:center;
-
-}
-
-}
-
-.financeiro{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr 1fr;
-
-    gap:18px;
+    border-left:6px solid #4A90E2;
 
 }
