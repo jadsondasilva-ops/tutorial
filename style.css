@@ -320,3 +320,13 @@ justify-content:center;
 }
 
 }
+
+.financeiro{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1fr;
+
+    gap:18px;
+
+}
