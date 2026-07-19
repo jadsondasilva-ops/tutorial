@@ -61,24 +61,30 @@ function preencherTabela(id,dados){
 
     const tabela = document.getElementById(id);
 
-    tabela.innerHTML="";
+    tabela.innerHTML = "";
 
-    dados.forEach(item=>{
+    dados.forEach(item => {
 
-        tabela.innerHTML +=
-
-        `
-        <tr>
-
-            <td>${item.nome}</td>
-
-            <td>R$ ${item.valor.toFixed(2)}</td>
-
-        </tr>
-
+        tabela.innerHTML += `
+            <tr>
+                <td>${item.nome}</td>
+                <td>R$ ${item.valor.toFixed(2)}</td>
+            </tr>
         `;
 
     });
+
+    const linhasExtras = 16 - dados.length;
+
+    for (let i = 0; i < linhasExtras; i++) {
+
+        tabela.innerHTML += `
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        `;
+    }
 
 }
 

@@ -52,129 +52,39 @@
 
         <section class="linhaSuperior">
 
-            <!-- COLUNAS FINANCEIRAS -->
+            <section class="financeiroContainer">
 
-            <section class="financeiro">
+                <div class="saldoGeral">
 
-                <!-- ESSENCIAIS -->
+                    <span>Saldo Total</span>
 
-                <article class="painel essenciais">
+                    <h1 id="saldo">
+                        R$ 0,00
+                    </h1>
 
-                    <header>
+                </div>
 
-                        <h2>Essenciais</h2>
+                <section class="financeiro">
 
-                        <span id="totalEssenciais">
+                    <!-- Essenciais -->
 
-                            R$ 0,00
+                    ...
 
-                        </span>
+                    <!-- Ocasionais -->
 
-                    </header>
+                    ...
 
-                    <table>
+                    <!-- Investimentos -->
 
-                        <tbody id="tbEssenciais">
+                    ...
 
-                        </tbody>
-
-                    </table>
-
-                    <footer>
-
-                        <span id="saldoEssenciais">
-
-                            R$ 0,00
-
-                        </span>
-
-                    </footer>
-
-                </article>
-
-                <!-- OCASIONAIS -->
-
-                <article class="painel ocasionais">
-
-                    <header>
-
-                        <h2>Ocasionais</h2>
-
-                        <span id="totalOcasionais">
-
-                            R$ 0,00
-
-                        </span>
-
-                    </header>
-
-                    <table>
-
-                        <tbody id="tbOcasionais">
-
-                        </tbody>
-
-                    </table>
-
-                    <footer>
-
-                        <span id="saldoOcasionais">
-
-                            R$ 0,00
-
-                        </span>
-
-                    </footer>
-
-                </article>
-
-                <!-- INVESTIMENTOS -->
-
-                <article class="painel investimentos">
-
-                    <header>
-
-                        <h2>Investimentos</h2>
-
-                        <span id="totalInvestimentos">
-
-                            R$ 0,00
-
-                        </span>
-
-                    </header>
-
-                    <table>
-
-                        <tbody id="tbInvestimentos">
-
-                        </tbody>
-
-                    </table>
-
-                    <footer>
-
-                        <span id="saldoInvestimentos">
-
-                            R$ 0,00
-
-                        </span>
-
-                    </footer>
-
-                </article>
+                </section>
 
             </section>
 
-            <!-- GRÁFICO -->
-
             <aside class="grafico card">
 
-                <h2>
-
-                    Distribuição
-
-                </h2>
+                <h2>Distribuição</h2>
 
                 <canvas id="graficoPizza"></canvas>
 
@@ -185,22 +95,6 @@
         <!-- SEGUNDA LINHA -->
 
         <section class="linhaMeio">
-
-            <article class="saldo card">
-
-                <h2>
-
-                    Saldo Atual
-
-                </h2>
-
-                <h1 id="saldo">
-
-                    R$ 0,00
-
-                </h1>
-
-            </article>
 
             <article class="cartoes card">
 
@@ -235,41 +129,6 @@
                     </tbody>
 
                 </table>
-
-            </article>
-
-        </section>
-
-        <!-- TERCEIRA LINHA -->
-
-        <section class="linhaInferior">
-
-            <article class="agenda card">
-
-                <h2>
-
-                    Agenda
-
-                </h2>
-
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FSao_Paulo">
-
-                </iframe>
-
-            </article>
-
-            <article class="moto card">
-
-                <h2>
-
-                    Meta da Moto
-
-                </h2>
-
-                <canvas id="graficoMoto">
-
-                </canvas>
 
             </article>
 

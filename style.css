@@ -134,7 +134,12 @@ nav a:hover{
 
     overflow:hidden;
 
-    box-shadow:0 10px 20px rgba(0,0,0,.25);
+    min-height:640px;
+
+    display:flex;
+
+    flex-direction:column;
+
 
 }
 
@@ -197,6 +202,8 @@ nav a:hover{
 .painel table{
 
     width:100%;
+
+    flex:1;
 
     border-collapse:collapse;
 
@@ -305,7 +312,7 @@ nav a:hover{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr 1.4fr;
+    grid-template-columns:1fr 1fr;
 
     gap:20px;
 
@@ -349,19 +356,49 @@ nav a:hover{
     SALDO
 ====================================================*/
 
-.saldo{
+.financeiroContainer{
 
-    text-align:center;
+    flex:3;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
 
 }
 
-.saldo h1{
+.saldoGeral{
 
-    margin-top:30px;
+    background:#1D222D;
 
-    font-size:42px;
+    border-radius:12px;
 
-    color:#33D17A;
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.30);
+
+}
+
+.saldoGeral span{
+
+    display:block;
+
+    color:#DDD;
+
+    font-size:18px;
+
+    margin-bottom:10px;
+
+}
+
+.saldoGeral h1{
+
+    color:#34D16A;
+
+    font-size:52px;
 
 }
 
