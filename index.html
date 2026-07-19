@@ -29,13 +29,9 @@
         <ul>
 
             <li><a href="#">Início</a></li>
-
             <li><a href="#">Financeiro</a></li>
-
             <li><a href="#">Agenda</a></li>
-
             <li><a href="#">Relatórios</a></li>
-
             <li><a href="#">Configurações</a></li>
 
         </ul>
@@ -48,11 +44,17 @@
 
     <main class="dashboard">
 
-        <!-- PRIMEIRA LINHA -->
+        <!--========================-->
+        <!-- PRIMEIRA LINHA         -->
+        <!--========================-->
 
         <section class="linhaSuperior">
 
+            <!-- ESQUERDA -->
+
             <section class="financeiroContainer">
+
+                <!-- SALDO -->
 
                 <div class="saldoGeral">
 
@@ -64,27 +66,119 @@
 
                 </div>
 
+                <!-- TRÊS COLUNAS -->
+
                 <section class="financeiro">
 
-                    <!-- Essenciais -->
+                    <!-- ESSENCIAIS -->
 
-                    ...
+                    <article class="painel essenciais">
 
-                    <!-- Ocasionais -->
+                        <header>
 
-                    ...
+                            <h2>Essenciais</h2>
 
-                    <!-- Investimentos -->
+                            <span id="totalEssenciais">
+                                R$ 0,00
+                            </span>
 
-                    ...
+                        </header>
+
+                        <table>
+
+                            <tbody id="tbEssenciais">
+
+                            </tbody>
+
+                        </table>
+
+                        <footer>
+
+                            <span id="saldoEssenciais">
+                                R$ 0,00
+                            </span>
+
+                        </footer>
+
+                    </article>
+
+                    <!-- OCASIONAIS -->
+
+                    <article class="painel ocasionais">
+
+                        <header>
+
+                            <h2>Ocasionais</h2>
+
+                            <span id="totalOcasionais">
+                                R$ 0,00
+                            </span>
+
+                        </header>
+
+                        <table>
+
+                            <tbody id="tbOcasionais">
+
+                            </tbody>
+
+                        </table>
+
+                        <footer>
+
+                            <span id="saldoOcasionais">
+                                R$ 0,00
+                            </span>
+
+                        </footer>
+
+                    </article>
+
+                    <!-- INVESTIMENTOS -->
+
+                    <article class="painel investimentos">
+
+                        <header>
+
+                            <h2>Investimentos</h2>
+
+                            <span id="totalInvestimentos">
+                                R$ 0,00
+                            </span>
+
+                        </header>
+
+                        <table>
+
+                            <tbody id="tbInvestimentos">
+
+                            </tbody>
+
+                        </table>
+
+                        <footer>
+
+                            <span id="saldoInvestimentos">
+                                R$ 0,00
+                            </span>
+
+                        </footer>
+
+                    </article>
 
                 </section>
 
             </section>
 
+            <!-- DIREITA -->
+
             <aside class="grafico card">
 
-                <h2>Distribuição</h2>
+                <h2>
+
+                    Distribuição
+
+                </h2>
 
                 <canvas id="graficoPizza"></canvas>
 
@@ -92,7 +186,9 @@
 
         </section>
 
-        <!-- SEGUNDA LINHA -->
+        <!--========================-->
+        <!-- SEGUNDA LINHA          -->
+        <!--========================-->
 
         <section class="linhaMeio">
 
@@ -135,8 +231,9 @@
         </section>
 
     </main>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="script.js"></script>
 
 </body>
