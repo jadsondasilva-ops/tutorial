@@ -595,3 +595,148 @@ td{
     }
 
 }
+
+/*====================================================
+    ADICIONAR
+====================================================*/
+
+.cabecalhoPainel{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 15px;
+
+}
+
+.btnAdicionar{
+
+    width:34px;
+
+    height:34px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#2E7DFF;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+.btnAdicionar:hover{
+
+    transform:scale(1.08);
+
+    background:#4B97FF;
+
+}
+
+/*====================================================
+    MODAL
+====================================================*/
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+}
+
+.oculto{
+
+    display:none;
+
+}
+
+.janela{
+
+    width:420px;
+
+    background:#1D222D;
+
+    padding:25px;
+
+    border-radius:15px;
+
+}
+
+.janela h2{
+
+    margin-bottom:20px;
+
+}
+
+.janela label{
+
+    display:block;
+
+    margin-top:15px;
+
+}
+
+.janela input,
+.janela select{
+
+    width:100%;
+
+    padding:10px;
+
+    margin-top:6px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2B3240;
+
+    color:white;
+
+}
+
+.botoes{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+}
+
+.botoes button{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}

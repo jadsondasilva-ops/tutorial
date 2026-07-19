@@ -74,13 +74,25 @@
 
                     <article class="painel essenciais">
 
-                        <header>
+                        <header class="cabecalhoPainel">
 
-                            <h2>Essenciais</h2>
+                            <div>
 
-                            <span id="totalEssenciais">
-                                R$ 0,00
-                            </span>
+                                <h2>Essenciais</h2>
+
+                                <span id="totalEssenciais">
+                                    R$ 0,00
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="btnAdicionar"
+                                data-categoria="essenciais">
+
+                                +
+
+                            </button>
 
                         </header>
 
@@ -106,13 +118,25 @@
 
                     <article class="painel ocasionais">
 
-                        <header>
+                        <header class="cabecalhoPainel">
 
-                            <h2>Ocasionais</h2>
+                            <div>
 
-                            <span id="totalOcasionais">
-                                R$ 0,00
-                            </span>
+                                <h2>Ocasionais</h2>
+
+                                <span id="totalOcasionais">
+                                    R$ 0,00
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="btnAdicionar"
+                                data-categoria="ocasionais">
+
+                                +
+
+                            </button>
 
                         </header>
 
@@ -138,13 +162,25 @@
 
                     <article class="painel investimentos">
 
-                        <header>
+                        <header class="cabecalhoPainel">
 
-                            <h2>Investimentos</h2>
+                            <div>
 
-                            <span id="totalInvestimentos">
-                                R$ 0,00
-                            </span>
+                                <h2>Investimentos</h2>
+
+                                <span id="totalInvestimentos">
+                                    R$ 0,00
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="btnAdicionar"
+                                data-categoria="investimentos">
+
+                                +
+
+                            </button>
 
                         </header>
 
@@ -235,6 +271,62 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="script.js"></script>
+
+    <div id="modal" class="modal oculto">
+
+        <div class="janela">
+
+            <h2>Nova Despesa</h2>
+
+            <label>Descrição</label>
+
+            <input
+                type="text"
+                id="descricao">
+
+            <label>Valor</label>
+
+            <input
+                type="number"
+                id="valor">
+
+            <label>Categoria</label>
+
+            <select id="categoria">
+
+                <option value="essenciais">
+                    Essenciais
+                </option>
+
+                <option value="ocasionais">
+                    Ocasionais
+                </option>
+
+                <option value="investimentos">
+                    Investimentos
+                </option>
+
+            </select>
+
+            <div class="botoes">
+
+                <button id="cancelar">
+
+                    Cancelar
+
+                </button>
+
+                <button id="salvar">
+
+                    Salvar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
 

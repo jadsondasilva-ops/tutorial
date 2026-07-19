@@ -1,225 +1,202 @@
-//==========================================
+//==================================================
 // DADOS
-//==========================================
+//==================================================
 
-const despesasEssenciais = [
+const dados = {
 
-    { nome:"Aluguel", valor:800 },
-    { nome:"Luz", valor:170 },
-    { nome:"Água", valor:90 },
-    { nome:"Internet", valor:110 },
-    { nome:"Celular", valor:65 }
+    essenciais: [
+        { descricao: "Aluguel", valor: 800 },
+        { descricao: "Luz", valor: 170 },
+        { descricao: "Água", valor: 90 },
+        { descricao: "Internet", valor: 110 },
+        { descricao: "Celular", valor: 65 }
+    ],
 
-];
+    ocasionais: [
+        { descricao: "Cinema", valor: 90 },
+        { descricao: "Lazer", valor: 200 },
+        { descricao: "Restaurante", valor: 170 }
+    ],
 
-const despesasOcasionais = [
+    investimentos: [
+        { descricao: "WEGE3", valor: 1400 },
+        { descricao: "BBAS3", valor: 950 },
+        { descricao: "VALE3", valor: 800 }
+    ]
 
-    { nome:"Cinema", valor:90 },
-    { nome:"Lazer", valor:200 },
-    { nome:"Restaurante", valor:170 }
+};
 
-];
+//==================================================
+// ELEMENTOS HTML
+//==================================================
 
-const investimentos = [
+const modal = document.getElementById("modal");
 
-    { nome:"WEGE3", valor:1400 },
-    { nome:"BBAS3", valor:950 },
-    { nome:"VALE3", valor:800 }
+const descricao = document.getElementById("descricao");
 
-];
+const valor = document.getElementById("valor");
 
-const cartoes = [
+const categoria = document.getElementById("categoria");
 
-    { nome:"Nubank", valor:620 },
-    { nome:"Inter", valor:230 }
+const btnSalvar = document.getElementById("salvar");
 
-];
+const btnCancelar = document.getElementById("cancelar");
 
-const pagamentos = [
+const botoesAdicionar = document.querySelectorAll(".btnAdicionar");
 
-    { nome:"Academia", valor:90 },
-    { nome:"Seguro", valor:150 },
-    { nome:"Spotify", valor:22 }
+//==================================================
+// ABRIR MODAL
+//==================================================
 
-];
+botoesAdicionar.forEach(botao => {
 
-const salario = 6000;
+    botao.addEventListener("click", () => {
 
+        modal.classList.remove("oculto");
 
-//==========================================
-// FUNÇÕES
-//==========================================
+        categoria.value = botao.dataset.categoria;
 
-function soma(lista){
+        descricao.value = "";
 
-    return lista.reduce((total,item)=> total + item.valor,0);
+        valor.value = "";
+
+        descricao.focus();
+
+    });
+
+});
+
+//==================================================
+// FECHAR
+//==================================================
+
+btnCancelar.addEventListener("click", fecharModal);
+
+function fecharModal(){
+
+    modal.classList.add("oculto");
 
 }
 
+//==================================================
+// DESENHAR TABELA
+//==================================================
 
-function preencherTabela(id,dados){
+function renderizarTabela(nomeTabela, idTabela){
 
-    const tabela = document.getElementById(id);
+    const tbody = document.getElementById(idTabela);
 
-    tabela.innerHTML = "";
+    tbody.innerHTML = "";
 
-    dados.forEach(item => {
+    dados[nomeTabela].forEach(item => {
 
-        tabela.innerHTML += `
+        tbody.innerHTML += `
+
             <tr>
-                <td>${item.nome}</td>
-                <td>R$ ${item.valor.toFixed(2)}</td>
+
+                <td>${item.descricao}</td>
+
+                <td style="text-align:right">
+
+                    R$ ${item.valor.toFixed(2)}
+
+                </td>
+
             </tr>
+
         `;
 
     });
 
-    const linhasExtras = 16 - dados.length;
+}
 
-    for (let i = 0; i < linhasExtras; i++) {
+//==================================================
+// TOTAIS
+//==================================================
 
-        tabela.innerHTML += `
-            <tr>
-                <td>&nbsp;</td>
-                <td></td>
-            </tr>
-        `;
-    }
+function atualizarTotais(){
+
+    let totalEssenciais = 0;
+
+    let totalOcasionais = 0;
+
+    let totalInvestimentos = 0;
+
+    dados.essenciais.forEach(i => totalEssenciais += i.valor);
+
+    dados.ocasionais.forEach(i => totalOcasionais += i.valor);
+
+    dados.investimentos.forEach(i => totalInvestimentos += i.valor);
+
+    document.getElementById("totalEssenciais").innerHTML =
+        "R$ " + totalEssenciais.toFixed(2);
+
+    document.getElementById("totalOcasionais").innerHTML =
+        "R$ " + totalOcasionais.toFixed(2);
+
+    document.getElementById("totalInvestimentos").innerHTML =
+        "R$ " + totalInvestimentos.toFixed(2);
+
+    document.getElementById("saldo").innerHTML =
+        "R$ " +
+        (totalEssenciais + totalOcasionais + totalInvestimentos).toFixed(2);
 
 }
 
-preencherTabela("tbEssenciais",despesasEssenciais);
+//==================================================
+// NOVO ITEM
+//==================================================
 
-preencherTabela("tbOcasionais",despesasOcasionais);
+btnSalvar.addEventListener("click", () => {
 
-preencherTabela("tbInvestimentos",investimentos);
+    if(descricao.value.trim() === ""){
 
-preencherTabela("tbCartoes",cartoes);
+        alert("Digite uma descrição.");
 
-preencherTabela("tbPagamentos",pagamentos);
-
-document.getElementById("totalEssenciais").innerHTML =
-"R$ " + soma(despesasEssenciais).toLocaleString("pt-BR");
-
-document.getElementById("totalOcasionais").innerHTML =
-"R$ " + soma(despesasOcasionais).toLocaleString("pt-BR");
-
-document.getElementById("totalInvestimentos").innerHTML =
-"R$ " + soma(investimentos).toLocaleString("pt-BR");
-
-const saldo =
-
-salario
-
--
-
-soma(despesasEssenciais)
-
--
-
-soma(despesasOcasionais)
-
--
-
-soma(cartoes)
-
--
-
-soma(pagamentos);
-
-document.getElementById("saldo").innerHTML =
-
-"R$ "
-
-+
-
-saldo.toLocaleString("pt-BR",{
-
-minimumFractionDigits:2
-
-});
-
-//==========================================
-// GRÁFICO DE DISTRIBUIÇÃO
-//==========================================
-
-const graficoPizza = document
-.getElementById("graficoPizza");
-
-new Chart(graficoPizza, {
-
-    type: "pie",
-
-    data: {
-
-        labels: [
-
-            "Essenciais",
-
-            "Ocasionais",
-
-            "Investimentos"
-
-        ],
-
-        datasets: [{
-
-            data: [
-
-                soma(despesasEssenciais),
-
-                soma(despesasOcasionais),
-
-                soma(investimentos)
-
-            ],
-
-            backgroundColor: [
-
-                "#d76b6b",
-
-                "#d8a15c",
-
-                "#6b87d8"
-
-            ],
-
-            borderColor:"#111318",
-
-            borderWidth:3
-
-        }]
-
-    },
-
-    options:{
-
-        responsive:true,
-
-        plugins:{
-
-            legend:{
-
-                position:"bottom",
-
-                labels:{
-
-                    color:"white",
-
-                    padding:20,
-
-                    font:{
-
-                        size:14
-
-                    }
-
-                }
-
-            }
-
-        }
+        return;
 
     }
 
+    if(valor.value === ""){
+
+        alert("Digite um valor.");
+
+        return;
+
+    }
+
+    dados[categoria.value].push({
+
+        descricao: descricao.value,
+
+        valor: Number(valor.value)
+
+    });
+
+    atualizarTudo();
+
+    fecharModal();
+
 });
+
+//==================================================
+// ATUALIZAR TUDO
+//==================================================
+
+function atualizarTudo(){
+
+    renderizarTabela("essenciais","tbEssenciais");
+
+    renderizarTabela("ocasionais","tbOcasionais");
+
+    renderizarTabela("investimentos","tbInvestimentos");
+
+    atualizarTotais();
+
+}
+
+//==================================================
+// START
+//==================================================
+
+atualizarTudo();
