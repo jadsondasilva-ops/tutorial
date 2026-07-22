@@ -202,30 +202,36 @@ nav a:hover{
 .painel table{
 
     width:100%;
-
     flex:1;
-
     border-collapse:collapse;
+
+}
+
+.painel tbody tr{
+
+    height:38px;
+    border-bottom:1px dashed #3B4353;
 
 }
 
 .painel td{
 
     padding:8px 12px;
-
-    border-bottom:1px dashed #3B4353;
-
     font-size:14px;
 
 }
 
-.painel td:last-child{
+.valor{
 
     text-align:right;
-
     color:#FF7272;
-
     font-weight:bold;
+
+}
+
+.linhaVazia td{
+
+    color:transparent;
 
 }
 
@@ -501,13 +507,6 @@ table{
     border-collapse:collapse;
 
 }
-
-td{
-
-    padding:10px;
-
-}
-
 
 /*====================================================
     SCROLL

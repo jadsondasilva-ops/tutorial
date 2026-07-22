@@ -88,25 +88,35 @@ function renderizarTabela(nomeTabela, idTabela){
 
     tbody.innerHTML = "";
 
-    dados[nomeTabela].forEach(item => {
+    const MAX_LINHAS = 20;
 
-        tbody.innerHTML += `
+    for(let i = 0; i < MAX_LINHAS; i++){
 
-            <tr>
+        const item = dados[nomeTabela][i];
 
-                <td>${item.descricao}</td>
+        if(item){
 
-                <td style="text-align:right">
+            tbody.innerHTML += `
+                <tr>
+                    <td>${item.descricao}</td>
+                    <td class="valor">
+                        R$ ${item.valor.toFixed(2)}
+                    </td>
+                </tr>
+            `;
 
-                    R$ ${item.valor.toFixed(2)}
+        }else{
 
-                </td>
+            tbody.innerHTML += `
+                <tr class="linhaVazia">
+                    <td>&nbsp;</td>
+                    <td></td>
+                </tr>
+            `;
 
-            </tr>
+        }
 
-        `;
-
-    });
+    }
 
 }
 
