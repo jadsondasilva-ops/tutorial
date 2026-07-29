@@ -739,3 +739,70 @@ table{
     cursor:pointer;
 
 }
+
+/*====================================================*
+*TRANSFERÊNCIA DE ORÇAMENTO*
+*====================================================*/
+
+.transferencia{
+
+    padding:12px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    background:#202631;
+
+    border-top:1px solid #303744;
+
+}
+
+.transferencia input,
+.transferencia select{
+
+    width:100%;
+
+    padding:8px 10px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2B3240;
+
+    color:#FFF;
+
+    font-size:14px;
+
+}
+
+.btnTransferir{
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#2E7DFF;
+
+    color:white;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+.btnTransferir:hover{
+
+    background:#4B97FF;
+
+    transform:scale(1.02);
+
+}

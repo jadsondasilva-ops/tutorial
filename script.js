@@ -59,6 +59,12 @@ const btnCancelar = document.getElementById("cancelar");
 const botoesAdicionar = document.querySelectorAll(".btnAdicionar");
 
 //==================================================
+// TRANSFERÊNCIA
+//==================================================
+
+const botoesTransferir = document.querySelectorAll(".btnTransferir");
+
+//==================================================
 // ABRIR MODAL
 //==================================================
 
@@ -133,6 +139,72 @@ function renderizarTabela(nomeTabela, idTabela){
     }
 
 }
+
+//==================================================
+// TRANSFERIR ORÇAMENTO
+//==================================================
+
+function transferirOrcamento(origem, destino, valor){
+
+    if(valor <= 0){
+
+        alert("Informe um valor válido.");
+
+        return;
+
+    }
+
+    if(orcamento[origem] < valor){
+
+        alert("A categoria de origem não possui orçamento suficiente.");
+
+        return;
+
+    }
+
+    orcamento[origem] -= valor;
+
+    orcamento[destino] += valor;
+
+    atualizarTudo();
+
+}
+
+//==================================================
+// EVENTO DOS BOTÕES DE TRANSFERÊNCIA
+//==================================================
+
+botoesTransferir.forEach(botao => {
+
+    botao.addEventListener("click", () => {
+
+        const destino = botao.dataset.destino;
+
+        const valor = Number(
+            document.getElementById(
+                "valor" +
+                destino.charAt(0).toUpperCase() +
+                destino.slice(1)
+            ).value
+        );
+
+        const origem = document.getElementById(
+            "origem" +
+            destino.charAt(0).toUpperCase() +
+            destino.slice(1)
+        ).value;
+
+        transferirOrcamento(origem, destino, valor);
+
+        document.getElementById(
+            "valor" +
+            destino.charAt(0).toUpperCase() +
+            destino.slice(1)
+        ).value = "";
+
+    });
+
+});
 
 //==================================================
 // TOTAIS
