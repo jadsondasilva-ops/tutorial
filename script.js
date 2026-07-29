@@ -27,6 +27,20 @@ const dados = {
 };
 
 //==================================================
+// ORÇAMENTO
+//==================================================
+
+const saldoTotal = 6150;
+
+const orcamento = {
+
+    essenciais: saldoTotal * 0.50,
+    ocasionais: saldoTotal * 0.30,
+    investimentos: saldoTotal * 0.20
+
+};
+
+//==================================================
 // ELEMENTOS HTML
 //==================================================
 
@@ -126,30 +140,40 @@ function renderizarTabela(nomeTabela, idTabela){
 
 function atualizarTotais(){
 
-    let totalEssenciais = 0;
+    let gastosEssenciais = 0;
+    let gastosOcasionais = 0;
+    let gastosInvestimentos = 0;
 
-    let totalOcasionais = 0;
+    dados.essenciais.forEach(item => gastosEssenciais += item.valor);
+    dados.ocasionais.forEach(item => gastosOcasionais += item.valor);
+    dados.investimentos.forEach(item => gastosInvestimentos += item.valor);
 
-    let totalInvestimentos = 0;
-
-    dados.essenciais.forEach(i => totalEssenciais += i.valor);
-
-    dados.ocasionais.forEach(i => totalOcasionais += i.valor);
-
-    dados.investimentos.forEach(i => totalInvestimentos += i.valor);
+    // Cabeçalho = orçamento disponível da categoria
 
     document.getElementById("totalEssenciais").innerHTML =
-        "R$ " + totalEssenciais.toFixed(2);
+        "R$ " + orcamento.essenciais.toFixed(2);
 
     document.getElementById("totalOcasionais").innerHTML =
-        "R$ " + totalOcasionais.toFixed(2);
+        "R$ " + orcamento.ocasionais.toFixed(2);
 
     document.getElementById("totalInvestimentos").innerHTML =
-        "R$ " + totalInvestimentos.toFixed(2);
+        "R$ " + orcamento.investimentos.toFixed(2);
+
+    // Rodapé = saldo restante
+
+    document.getElementById("saldoEssenciais").innerHTML =
+        "R$ " + (orcamento.essenciais - gastosEssenciais).toFixed(2);
+
+    document.getElementById("saldoOcasionais").innerHTML =
+        "R$ " + (orcamento.ocasionais - gastosOcasionais).toFixed(2);
+
+    document.getElementById("saldoInvestimentos").innerHTML =
+        "R$ " + (orcamento.investimentos - gastosInvestimentos).toFixed(2);
+
+    // Saldo Geral
 
     document.getElementById("saldo").innerHTML =
-        "R$ " +
-        (totalEssenciais + totalOcasionais + totalInvestimentos).toFixed(2);
+        "R$ " + saldoTotal.toFixed(2);
 
 }
 
