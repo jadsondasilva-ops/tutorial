@@ -235,6 +235,44 @@ nav a:hover{
 
 }
 
+.acoes{
+
+    width:40px;
+
+    text-align:center;
+
+}
+
+.btnExcluir{
+
+    width:24px;
+
+    height:24px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#b83a3a;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+.btnExcluir:hover{
+
+    background:#ff4444;
+
+    transform:scale(1.1);
+
+}
+
 /*====================================================
     RODAPÉ
 ====================================================*/

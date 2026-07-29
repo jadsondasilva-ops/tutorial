@@ -117,26 +117,67 @@ function renderizarTabela(nomeTabela, idTabela){
         if(item){
 
             tbody.innerHTML += `
-                <tr>
-                    <td>${item.descricao}</td>
-                    <td class="valor">
-                        R$ ${item.valor.toFixed(2)}
-                    </td>
-                </tr>
+            <tr>
+
+                <td>${item.descricao}</td>
+
+                <td class="valor">
+                    R$ ${item.valor.toFixed(2)}
+                </td>
+
+                <td class="acoes">
+
+                    <button
+                        class="btnExcluir"
+                        data-tabela="${nomeTabela}"
+                        data-indice="${i}">
+
+                        ✕
+
+                    </button>
+
+                </td>
+
+            </tr>
             `;
 
         }else{
 
             tbody.innerHTML += `
-                <tr class="linhaVazia">
-                    <td>&nbsp;</td>
-                    <td></td>
-                </tr>
+            <tr class="linhaVazia">
+
+                <td>&nbsp;</td>
+
+                <td></td>
+
+                <td></td>
+
+            </tr>
             `;
 
         }
 
     }
+
+}
+
+function configurarExclusao(){
+
+    document.querySelectorAll(".btnExcluir").forEach(botao => {
+
+        botao.addEventListener("click", () => {
+
+            const tabela = botao.dataset.tabela;
+
+            const indice = Number(botao.dataset.indice);
+
+            dados[tabela].splice(indice,1);
+
+            atualizarTudo();
+
+        });
+
+    });
 
 }
 
@@ -296,6 +337,8 @@ function atualizarTudo(){
     renderizarTabela("ocasionais","tbOcasionais");
 
     renderizarTabela("investimentos","tbInvestimentos");
+
+    configurarExclusao();
 
     atualizarTotais();
 
