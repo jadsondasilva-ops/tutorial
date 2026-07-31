@@ -30,7 +30,7 @@ const dados = {
 // ORÇAMENTO
 //==================================================
 
-const saldoTotal = 6150;
+let saldoTotal = 6150;
 
 const orcamento = {
 
@@ -55,6 +55,10 @@ const categoria = document.getElementById("categoria");
 const btnSalvar = document.getElementById("salvar");
 
 const btnCancelar = document.getElementById("cancelar");
+
+const saldo = document.getElementById("saldo");
+
+const editarSaldo = document.getElementById("editarSaldo");
 
 const botoesAdicionar = document.querySelectorAll(".btnAdicionar");
 
@@ -97,6 +101,60 @@ function fecharModal(){
     modal.classList.add("oculto");
 
 }
+
+//==================================================
+// EDITAR SALDO
+//==================================================
+
+saldo.addEventListener("click", () => {
+
+    saldo.classList.add("oculto");
+
+    editarSaldo.classList.remove("oculto");
+
+    editarSaldo.value = saldoTotal;
+
+    editarSaldo.focus();
+
+    editarSaldo.select();
+
+});
+
+function salvarSaldo(){
+
+    const novoValor = Number(editarSaldo.value);
+
+    if(!isNaN(novoValor) && novoValor > 0){
+
+        saldoTotal = novoValor;
+
+        orcamento.essenciais = saldoTotal * 0.50;
+
+        orcamento.ocasionais = saldoTotal * 0.30;
+
+        orcamento.investimentos = saldoTotal * 0.20;
+
+    }
+
+    editarSaldo.classList.add("oculto");
+
+    saldo.classList.remove("oculto");
+
+    atualizarTudo();
+
+}
+
+editarSaldo.addEventListener("keydown", e => {
+
+    if(e.key === "Enter"){
+
+        salvarSaldo();
+
+    }
+
+});
+
+editarSaldo.addEventListener("blur", salvarSaldo);
 
 //==================================================
 // DESENHAR TABELA

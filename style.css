@@ -446,6 +446,58 @@ nav a:hover{
 
 }
 
+/*====================================================
+    EDIÇÃO DO SALDO
+====================================================*/
+
+.saldoEdicao{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+#saldo{
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+#saldo:hover{
+
+    color:#66B3FF;
+
+}
+
+#editarSaldo{
+
+    width:220px;
+
+    font-size:52px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:8px;
+
+    background:#2B3240;
+
+    color:#34D16A;
+
+    padding:4px 8px;
+
+}
+
 
 /*====================================================
     CARTÕES
