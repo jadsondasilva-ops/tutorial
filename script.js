@@ -385,6 +385,83 @@ btnSalvar.addEventListener("click", () => {
 });
 
 //==================================================
+// ATUALIZAR GRÁFICOS
+//==================================================
+
+function atualizarGrafico() {
+
+    let gastosEssenciais = 0;
+    let gastosOcasionais = 0;
+    let gastosInvestimentos = 0;
+
+    dados.essenciais.forEach(item => gastosEssenciais += item.valor);
+    dados.ocasionais.forEach(item => gastosOcasionais += item.valor);
+    dados.investimentos.forEach(item => gastosInvestimentos += item.valor);
+
+    const ctx = document.getElementById("graficoPizza");
+
+    if (graficoPizza) {
+        graficoPizza.destroy();
+    }
+
+    graficoPizza = new Chart(ctx, {
+
+        type: "pie",
+
+        data: {
+
+            labels: [
+                "Essenciais",
+                "Ocasionais",
+                "Investimentos"
+            ],
+
+            datasets: [{
+
+                data: [
+                    gastosEssenciais,
+                    gastosOcasionais,
+                    gastosInvestimentos
+                ],
+
+                backgroundColor: [
+                    "#E53935",
+                    "#FB8C00",
+                    "#4A90E2"
+                ]
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom",
+
+                    labels: {
+
+                        color: "white"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+
+//==================================================
 // ATUALIZAR TUDO
 //==================================================
 
@@ -395,6 +472,8 @@ function atualizarTudo(){
     renderizarTabela("ocasionais","tbOcasionais");
 
     renderizarTabela("investimentos","tbInvestimentos");
+
+    atualizarGrafico();
 
     configurarExclusao();
 
