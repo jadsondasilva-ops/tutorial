@@ -388,6 +388,8 @@ btnSalvar.addEventListener("click", () => {
 // ATUALIZAR GRÁFICOS
 //==================================================
 
+let graficoPizza = null;
+
 function atualizarGrafico() {
 
     let gastosEssenciais = 0;
