@@ -399,7 +399,10 @@ function atualizarGrafico() {
     dados.investimentos.forEach(item => gastosInvestimentos += item.valor);
 
     const ctx = document.getElementById("graficoPizza");
-
+    
+    console.log(graficoPizza);
+    console.log(typeof graficoPizza);
+    
     if (graficoPizza) {
         graficoPizza.destroy();
     }
