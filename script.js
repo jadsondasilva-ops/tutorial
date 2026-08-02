@@ -416,9 +416,9 @@ function atualizarGrafico() {
         data: {
 
             labels: [
-                "Essenciais",
-                "Ocasionais",
-                "Investimentos"
+                "ESSENCIAIS",
+                "OCASIONAIS",
+                "INVESTIMENTOS"
             ],
 
             datasets: [{
@@ -457,7 +457,7 @@ function atualizarGrafico() {
 
                         font: {
 
-                            size: 22
+                            size: 20
 
                         }
 
