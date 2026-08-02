@@ -321,6 +321,8 @@ nav a:hover{
 
     min-width:350px;
 
+    max-width: 507px;
+
     background:#1D222D;
 
     border-radius:12px;

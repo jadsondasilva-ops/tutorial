@@ -441,6 +441,8 @@ function atualizarGrafico() {
 
         options: {
 
+            radius: "75%",
+
             responsive: true,
 
             plugins: {
@@ -451,7 +453,13 @@ function atualizarGrafico() {
 
                     labels: {
 
-                        color: "white"
+                        color: "white",
+
+                        font: {
+
+                            size: 30
+
+                        }
 
                     }
 
