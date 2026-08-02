@@ -441,13 +441,15 @@ function atualizarGrafico() {
 
         options: {
 
-            radius: "75%",
+            radius: "85%",
 
             responsive: true,
 
             plugins: {
 
                 tooltip: {
+
+                    padding: 16,
 
                     callbacks: {
 
@@ -459,10 +461,19 @@ function atualizarGrafico() {
 
                             const porcentagem = (valor / total * 100).toFixed(1);
 
-                            return `R$ ${valor.toFixed(2)} - ${porcentagem}%`;
+                            return `  R$ ${valor.toFixed(2)} - ${porcentagem}%`;
 
                         }
+                    },
+
+                    titleFont: {
+                        size: 20
+                    },
+
+                    bodyFont: {
+                        size: 18
                     }
+
                 },
 
                 legend: {
