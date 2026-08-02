@@ -447,6 +447,24 @@ function atualizarGrafico() {
 
             plugins: {
 
+                tooltip: {
+
+                    callbacks: {
+
+                        label: function(context){
+
+                            const total = context.dataset.data.reduce((a,b)=>a+b,0);
+
+                            const valor = context.raw;
+
+                            const porcentagem = (valor / total * 100).toFixed(1);
+
+                            return `R$ ${valor.toFixed(2)} - ${porcentagem}%`;
+
+                        }
+                    }
+                },
+
                 legend: {
 
                     position: "bottom",
