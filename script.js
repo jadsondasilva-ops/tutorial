@@ -457,7 +457,7 @@ function atualizarGrafico() {
 
                         font: {
 
-                            size: 30
+                            size: 22
 
                         }
 
