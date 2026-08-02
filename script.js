@@ -424,9 +424,9 @@ function atualizarGrafico() {
             datasets: [{
 
                 data: [
-                    gastosEssenciais,
-                    gastosOcasionais,
-                    gastosInvestimentos
+                    orcamento.essenciais,
+                    orcamento.ocasionais,
+                    orcamento.investimentos
                 ],
 
                 backgroundColor: [
