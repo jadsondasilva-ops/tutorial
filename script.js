@@ -118,7 +118,7 @@ linkFinanceiro.addEventListener("click", (evento) => {
 // RETORNO INÍCIO
 //==================================================
 
-linkFinanceiro.addEventListener("click", (evento) => {
+linkInicio.addEventListener("click", (evento) => {
 
     evento.preventDefault();
 
