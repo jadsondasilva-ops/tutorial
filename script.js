@@ -40,6 +40,31 @@ const orcamento = {
 
 };
 
+function salvarDados() {
+
+    localStorage.setItem("dados", JSON.stringify(dados));
+
+    localStorage.setItem("saldoTotal", saldoTotal);
+
+}
+
+function carregarDados() {
+
+    const dadosSalvos = localStorage.getItem("dados");
+    const saldoSalvo = localStorage.getItem("saldoTotal");
+
+    if (dadosSalvos) {
+        Object.assign(dados, JSON.parse(dadosSalvos));
+    }
+
+    if (saldoSalvo) {
+        saldoTotal = Number(saldoSalvo);
+    }
+
+}
+
+
+
 //==================================================
 // ELEMENTOS HTML
 //==================================================
@@ -133,6 +158,8 @@ function salvarSaldo(){
         orcamento.ocasionais = saldoTotal * 0.30;
 
         orcamento.investimentos = saldoTotal * 0.20;
+
+        salvarDados();
 
     }
 
@@ -231,6 +258,8 @@ function configurarExclusao(){
 
             dados[tabela].splice(indice,1);
 
+            salvarDados();
+
             atualizarTudo();
 
         });
@@ -264,6 +293,8 @@ function transferirOrcamento(origem, destino, valor){
     orcamento[origem] -= valor;
 
     orcamento[destino] += valor;
+
+    salvarDados();
 
     atualizarTudo();
 
@@ -378,6 +409,8 @@ btnSalvar.addEventListener("click", () => {
 
     });
 
+    salvarDados();
+
     atualizarTudo();
 
     fecharModal();
@@ -441,7 +474,7 @@ function atualizarGrafico() {
 
         options: {
 
-            radius: "85%",
+            radius: "90%",
 
             responsive: true,
 
@@ -526,5 +559,11 @@ function atualizarTudo(){
 //==================================================
 // START
 //==================================================
+
+carregarDados();
+
+orcamento.essenciais = saldoTotal * 0.50;
+orcamento.ocasionais = saldoTotal * 0.30;
+orcamento.investimentos = saldoTotal * 0.20;
 
 atualizarTudo();
