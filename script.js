@@ -98,6 +98,8 @@ const linkFinanceiro = document.getElementById("linkFinanceiro");
 
 const paginaFinanceiro = document.getElementById("paginaFinanceiro");
 
+const linkInicio = document.getElementById("linkInicio");
+
 //==================================================
 // ABA FINANCEIRO
 //==================================================
@@ -109,6 +111,20 @@ linkFinanceiro.addEventListener("click", (evento) => {
     document.querySelector(".dashboard").classList.add("oculto");
 
     paginaFinanceiro.classList.remove("oculto");
+
+});
+
+//==================================================
+// RETORNO INÍCIO
+//==================================================
+
+linkFinanceiro.addEventListener("click", (evento) => {
+
+    evento.preventDefault();
+
+    document.querySelector(".dashboard").classList.remove("oculto");
+
+    paginaFinanceiro.classList.add("oculto");
 
 });
 
