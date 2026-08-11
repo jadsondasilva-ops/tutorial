@@ -94,6 +94,24 @@ const editarSaldo = document.getElementById("editarSaldo");
 
 const botoesAdicionar = document.querySelectorAll(".btnAdicionar");
 
+const linkFinanceiro = document.getElementById("linkFinanceiro");
+
+const paginaFinanceiro = document.getElementById("paginaFinanceiro");
+
+//==================================================
+// ABA FINANCEIRO
+//==================================================
+
+linkFinanceiro.addEventListener("click", (evento) => {
+
+    evento.preventDefault();
+
+    document.querySelector(".dashboard").classList.add("oculto");
+
+    paginaFinanceiro.classList.remove("oculto");
+
+});
+
 //==================================================
 // TRANSFERÊNCIA
 //==================================================

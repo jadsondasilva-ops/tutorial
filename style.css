@@ -898,3 +898,21 @@ table{
     transform:scale(1.02);
 
 }
+
+/*====================================================*/
+/* PÁGINA FINANCEIRO */
+/*====================================================*/
+
+.paginaFinanceiro {
+
+    width: 96%;
+
+    min-height: 700px;
+
+    margin: 25px auto;
+
+    background: white;
+
+    border-radius: 12px;
+
+}
