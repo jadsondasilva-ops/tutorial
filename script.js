@@ -46,12 +46,15 @@ function salvarDados() {
 
     localStorage.setItem("saldoTotal", saldoTotal);
 
+    localStorage.setItem("orcamento", JSON.stringify(orcamento));
+
 }
 
 function carregarDados() {
 
     const dadosSalvos = localStorage.getItem("dados");
     const saldoSalvo = localStorage.getItem("saldoTotal");
+    const orcamentoSalvo = localStorage.getItem("orcamento");
 
     if (dadosSalvos) {
         Object.assign(dados, JSON.parse(dadosSalvos));
@@ -59,6 +62,10 @@ function carregarDados() {
 
     if (saldoSalvo) {
         saldoTotal = Number(saldoSalvo);
+    }
+
+    if (orcamentoSalvo) {
+        Object.assign(orcamento, JSON.parse(orcamentoSalvo));
     }
 
 }
@@ -561,9 +568,5 @@ function atualizarTudo(){
 //==================================================
 
 carregarDados();
-
-orcamento.essenciais = saldoTotal * 0.50;
-orcamento.ocasionais = saldoTotal * 0.30;
-orcamento.investimentos = saldoTotal * 0.20;
 
 atualizarTudo();
