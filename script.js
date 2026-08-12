@@ -234,7 +234,7 @@ function renderizarTabela(nomeTabela, idTabela){
 
     tbody.innerHTML = "";
 
-    const MAX_LINHAS = 20;
+    const MAX_LINHAS = 15;
 
     for(let i = 0; i < MAX_LINHAS; i++){
 
