@@ -112,7 +112,7 @@ linkFinanceiro.addEventListener("click", (evento) => {
 
     paginaFinanceiro.classList.remove("oculto");
 
-});
+}); //* TORNAR EM FUNÇÃO PARA NO FUTURO SERVIR PARA ALTERNAR AUTO.//
 
 //==================================================
 // RETORNO INÍCIO
@@ -560,7 +560,7 @@ function atualizarGrafico() {
 
                         font: {
 
-                            size: 20
+                            size: 18
 
                         }
 
