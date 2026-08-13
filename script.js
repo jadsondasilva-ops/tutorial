@@ -101,6 +101,22 @@ const paginaFinanceiro = document.getElementById("paginaFinanceiro");
 const linkInicio = document.getElementById("linkInicio");
 
 //==================================================
+// ELEMENTOS - NOVO LANÇAMENTO
+//==================================================
+
+const btnNovoLancamento =
+    document.getElementById("btnNovoLancamento");
+
+const modalNovoLancamento =
+    document.getElementById("modalNovoLancamento");
+
+const dataNovoLancamento =
+    document.getElementById("dataNovoLancamento");
+
+const cancelarNovoLancamento =
+    document.getElementById("cancelarNovoLancamento");
+
+//==================================================
 // ABA FINANCEIRO
 //==================================================
 
@@ -113,6 +129,41 @@ linkFinanceiro.addEventListener("click", (evento) => {
     paginaFinanceiro.classList.remove("oculto");
 
 }); //* TORNAR EM FUNÇÃO PARA NO FUTURO SERVIR PARA ALTERNAR AUTO.//
+
+//==================================================
+// NOVO LANÇAMENTO - ABRIR MODAL
+//==================================================
+
+btnNovoLancamento.addEventListener("click", () => {
+
+    const hoje = new Date();
+
+    const ano = hoje.getFullYear();
+
+    const mes = String(
+        hoje.getMonth() + 1
+    ).padStart(2, "0");
+
+    const dia = String(
+        hoje.getDate()
+    ).padStart(2, "0");
+
+    dataNovoLancamento.value =
+        `${ano}-${mes}-${dia}`;
+
+    modalNovoLancamento.classList.remove("oculto");
+
+});
+
+//==================================================
+// NOVO LANÇAMENTO - FECHAR MODAL
+//==================================================
+
+cancelarNovoLancamento.addEventListener("click", () => {
+
+    modalNovoLancamento.classList.add("oculto");
+
+});
 
 //==================================================
 // RETORNO INÍCIO
