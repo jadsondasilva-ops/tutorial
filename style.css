@@ -899,20 +899,328 @@ table{
 
 }
 
-/*====================================================*/
-/* PÁGINA FINANCEIRO */
-/*====================================================*/
+/*====================================================
+    PÁGINA FINANCEIRO
+====================================================*/
 
 .paginaFinanceiro {
 
     width: 96%;
 
-    min-height: 700px;
+    min-height: calc(100vh - 95px);
 
     margin: 25px auto;
 
-    background: white;
+    background: #1D222D;
 
     border-radius: 12px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.30);
+
+    overflow: hidden;
+
+}
+
+
+/*====================================================
+    PAINEL DE LANÇAMENTOS
+====================================================*/
+
+.painelLancamentos {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/*====================================================
+    CABEÇALHO
+====================================================*/
+
+.cabecalhoLancamentos {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 25px;
+
+    background: #1B1F27;
+
+    border-bottom: 1px solid #303744;
+
+}
+
+.cabecalhoLancamentos h1 {
+
+    font-size: 24px;
+
+    margin-bottom: 5px;
+
+}
+
+.cabecalhoLancamentos span {
+
+    color: #9DA5B4;
+
+    font-size: 13px;
+
+}
+
+
+/*====================================================
+    BOTÃO NOVO LANÇAMENTO
+====================================================*/
+
+.btnNovoLancamento {
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    background: #2E7DFF;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.btnNovoLancamento:hover {
+
+    background: #4B97FF;
+
+    transform: scale(1.03);
+
+}
+
+
+/*====================================================
+    FILTROS
+====================================================*/
+
+.filtrosLancamentos {
+
+    display: flex;
+
+    gap: 10px;
+
+    padding: 15px 25px;
+
+    background: #202631;
+
+    border-bottom: 1px solid #303744;
+
+}
+
+.filtrosLancamentos select {
+
+    padding: 9px 12px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #2B3240;
+
+    color: white;
+
+    outline: none;
+
+}
+
+
+/*====================================================
+    TABELA
+====================================================*/
+
+.tabelaLancamentos {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+.tabelaLancamentos table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+
+}
+
+
+/* CABEÇALHO DA TABELA */
+
+.tabelaLancamentos thead {
+
+    background: #171B22;
+
+}
+
+.tabelaLancamentos th {
+
+    padding: 13px 15px;
+
+    color: #9DA5B4;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    text-align: left;
+
+    border-bottom: 1px solid #303744;
+
+    white-space: nowrap;
+
+}
+
+
+/* LINHAS */
+
+.tabelaLancamentos tbody tr {
+
+    height: 42px;
+
+    border-bottom: 1px dashed #343C4A;
+
+    transition: .15s;
+
+}
+
+.tabelaLancamentos tbody tr:hover {
+
+    background: #242A35;
+
+}
+
+
+/* CÉLULAS */
+
+.tabelaLancamentos td {
+
+    padding: 8px 15px;
+
+    font-size: 13px;
+
+    color: #E5E7EB;
+
+}
+
+
+/* VALOR */
+
+.valorLancamento {
+
+    text-align: right;
+
+    color: #FF7272 !important;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+}
+
+
+/* AÇÕES */
+
+.acoesLancamento {
+
+    width: 50px;
+
+    text-align: center;
+
+}
+
+
+/*====================================================
+    CATEGORIAS
+====================================================*/
+
+.categoria {
+
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+}
+
+.categoria.essencial {
+
+    background: rgba(229,57,53,.15);
+
+    color: #FF7777;
+
+}
+
+.categoria.occasional {
+
+    background: rgba(251,140,0,.15);
+
+    color: #FFB454;
+
+}
+
+
+/*====================================================
+    RESUMO
+====================================================*/
+
+.resumoLancamentos {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 18px 25px;
+
+    background: #171B22;
+
+    border-top: 1px solid #303744;
+
+}
+
+.resumoLancamentos span {
+
+    color: #9DA5B4;
+
+    font-size: 13px;
+
+}
+
+.resumoLancamentos strong {
+
+    color: #34D16A;
+
+    font-size: 20px;
 
 }

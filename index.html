@@ -364,12 +364,169 @@
 
     </main>
 
-
     <!--========================-->
     <!-- PÁGINA FINANCEIRO      -->
     <!--========================-->
 
     <section id="paginaFinanceiro" class="paginaFinanceiro oculto">
+
+        <div class="painelLancamentos">
+
+            <!-- CABEÇALHO -->
+
+            <header class="cabecalhoLancamentos">
+
+                <div>
+                    <h1>Lançamentos</h1>
+                    <span>Despesas registradas no mês</span>
+                </div>
+
+                <button class="btnNovoLancamento">
+                    + Novo lançamento
+                </button>
+
+            </header>
+
+
+            <!-- FILTROS -->
+
+            <div class="filtrosLancamentos">
+
+                <select id="filtroMes">
+
+                    <option value="08">Agosto 2026</option>
+                    <option value="07">Julho 2026</option>
+                    <option value="06">Junho 2026</option>
+
+                </select>
+
+                <select id="filtroCategoria">
+
+                    <option value="todas">
+                        Todas as categorias
+                    </option>
+
+                    <option value="essenciais">
+                        Essenciais
+                    </option>
+
+                    <option value="ocasionais">
+                        Ocasionais
+                    </option>
+
+                    <option value="investimentos">
+                        Investimentos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TABELA -->
+
+            <div class="tabelaLancamentos">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Data</th>
+                            <th>Categoria</th>
+                            <th>Descrição</th>
+                            <th>Cartão</th>
+                            <th>Pagamento</th>
+                            <th>Valor</th>
+                            <th></th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tbLancamentos">
+
+                        <tr>
+
+                            <td>13/08/2026</td>
+
+                            <td>
+                                <span class="categoria essencial">
+                                    Alimentação
+                                </span>
+                            </td>
+
+                            <td>Marmita</td>
+
+                            <td>Santander</td>
+
+                            <td>Débito</td>
+
+                            <td class="valorLancamento">
+                                R$ 50,00
+                            </td>
+
+                            <td class="acoesLancamento">
+
+                                <button class="btnExcluir">
+                                    ×
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>12/08/2026</td>
+
+                            <td>
+                                <span class="categoria ocasional">
+                                    Lazer
+                                </span>
+                            </td>
+
+                            <td>Cinema</td>
+
+                            <td>Nubank</td>
+
+                            <td>Crédito</td>
+
+                            <td class="valorLancamento">
+                                R$ 35,00
+                            </td>
+
+                            <td class="acoesLancamento">
+
+                                <button class="btnExcluir">
+                                    ×
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- RODAPÉ -->
+
+            <footer class="resumoLancamentos">
+
+                <span>Total do mês</span>
+
+                <strong id="totalLancamentos">
+                    R$ 85,00
+                </strong>
+
+            </footer>
+
+        </div>
 
     </section>
 
