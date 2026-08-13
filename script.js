@@ -541,11 +541,11 @@ function atualizarGrafico() {
                     },
 
                     titleFont: {
-                        size: 20
+                        size: 18
                     },
 
                     bodyFont: {
-                        size: 18
+                        size: 16
                     }
 
                 },
@@ -560,7 +560,7 @@ function atualizarGrafico() {
 
                         font: {
 
-                            size: 18
+                            size: 12
 
                         }
 
