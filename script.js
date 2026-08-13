@@ -27,6 +27,40 @@ const dados = {
 };
 
 //==================================================
+// LANÇAMENTOS
+//==================================================
+
+let lancamentos = [];
+
+//==================================================
+// SUBCATEGORIAS
+//==================================================
+
+function carregarSubcategorias(){
+
+    const lista =
+        document.getElementById("listaSubcategorias");
+
+    lista.innerHTML = "";
+
+    for(const categoria in dados){
+
+        dados[categoria].forEach(item => {
+
+            const opcao =
+                document.createElement("option");
+
+            opcao.value = item.descricao;
+
+            lista.appendChild(opcao);
+
+        });
+
+    }
+
+}
+
+//==================================================
 // ORÇAMENTO
 //==================================================
 
@@ -48,6 +82,8 @@ function salvarDados() {
 
     localStorage.setItem("orcamento", JSON.stringify(orcamento));
 
+    localStorage.setItem("lancamentos", JSON.stringify(lancamentos));
+
 }
 
 function carregarDados() {
@@ -55,6 +91,7 @@ function carregarDados() {
     const dadosSalvos = localStorage.getItem("dados");
     const saldoSalvo = localStorage.getItem("saldoTotal");
     const orcamentoSalvo = localStorage.getItem("orcamento");
+    const lancamentosSalvos = localStorage.getItem("lancamentos");
 
     if (dadosSalvos) {
         Object.assign(dados, JSON.parse(dadosSalvos));
@@ -66,6 +103,10 @@ function carregarDados() {
 
     if (orcamentoSalvo) {
         Object.assign(orcamento, JSON.parse(orcamentoSalvo));
+    }
+
+    if (lancamentosSalvos) {
+    lancamentos = JSON.parse(lancamentosSalvos);
     }
 
 }
@@ -131,7 +172,7 @@ linkFinanceiro.addEventListener("click", (evento) => {
 }); //* TORNAR EM FUNÇÃO PARA NO FUTURO SERVIR PARA ALTERNAR AUTO.//
 
 //==================================================
-// NOVO LANÇAMENTO - ABRIR MODAL
+// NOVO LANÇAMENTO - ABRIR
 //==================================================
 
 btnNovoLancamento.addEventListener("click", () => {
@@ -471,6 +512,18 @@ function atualizarTotais(){
 
 }
 
+function atualizarTotaisLancados(){
+
+    let gastosLancados = 0;
+
+    lancamentos.forEach(item => gastosLancados += item.valor);
+
+    // Rodapé = saldo restante
+
+    document.getElementById("totalLancamentos").innerHTML =
+        "R$ " + (gastosLancados).toFixed(2);
+}
+
 //==================================================
 // NOVO ITEM
 //==================================================
@@ -627,6 +680,145 @@ function atualizarGrafico() {
 
 }
 
+//==================================================
+// DESENHAR LANÇAMENTOS
+//==================================================
+
+function renderizarLancamentos(){
+
+    tbLancamentos.innerHTML = "";
+
+    lancamentos.forEach((lancamento, indice) => {
+
+        const data = new Date(
+            lancamento.data + "T00:00:00"
+        );
+
+        const dataFormatada =
+            data.toLocaleDateString("pt-BR");
+
+        tbLancamentos.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${dataFormatada}
+                </td>
+
+                <td>
+                    ${lancamento.subcategoria}
+                </td>
+
+                <td>
+                    ${lancamento.descricao}
+                </td>
+
+                <td>
+                    ${lancamento.cartao}
+                </td>
+
+                <td>
+                    ${lancamento.pagamento}
+                </td>
+
+                <td class="valorLancamento">
+
+                    R$ ${lancamento.valor.toFixed(2)}
+
+                </td>
+
+                <td class="acoesLancamento">
+
+                    <button
+                        class="btnExcluirLancamento"
+                        data-indice="${indice}">
+
+                        ×
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+//==================================================
+// NOVO LANÇAMENTO
+//==================================================
+
+salvarNovoLancamento.addEventListener("click", () => {
+
+    if(dataNovoLancamento.value === ""){
+
+        alert("Informe a data.");
+
+        return;
+
+    }
+
+    if(subcategoriaNovoLancamento.value.trim() === ""){
+
+        alert("Informe a subcategoria.");
+
+        return;
+
+    }
+
+    if(descricaoNovoLancamento.value.trim() === ""){
+
+        alert("Informe a descrição.");
+
+        return;
+
+    }
+
+    if(valorNovoLancamento.value === ""){
+
+        alert("Informe o valor.");
+
+        return;
+
+    }
+
+    const novoLancamento = {
+
+        data:
+            dataNovoLancamento.value,
+
+        subcategoria:
+            subcategoriaNovoLancamento.value,
+
+        descricao:
+            descricaoNovoLancamento.value,
+
+        cartao:
+            cartaoNovoLancamento.value,
+
+        pagamento:
+            pagamentoNovoLancamento.value,
+
+        valor:
+            Number(valorNovoLancamento.value)
+
+    };
+
+    lancamentos.push(novoLancamento);
+
+    salvarDados();
+
+    renderizarLancamentos();
+
+    atualizarTotaisLancados()
+
+    modalNovoLancamento.classList.add("oculto");
+
+});
+
 
 //==================================================
 // ATUALIZAR TUDO
@@ -646,6 +838,8 @@ function atualizarTudo(){
 
     atualizarTotais();
 
+    atualizarTotaisLancados();
+
 }
 
 //==================================================
@@ -653,5 +847,9 @@ function atualizarTudo(){
 //==================================================
 
 carregarDados();
+
+carregarSubcategorias();
+
+renderizarLancamentos();
 
 atualizarTudo();

@@ -434,7 +434,7 @@
                         <tr>
 
                             <th>Data</th>
-                            <th>Categoria</th>
+                            <th>Subcategoria</th>
                             <th>Descrição</th>
                             <th>Cartão</th>
                             <th>Pagamento</th>
@@ -521,7 +521,7 @@
                 <span>Total do mês</span>
 
                 <strong id="totalLancamentos">
-                    R$ 85,00
+                    R$ 0,00
                 </strong>
 
             </footer>
@@ -601,44 +601,29 @@
                 type="date"
                 id="dataNovoLancamento">
 
-            <label>Categoria</label>
+            <label>Subcategoria</label>
 
-            <select id="categoriaNovoLancamento">
+            <input
+                type="text"
+                id="subcategoriaNovoLancamento"
+                list="listaSubcategorias"
+                placeholder="Pesquisar subcategoria"
+                autocomplete="off">
 
-                <option value="essenciais">
-                    Essenciais
-                </option>
-
-                <option value="ocasionais">
-                    Ocasionais
-                </option>
-
-                <option value="investimentos">
-                    Investimentos
-                </option>
-
-            </select>
-
+            <datalist id="listaSubcategorias"></datalist>
             <label>Descrição</label>
 
             <input
                 type="text"
                 id="descricaoNovoLancamento"
-                placeholder="Ex.: Marmita">
+                placeholder="Descrição">
 
             <label>Cartão</label>
 
-            <select id="cartaoNovoLancamento">
-
-                <option value="Santander">
-                    Santander
-                </option>
-
-                <option value="Nubank">
-                    Nubank
-                </option>
-
-            </select>
+            <input
+                type="text"
+                id="cartaoNovoLancamento"
+                placeholder="Cartão">
 
             <label>Pagamento</label>
 
