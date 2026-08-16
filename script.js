@@ -339,6 +339,10 @@ function renderizarTabela(nomeTabela, idTabela){
 
                 <td>${item.descricao}</td>
 
+                <td class="futuro">
+                    
+                </td>
+
                 <td class="valor">
                     R$ ${item.valor.toFixed(2)}
                 </td>
@@ -365,6 +369,8 @@ function renderizarTabela(nomeTabela, idTabela){
             <tr class="linhaVazia">
 
                 <td>&nbsp;</td>
+
+                <td></td>
 
                 <td></td>
 

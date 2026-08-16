@@ -1224,3 +1224,20 @@ table{
     font-size: 20px;
 
 }
+
+/*====================================================
+    NOVO CAMPO
+====================================================*/
+
+.painel td{
+
+    padding:2px 12px;
+    font-size:12px;
+
+}
+
+.painel td.futuro{
+
+    text-align:center;
+
+}
