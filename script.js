@@ -687,6 +687,31 @@ function atualizarGrafico() {
 }
 
 //==================================================
+// IDENTIFICAR CATEGORIA DA SUBCATEGORIA
+//==================================================
+
+function identificarCategoria(subcategoria){
+
+    for(const categoria in dados){
+
+        const existe = dados[categoria].some(item =>
+            item.descricao.toLowerCase() ===
+            subcategoria.toLowerCase()
+        );
+
+        if(existe){
+
+            return categoria;
+
+        }
+
+    }
+
+    return null;
+
+}
+
+//==================================================
 // DESENHAR LANÇAMENTOS
 //==================================================
 
@@ -712,7 +737,11 @@ function renderizarLancamentos(){
                 </td>
 
                 <td>
-                    ${lancamento.subcategoria}
+
+                    <span class="subcategoria ${lancamento.categoria}">
+                        ${lancamento.subcategoria}
+                    </span>
+
                 </td>
 
                 <td>
@@ -791,25 +820,33 @@ salvarNovoLancamento.addEventListener("click", () => {
 
     }
 
+    const subcategoria = subcategoriaNovoLancamento.value.trim();
+
+    const categoriaLancamento = identificarCategoria(subcategoria);
+
+    if(!categoriaLancamento){
+
+        alert("Subcategoria não encontrada.");
+
+        return;
+
+    }
+
     const novoLancamento = {
 
-        data:
-            dataNovoLancamento.value,
+        data: dataNovoLancamento.value,
 
-        subcategoria:
-            subcategoriaNovoLancamento.value,
+        categoria: categoriaLancamento,
 
-        descricao:
-            descricaoNovoLancamento.value,
+        subcategoria: subcategoria,
 
-        cartao:
-            cartaoNovoLancamento.value,
+        descricao: descricaoNovoLancamento.value,
 
-        pagamento:
-            pagamentoNovoLancamento.value,
+        cartao: cartaoNovoLancamento.value,
 
-        valor:
-            Number(valorNovoLancamento.value)
+        pagamento: pagamentoNovoLancamento.value,
+
+        valor: Number(valorNovoLancamento.value)
 
     };
 

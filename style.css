@@ -1085,7 +1085,7 @@ table{
 
     text-transform: uppercase;
 
-    text-align: left;
+    text-align: center;
 
     border-bottom: 1px solid #303744;
 
@@ -1120,6 +1120,8 @@ table{
     padding: 8px 15px;
 
     font-size: 13px;
+
+    text-align: center;
 
     color: #E5E7EB;
 
@@ -1226,18 +1228,69 @@ table{
 }
 
 /*====================================================
-    NOVO CAMPO
+    SUBCATEGORIA - LANÇAMENTOS
 ====================================================*/
 
-.painel td{
+.subcategoria{
 
-    padding:2px 12px;
-    font-size:12px;
+    display:inline-flex;
+
+    justify-content:center;
+
+    min-width:180px;
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    background:#1D222D;
 
 }
 
-.painel td.futuro{
 
-    text-align:center;
+/* ESSENCIAIS */
+
+.subcategoria.essenciais{
+
+    border:2px solid #E53935;
+
+    text-align: center;
+
+    color:#E53935;
+
+}
+
+
+/* OCASIONAIS */
+
+.subcategoria.ocasionais{
+
+    border:2px solid #FB8C00;
+
+    color:#FB8C00;
+
+}
+
+
+/* INVESTIMENTOS */
+
+.subcategoria.investimentos{
+
+    border:2px solid #4A90E2;
+
+    color:#4A90E2;
+
+}
+
+
+/* SETA */
+
+.setaSubcategoria{
+
+    margin-left:10px;
+
+    font-size:12px;
 
 }
