@@ -830,22 +830,43 @@ function renderizarLancamentos(){
 
 salvarNovoLancamento.addEventListener("click", () => {
 
-    // ... (Mantenha todas as validações `if` originais aqui) ...
+    if(dataNovoLancamento.value === ""){
+        alert("Informe a data.");
+        return;
+    }
+
+    if(subcategoriaNovoLancamento.value.trim() === ""){
+        alert("Informe a subcategoria.");
+        return;
+    }
+
+    if(descricaoNovoLancamento.value.trim() === ""){
+        alert("Informe a descrição.");
+        return;
+    }
+
+    if(valorNovoLancamento.value === ""){
+        alert("Informe o valor.");
+        return;
+    }
+
+    // Variáveis importantes que estavam faltando:
+    const subcategoria = subcategoriaNovoLancamento.value.trim();
+    const categoriaLancamento = identificarCategoria(subcategoria);
+
+    if(!categoriaLancamento){
+        alert("Subcategoria não encontrada.");
+        return;
+    }
 
     const novoLancamento = {
 
         data: dataNovoLancamento.value,
-
         categoria: categoriaLancamento,
-
         subcategoria: subcategoria,
-
         descricao: descricaoNovoLancamento.value,
-
         cartao: cartaoNovoLancamento.value,
-
         pagamento: pagamentoNovoLancamento.value,
-
         valor: Number(valorNovoLancamento.value)
 
     };
@@ -857,8 +878,7 @@ salvarNovoLancamento.addEventListener("click", () => {
     renderizarLancamentos();
 
     atualizarTotaisLancados();
-    
-    // Atualiza os saldos e as tabelas do Dashboard principal
+
     atualizarTudo(); 
 
     modalNovoLancamento.classList.add("oculto");

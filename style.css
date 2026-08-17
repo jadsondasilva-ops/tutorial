@@ -217,7 +217,7 @@ nav a:hover{
 
 .painel td{
 
-    padding:2px 12px;
+    padding:2px 9px;
     font-size:12px;
 
 }
@@ -238,47 +238,40 @@ nav a:hover{
 
 .acoes{
 
-    width:40px;
-
-    text-align:center;
+    width: 0;
+    padding: 0 !important;
+    position: relative;
 
 }
 
-.btnExcluir{
-
-    width:24px;
-
-    height:24px;
-
-    font-size: 10px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:#b83a3a;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-weight:bold;
+/* Botão flutuante */
+.btnExcluir {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background: #b83a3a;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    
+    /* NOVO: Faz o botão flutuar no canto direito da linha */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -12px; /* Centraliza perfeitamente na vertical */
 
     transition: all 0.3s ease; 
-
     opacity: 0; 
     transform: translateX(10px); 
     pointer-events: none; 
-
 }
 
-/* Ajustar o efeito de hover do próprio botão para não bugar a posição */
-.btnExcluir:hover{
-
-    background:#ff4444;
-
+/* Efeito ao colocar o mouse EXATAMENTE em cima do botão */
+.btnExcluir:hover {
+    background: #ff4444;
     transform: translateX(0) scale(1.1);
-
 }
 
 /*====================================================
