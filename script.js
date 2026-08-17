@@ -334,13 +334,27 @@ function renderizarTabela(nomeTabela, idTabela){
 
         if(item){
 
+            // 1. Filtra os lançamentos que pertencem a esta subcategoria
+            const lancamentosFiltrados = lancamentos.filter(l => 
+                l.subcategoria.toLowerCase() === item.descricao.toLowerCase()
+            );
+
+            let valorFuturo = "";
+
+            // 2. Se houver lançamentos, calcula o valor restante (Total - Lançamentos)
+            if(lancamentosFiltrados.length > 0){
+                const totalGasto = lancamentosFiltrados.reduce((acc, l) => acc + l.valor, 0);
+                const restante = item.valor - totalGasto;
+                valorFuturo = `R$ ${restante.toFixed(2)}`;
+            }
+
             tbody.innerHTML += `
             <tr>
 
                 <td>${item.descricao}</td>
 
                 <td class="futuro">
-                    
+                    ${valorFuturo}
                 </td>
 
                 <td class="valor">
@@ -365,6 +379,7 @@ function renderizarTabela(nomeTabela, idTabela){
 
         }else{
 
+            // Mantém as linhas vazias intactas
             tbody.innerHTML += `
             <tr class="linhaVazia">
 
@@ -780,6 +795,33 @@ function renderizarLancamentos(){
 
     });
 
+    //==================================================
+    // NOVO: CONFIGURAR BOTÕES DE EXCLUIR LANÇAMENTO
+    //==================================================
+    document.querySelectorAll(".btnExcluirLancamento").forEach(botao => {
+
+        botao.addEventListener("click", () => {
+
+            // Pega o índice do lançamento que está no HTML do botão
+            const indice = Number(botao.dataset.indice);
+
+            // Remove 1 item do array 'lancamentos' a partir do índice selecionado
+            lancamentos.splice(indice, 1);
+
+            // Salva as alterações no navegador
+            salvarDados();
+
+            // Atualiza a tabela de lançamentos e o total da página
+            renderizarLancamentos();
+            atualizarTotaisLancados();
+
+            // Atualiza o Dashboard principal (recalculando a coluna "futuro")
+            atualizarTudo();
+
+        });
+
+    });
+
 }
 
 //==================================================
@@ -788,49 +830,7 @@ function renderizarLancamentos(){
 
 salvarNovoLancamento.addEventListener("click", () => {
 
-    if(dataNovoLancamento.value === ""){
-
-        alert("Informe a data.");
-
-        return;
-
-    }
-
-    if(subcategoriaNovoLancamento.value.trim() === ""){
-
-        alert("Informe a subcategoria.");
-
-        return;
-
-    }
-
-    if(descricaoNovoLancamento.value.trim() === ""){
-
-        alert("Informe a descrição.");
-
-        return;
-
-    }
-
-    if(valorNovoLancamento.value === ""){
-
-        alert("Informe o valor.");
-
-        return;
-
-    }
-
-    const subcategoria = subcategoriaNovoLancamento.value.trim();
-
-    const categoriaLancamento = identificarCategoria(subcategoria);
-
-    if(!categoriaLancamento){
-
-        alert("Subcategoria não encontrada.");
-
-        return;
-
-    }
+    // ... (Mantenha todas as validações `if` originais aqui) ...
 
     const novoLancamento = {
 
@@ -856,7 +856,10 @@ salvarNovoLancamento.addEventListener("click", () => {
 
     renderizarLancamentos();
 
-    atualizarTotaisLancados()
+    atualizarTotaisLancados();
+    
+    // Atualiza os saldos e as tabelas do Dashboard principal
+    atualizarTudo(); 
 
     modalNovoLancamento.classList.add("oculto");
 
