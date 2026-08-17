@@ -207,11 +207,13 @@ nav a:hover{
 
 }
 
-.painel tbody tr{
+.painel tbody tr {
 
-    height:30px;
-    border-bottom:1px dashed #3B4353;
-    transition: transform 0.3s ease;
+    height: 30px;
+
+    border-bottom: 1px dashed #3B4353;
+
+    position: relative;
 
 }
 
@@ -236,44 +238,65 @@ nav a:hover{
 
 }
 
-.acoes{
+.acoes {
 
-    width: 0;
+    position: absolute;
+
+    right: 5px; /* Distância do botão até a borda direita */
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 30px;
+
     padding: 0 !important;
-    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
 }
 
-/* Botão flutuante */
 .btnExcluir {
-    width: 24px;
-    height: 24px;
+
+    width: 22px;
+
+    height: 22px;
+
     border: none;
+
     border-radius: 50%;
+
     background: #b83a3a;
+
     color: white;
+
     cursor: pointer;
+
     font-weight: bold;
-    font-size: 12px;
-    
-    /* NOVO: Faz o botão flutuar no canto direito da linha */
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    margin-top: -12px; /* Centraliza perfeitamente na vertical */
+
+    font-size: 11px; /* Tamanho do 'x' ajustado */
 
     transition: all 0.3s ease; 
+
     opacity: 0; 
+
     transform: translateX(10px); 
+
     pointer-events: none; 
+
 }
 
-/* Efeito ao colocar o mouse EXATAMENTE em cima do botão */
 .btnExcluir:hover {
-    background: #ff4444;
-    transform: translateX(0) scale(1.1);
-}
 
+    background: #ff4444;
+
+    transform: translateX(0) scale(1.1);
+
+}
 /*====================================================
     ANIMAÇÃO DE DESLIZE DA LINHA (HOVER)
 ====================================================*/
@@ -1314,4 +1337,45 @@ table{
 
     font-size:12px;
 
+}
+
+/* A linha vira o container de posicionamento */
+.linhaComExclusao {
+    position: relative;
+    border-bottom: 1px dashed #3B4353;
+    transition: transform 0.3s ease;
+}
+
+/* Criamos o botão como um elemento virtual (pseudo-elemento) */
+.linhaComExclusao::after {
+    content: "✕";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    
+    width: 20px;
+    height: 20px;
+    background: #b83a3a;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Efeito ao passar o mouse na linha */
+.linhaComExclusao:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+}
+
+.linhaComExclusao:hover::after:hover {
+    background: #ff4444;
 }

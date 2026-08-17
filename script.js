@@ -348,32 +348,12 @@ function renderizarTabela(nomeTabela, idTabela){
                 valorFuturo = `R$ ${restante.toFixed(2)}`;
             }
 
+            // Dentro da função renderizarTabela, no trecho do `tbody.innerHTML +=`
             tbody.innerHTML += `
-            <tr>
-
+            <tr class="linhaComExclusao" data-tabela="${nomeTabela}" data-indice="${i}">
                 <td>${item.descricao}</td>
-
-                <td class="futuro">
-                    ${valorFuturo}
-                </td>
-
-                <td class="valor">
-                    R$ ${item.valor.toFixed(2)}
-                </td>
-
-                <td class="acoes">
-
-                    <button
-                        class="btnExcluir"
-                        data-tabela="${nomeTabela}"
-                        data-indice="${i}">
-
-                        ✕
-
-                    </button>
-
-                </td>
-
+                <td class="futuro">${valorFuturo}</td>
+                <td class="valor">R$ ${item.valor.toFixed(2)}</td>
             </tr>
             `;
 
@@ -400,26 +380,19 @@ function renderizarTabela(nomeTabela, idTabela){
 
 }
 
-function configurarExclusao(){
+function configurarExclusao() {
+    document.querySelectorAll(".linhaComExclusao").forEach(linha => {
+        linha.addEventListener("click", (e) => {
+            // Verifica se o clique foi no botão (o pseudo-elemento não gera evento direto, 
+            // então vamos detectar o clique na linha ou ajustar conforme sua preferência)
+            const tabela = linha.dataset.tabela;
+            const indice = Number(linha.dataset.indice);
 
-    document.querySelectorAll(".btnExcluir").forEach(botao => {
-
-        botao.addEventListener("click", () => {
-
-            const tabela = botao.dataset.tabela;
-
-            const indice = Number(botao.dataset.indice);
-
-            dados[tabela].splice(indice,1);
-
+            dados[tabela].splice(indice, 1);
             salvarDados();
-
             atualizarTudo();
-
         });
-
     });
-
 }
 
 //==================================================
