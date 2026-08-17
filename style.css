@@ -261,51 +261,40 @@ nav a:hover{
 }
 
 .btnExcluir {
-
-    width: 22px;
-
-    height: 22px;
-
+    width: 24px;
+    height: 24px;
     border: none;
-
     border-radius: 50%;
-
     background: #b83a3a;
-
     color: white;
-
     cursor: pointer;
-
     font-weight: bold;
-
-    font-size: 11px; /* Tamanho do 'x' ajustado */
-
-    transition: all 0.3s ease; 
-
+    font-size: 11px;
+    
+    /* Posicionamento absoluto para ficar "flutuando" */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    
+    z-index: 10; /* Garante que ele fique acima do texto */
     opacity: 0; 
-
-    transform: translateX(10px); 
-
+    transition: opacity 0.3s ease; 
     pointer-events: none; 
-
 }
 
 .btnExcluir:hover {
-
     background: #ff4444;
-
-    transform: translateX(0) scale(1.1);
-
 }
+
 /*====================================================
     ANIMAÇÃO DE DESLIZE DA LINHA (HOVER)
 ====================================================*/
 
 /* 1. Desliza o texto das outras colunas 10px para a esquerda */
-.painel tbody tr:hover td:not(.acoes) {
-    
-    transform: translateX(-10px);
-    
+.painel tbody tr:hover .btnExcluir {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* 2. Mostra o botão e traz ele para a posição original */
