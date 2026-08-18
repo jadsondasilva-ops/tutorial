@@ -1357,3 +1357,21 @@ table{
     transition: all 0.3s ease;
     pointer-events: none;
 }
+
+/*====================================================
+    DRAG AND DROP (ARRASTAR E SOLTAR)
+====================================================*/
+
+.linhaComExclusao:active {
+    cursor: grabbing !important;
+}
+
+.arrastando {
+    opacity: 0.4;
+    background: #242A35;
+}
+
+.drag-over {
+    border-top: 2px solid #4DA3FF; /* Cria uma linha azul indicando onde o item vai cair */
+    background: #1B1F27;
+}

@@ -111,7 +111,12 @@ function carregarDados() {
 
 }
 
-
+//==================================================
+// CONTROLE DE EDIÇÃO
+//==================================================
+let modoEdicao = false;
+let itemEditadoCategoria = null;
+let itemEditadoIndice = null;
 
 //==================================================
 // ELEMENTOS HTML
@@ -227,25 +232,20 @@ linkInicio.addEventListener("click", (evento) => {
 const botoesTransferir = document.querySelectorAll(".btnTransferir");
 
 //==================================================
-// ABRIR MODAL
+// ABRIR MODAL (NOVA DESPESA)
 //==================================================
 
 botoesAdicionar.forEach(botao => {
-
     botao.addEventListener("click", () => {
+        modoEdicao = false; // Garante que é um item novo
+        document.querySelector("#modal .janela h2").innerText = "Nova Despesa";
 
         modal.classList.remove("oculto");
-
         categoria.value = botao.dataset.categoria;
-
         descricao.value = "";
-
         valor.value = "";
-
         descricao.focus();
-
     });
-
 });
 
 //==================================================
@@ -350,7 +350,7 @@ function renderizarTabela(nomeTabela, idTabela){
 
             // Dentro da função renderizarTabela, no trecho do `tbody.innerHTML +=`
             tbody.innerHTML += `
-            <tr class="linhaComExclusao" data-tabela="${nomeTabela}" data-indice="${i}">
+            <tr class="linhaComExclusao" data-tabela="${nomeTabela}" data-indice="${i}" draggable="true" style="cursor: grab;">
                 <td>${item.descricao}</td>
                 <td class="futuro">${valorFuturo}</td>
                 <td class="valor">R$ ${item.valor.toFixed(2)}</td>
@@ -395,6 +395,93 @@ function configurarExclusao() {
             dados[tabela].splice(indice, 1);
             salvarDados();
             atualizarTudo();
+        });
+    });
+}
+
+//==================================================
+// DRAG AND DROP (REORDENAR LINHAS)
+//==================================================
+
+let linhaArrastada = null;
+
+function configurarDragAndDrop() {
+    const linhas = document.querySelectorAll(".linhaComExclusao[draggable='true']");
+
+    linhas.forEach(linha => {
+        // Ao começar a arrastar
+        linha.addEventListener("dragstart", function(e) {
+            linhaArrastada = this;
+            e.dataTransfer.effectAllowed = "move";
+            // Usa um pequeno delay para a linha original ficar com aspecto "fantasma"
+            setTimeout(() => this.classList.add("arrastando"), 0);
+        });
+
+        // Ao soltar ou cancelar
+        linha.addEventListener("dragend", function() {
+            linhaArrastada = null;
+            this.classList.remove("arrastando");
+        });
+
+        // Quando passa por cima de outra linha
+        linha.addEventListener("dragover", function(e) {
+            e.preventDefault(); // Obrigatório para permitir o "Drop"
+            // Garante que só mostre o efeito visual se arrastar dentro da mesma tabela
+            if (linhaArrastada && this.dataset.tabela === linhaArrastada.dataset.tabela && this !== linhaArrastada) {
+                this.classList.add("drag-over");
+            }
+        });
+
+        // Quando sai de cima de outra linha
+        linha.addEventListener("dragleave", function() {
+            this.classList.remove("drag-over");
+        });
+
+        // Quando solta a linha no novo destino
+        linha.addEventListener("drop", function(e) {
+            e.preventDefault();
+            this.classList.remove("drag-over");
+
+            // Valida se o drop é válido (na mesma tabela e numa linha diferente)
+            if (linhaArrastada && this.dataset.tabela === linhaArrastada.dataset.tabela && this !== linhaArrastada) {
+                
+                const tabela = this.dataset.tabela;
+                const indexOrigem = Number(linhaArrastada.dataset.indice);
+                const indexDestino = Number(this.dataset.indice);
+
+                // Reordena os itens no array 'dados'
+                const itemMovido = dados[tabela].splice(indexOrigem, 1)[0];
+                dados[tabela].splice(indexDestino, 0, itemMovido);
+
+                // Salva no localStorage e reconstrói a interface
+                salvarDados();
+                atualizarTudo();
+            }
+        });
+    });
+}
+
+//==================================================
+// DUPLO CLIQUE PARA EDITAR
+//==================================================
+
+function configurarDuploClique() {
+    document.querySelectorAll(".linhaComExclusao").forEach(linha => {
+        linha.addEventListener("dblclick", () => {
+            modoEdicao = true;
+            itemEditadoCategoria = linha.dataset.tabela;
+            itemEditadoIndice = Number(linha.dataset.indice);
+
+            const item = dados[itemEditadoCategoria][itemEditadoIndice];
+
+            // Muda o título do modal e preenche os campos
+            document.querySelector("#modal .janela h2").innerText = "Editar Despesa";
+            descricao.value = item.descricao;
+            valor.value = item.valor;
+            categoria.value = itemEditadoCategoria;
+
+            modal.classList.remove("oculto");
+            descricao.focus();
         });
     });
 }
@@ -523,41 +610,61 @@ function atualizarTotaisLancados(){
 }
 
 //==================================================
-// NOVO ITEM
+// SALVAR ITEM (NOVO OU EDIÇÃO)
 //==================================================
 
 btnSalvar.addEventListener("click", () => {
-
     if(descricao.value.trim() === ""){
-
         alert("Digite uma descrição.");
-
         return;
-
     }
 
     if(valor.value === ""){
-
         alert("Digite um valor.");
-
         return;
-
     }
 
-    dados[categoria.value].push({
+    if (modoEdicao) {
+        // --- MODO EDIÇÃO ---
+        const novaCategoria = categoria.value;
+        const novoValor = Number(valor.value);
+        const novaDescricao = descricao.value.trim();
+        const descricaoAntiga = dados[itemEditadoCategoria][itemEditadoIndice].descricao;
 
-        descricao: descricao.value,
+        // 1. Atualiza os dados
+        if (novaCategoria === itemEditadoCategoria) {
+            // Se manteve na mesma categoria
+            dados[itemEditadoCategoria][itemEditadoIndice].descricao = novaDescricao;
+            dados[itemEditadoCategoria][itemEditadoIndice].valor = novoValor;
+        } else {
+            // Se mudou de categoria (ex: de Essencial para Ocasional)
+            dados[itemEditadoCategoria].splice(itemEditadoIndice, 1);
+            dados[novaCategoria].push({ descricao: novaDescricao, valor: novoValor });
+        }
 
-        valor: Number(valor.value)
+        // 2. Atualiza o histórico de lançamentos caso o nome ou categoria tenham mudado
+        if (descricaoAntiga !== novaDescricao || novaCategoria !== itemEditadoCategoria) {
+            lancamentos.forEach(l => {
+                if (l.subcategoria.toLowerCase() === descricaoAntiga.toLowerCase()) {
+                    l.subcategoria = novaDescricao;
+                    l.categoria = novaCategoria;
+                }
+            });
+            renderizarLancamentos();
+        }
+        
+    } else {
+        // --- MODO NOVO ITEM ---
+        dados[categoria.value].push({
+            descricao: descricao.value.trim(),
+            valor: Number(valor.value)
+        });
+    }
 
-    });
-
+    carregarSubcategorias(); // Atualiza a lista de opções de lançamentos
     salvarDados();
-
     atualizarTudo();
-
     fecharModal();
-
 });
 
 //==================================================
@@ -878,6 +985,10 @@ function atualizarTudo(){
     atualizarGrafico();
 
     configurarExclusao();
+
+    configurarDragAndDrop();
+
+    configurarDuploClique();
 
     atualizarTotais();
 
