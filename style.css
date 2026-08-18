@@ -1357,14 +1357,3 @@ table{
     transition: all 0.3s ease;
     pointer-events: none;
 }
-
-/* Efeito ao passar o mouse na linha */
-.linhaComExclusao:hover::after {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-    pointer-events: auto;
-}
-
-.linhaComExclusao:hover::after:hover {
-    background: #ff4444;
-}

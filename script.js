@@ -354,6 +354,7 @@ function renderizarTabela(nomeTabela, idTabela){
                 <td>${item.descricao}</td>
                 <td class="futuro">${valorFuturo}</td>
                 <td class="valor">R$ ${item.valor.toFixed(2)}</td>
+                <td class="acoes"><button class="btnExcluir">✕</button></td>
             </tr>
             `;
 
@@ -381,10 +382,13 @@ function renderizarTabela(nomeTabela, idTabela){
 }
 
 function configurarExclusao() {
-    document.querySelectorAll(".linhaComExclusao").forEach(linha => {
-        linha.addEventListener("click", (e) => {
-            // Verifica se o clique foi no botão (o pseudo-elemento não gera evento direto, 
-            // então vamos detectar o clique na linha ou ajustar conforme sua preferência)
+    // Agora selecionamos apenas o botão, não mais a linha inteira
+    document.querySelectorAll(".btnExcluir").forEach(botao => {
+        botao.addEventListener("click", (e) => {
+            
+            // Encontra a linha "Pai" (tr) que contém o botão
+            const linha = e.target.closest("tr");
+            
             const tabela = linha.dataset.tabela;
             const indice = Number(linha.dataset.indice);
 
