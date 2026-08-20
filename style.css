@@ -1388,8 +1388,6 @@ table{
     color: #9DA5B4;
     font-size: 12px;
     text-transform: uppercase;
-    text-align: center;
-    align-items: center;
     padding-bottom: 10px;
     border-bottom: 1px solid #303744;
 }
@@ -1398,6 +1396,25 @@ table{
     width: 16px;
     height: 16px;
     cursor: pointer;
-    padding: 13px 15px
+    padding: 13px 15px;
     accent-color: #34D16A; /* Deixa o check verdinho no padrão do seu site */
+}
+
+/*====================================================
+    CABEÇALHOS DOS BLOCOS (DISTRIBUIÇÃO E PAGAMENTOS)
+====================================================*/
+.cabecalho-bloco {
+    background: #242A35; /* Um tom ligeiramente mais claro que o fundo do card (#1D222D) para destacar */
+    padding: 12px;
+    border-radius: 8px; /* Bordas arredondadas para manter o visual moderno */
+    margin-bottom: 20px; /* Espaçamento que empurra o gráfico/tabela para baixo, separando-os */
+    text-align: center; /* Centraliza o texto perfeitamente */
+    border: 1px solid #303744; /* Borda bem sutil para dar acabamento */
+}
+
+.cabecalho-bloco h2 {
+    margin-bottom: 0; /* Remove a margem original do h2 do card */
+    color: #5FAEFF; /* Mantém o azul que você já usava[cite: 3] */
+    font-size: 16px;
+    letter-spacing: 1.5px; /* Dá um leve espaçamento entre as letras, deixando mais elegante */
 }
