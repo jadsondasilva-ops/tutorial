@@ -294,7 +294,7 @@ function salvarSaldo(){
 
     const novoValor = Number(editarSaldo.value);
 
-    if(!isNaN(novoValor) && novoValor > 0){
+    if(!isNaN(novoValor) && novoValor > 0 && novoValor != saldoTotal){
 
         saldoTotal = novoValor;
 
