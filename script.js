@@ -22,6 +22,18 @@ const dados = {
         { descricao: "WEGE3", valor: 1400 },
         { descricao: "BBAS3", valor: 950 },
         { descricao: "VALE3", valor: 800 }
+    ],
+
+    pagamentos: [
+        { descricao: "Aluguel", valor: 800.00, vencimento: "02/08", pago: true },
+        { descricao: "Cartão Cmpt.", valor: 800.00, vencimento: "-", pago: true },
+        { descricao: "Telefone", valor: 139.88, vencimento: "10/08", pago: true },
+        { descricao: "Luz", valor: 90.95, vencimento: "08/08", pago: true },
+        { descricao: "IPVA (8/10)", valor: 84.69, vencimento: "15/08", pago: true },
+        { descricao: "Academia", valor: 113.69, vencimento: "-", pago: true },
+        { descricao: "Garagem", valor: 160.00, vencimento: "01/08", pago: true },
+        { descricao: "Dízimo", valor: 100.00, vencimento: "-", pago: true },
+        { descricao: "Carnê", valor: 579.07, vencimento: "13/08", pago: false }
     ]
 
 };
@@ -381,6 +393,60 @@ function renderizarTabela(nomeTabela, idTabela){
 
 }
 
+//==================================================
+// DESENHAR TABELA DE PAGAMENTOS
+//==================================================
+
+function renderizarTabelaPagamentos() {
+    const tbody = document.getElementById("tbPagamentos");
+    if (!tbody) return;
+    
+    tbody.innerHTML = "";
+    const MAX_LINHAS = 10; // Quantidade de linhas visíveis
+
+    // Garante que a array exista (caso o localStorage esteja desatualizado)
+    if (!dados.pagamentos) dados.pagamentos = [];
+
+    for (let i = 0; i < MAX_LINHAS; i++) {
+        const item = dados.pagamentos[i];
+
+        if (item) {
+            const checked = item.pago ? "checked" : "";
+            tbody.innerHTML += `
+            <tr class="linhaComExclusao" data-tabela="pagamentos" data-indice="${i}">
+                <td>${item.descricao}</td>
+                <td class="valor">R$ ${item.valor.toFixed(2)}</td>
+                <td style="text-align: center;">${item.vencimento}</td>
+                <td style="text-align: center;">
+                    <input type="checkbox" class="checkPagamento" data-indice="${i}" ${checked}>
+                </td>
+            </tr>
+            `;
+        } else {
+            // Linha vazia
+            tbody.innerHTML += `
+            <tr class="linhaVazia">
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: center;">
+                    <input type="checkbox" disabled style="opacity: 0.3;">
+                </td>
+            </tr>
+            `;
+        }
+    }
+
+    // Adiciona evento para salvar a mudança do checkbox automaticamente
+    document.querySelectorAll(".checkPagamento").forEach(checkbox => {
+        checkbox.addEventListener("change", (e) => {
+            const indice = e.target.dataset.indice;
+            dados.pagamentos[indice].pago = e.target.checked;
+            salvarDados();
+        });
+    });
+}
+
 function configurarExclusao() {
     // Agora selecionamos apenas o botão, não mais a linha inteira
     document.querySelectorAll(".btnExcluir").forEach(botao => {
@@ -718,7 +784,7 @@ function atualizarGrafico() {
                     "#4A90E2"
                 ],
                 
-                // NOVO: Remove a borda branca padrão e adiciona estilo
+                
                 borderWidth: 0,
                 hoverOffset: 8, // A fatia "pula" ao passar o mouse
                 borderRadius: 4 // Arredonda levemente as pontas das fatias
@@ -729,7 +795,7 @@ function atualizarGrafico() {
 
         options: {
 
-            cutout: '70%', // NOVO: Define a espessura do anel (quanto maior, mais fino)
+            cutout: '70%', 
             radius: "90%",
             responsive: true,
 
@@ -737,7 +803,7 @@ function atualizarGrafico() {
 
                 tooltip: {
                     padding: 16,
-                    // NOVO: Aplicando a fonte moderna no tooltip
+                    
                     titleFont: {
                         family: "'Inter', sans-serif",
                         size: 14
@@ -759,11 +825,11 @@ function atualizarGrafico() {
                 legend: {
                     position: "bottom",
                     labels: {
-                        color: "#9DA5B4", // Um cinza claro em vez de branco puro para ficar elegante
-                        usePointStyle: true, // NOVO: Transforma o quadrado da legenda em bolinha
-                        padding: 25, // Dá um respiro maior entre a legenda e o gráfico
+                        color: "#9DA5B4", 
+                        usePointStyle: true, 
+                        padding: 25, 
                         font: {
-                            family: "'Inter', sans-serif", // Nova fonte na legenda
+                            family: "'Inter', sans-serif", 
                             size: 12
                         }
                     }
@@ -970,6 +1036,8 @@ function atualizarTudo(){
     renderizarTabela("ocasionais","tbOcasionais");
 
     renderizarTabela("investimentos","tbInvestimentos");
+
+    renderizarTabelaPagamentos();
 
     atualizarGrafico();
 

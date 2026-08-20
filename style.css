@@ -348,22 +348,15 @@ nav a:hover{
     GRÁFICO
 ====================================================*/
 
-.grafico{
+.grafico {
 
-    flex:1;
+    background: #1D222D;
 
-    min-width:350px;
+    border-radius: 12px;
 
-    max-width: 590px;
-
-    background:#1D222D;
-
-    border-radius:12px;
-
-    padding:20px;
-
-    box-shadow:0 10px 20px rgba(0,0,0,.25);
-
+    padding: 20px;
+    
+    box-shadow: 0 10px 20px rgba(0,0,0,.25);
 }
 
 .grafico h2{
@@ -1374,4 +1367,16 @@ table{
 .drag-over {
     border-top: 2px solid #4DA3FF; /* Cria uma linha azul indicando onde o item vai cair */
     background: #1B1F27;
+}
+
+/*====================================================
+    PAINEL DIREITO (GRÁFICO + PAGAMENTOS)
+====================================================*/
+.painelDireito {
+    flex: 1;
+    min-width: 350px;
+    max-width: 590px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

@@ -305,17 +305,30 @@
 
             </section>
 
-            <!-- DIREITA -->
+            <!-- DIREITA (AGRUPANDO GRÁFICO E PAGAMENTOS) -->
+            <aside class="painelDireito">
 
-            <aside class="grafico card">
+                <article class="grafico card">
+                    <h2>DISTRIBUIÇÃO</h2>
+                    <canvas id="graficoPizza"></canvas>
+                </article>
 
-                <h2>
-
-                    DISTRIBUIÇÃO
-
-                </h2>
-
-                <canvas id="graficoPizza"></canvas>
+                <article class="pagamentos card">
+                    <h2>PAGAMENTOS</h2>
+                    <table class="tabela-estilo-pagamentos">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Descrição</th>
+                                <th style="text-align: right;">Valor</th>
+                                <th style="text-align: center;">Venc.</th>
+                                <th style="text-align: center;">Pago?</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbPagamentos">
+                            <!-- Gerado via JS -->
+                        </tbody>
+                    </table>
+                </article>
 
             </aside>
 
