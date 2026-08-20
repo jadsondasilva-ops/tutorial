@@ -694,14 +694,14 @@ function atualizarGrafico() {
 
     graficoPizza = new Chart(ctx, {
 
-        type: "pie",
+        type: "doughnut", // Mudamos de "pie" para "doughnut"
 
         data: {
 
             labels: [
-                "ESSENCIAIS",
-                "OCASIONAIS",
-                "INVESTIMENTOS"
+                "  ESSENCIAIS",
+                "  OCASIONAIS",
+                "  INVESTIMENTOS"
             ],
 
             datasets: [{
@@ -716,7 +716,12 @@ function atualizarGrafico() {
                     "#E53935",
                     "#FB8C00",
                     "#4A90E2"
-                ]
+                ],
+                
+                // NOVO: Remove a borda branca padrão e adiciona estilo
+                borderWidth: 0,
+                hoverOffset: 8, // A fatia "pula" ao passar o mouse
+                borderRadius: 4 // Arredonda levemente as pontas das fatias
 
             }]
 
@@ -724,63 +729,47 @@ function atualizarGrafico() {
 
         options: {
 
+            cutout: '70%', // NOVO: Define a espessura do anel (quanto maior, mais fino)
             radius: "90%",
-
             responsive: true,
 
             plugins: {
 
                 tooltip: {
-
                     padding: 16,
-
-                    callbacks: {
-
-                        label: function(context){
-
-                            const total = context.dataset.data.reduce((a,b)=>a+b,0);
-
-                            const valor = context.raw;
-
-                            const porcentagem = (valor / total * 100).toFixed(1);
-
-                            return `  R$ ${valor.toFixed(2)} - ${porcentagem}%`;
-
-                        }
-                    },
-
+                    // NOVO: Aplicando a fonte moderna no tooltip
                     titleFont: {
-                        size: 18
+                        family: "'Inter', sans-serif",
+                        size: 14
                     },
-
                     bodyFont: {
-                        size: 16
+                        family: "'Inter', sans-serif",
+                        size: 14
+                    },
+                    callbacks: {
+                        label: function(context){
+                            const total = context.dataset.data.reduce((a,b)=>a+b,0);
+                            const valor = context.raw;
+                            const porcentagem = (valor / total * 100).toFixed(1);
+                            return `  R$ ${valor.toFixed(2)} - ${porcentagem}%`;
+                        }
                     }
-
                 },
 
                 legend: {
-
                     position: "bottom",
-
                     labels: {
-
-                        color: "white",
-
+                        color: "#9DA5B4", // Um cinza claro em vez de branco puro para ficar elegante
+                        usePointStyle: true, // NOVO: Transforma o quadrado da legenda em bolinha
+                        padding: 25, // Dá um respiro maior entre a legenda e o gráfico
                         font: {
-
+                            family: "'Inter', sans-serif", // Nova fonte na legenda
                             size: 12
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     });
 
 }
