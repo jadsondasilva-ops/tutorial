@@ -562,8 +562,8 @@ nav a:hover{
 
 .pagamentos td{
 
-    padding:10px;
-
+    padding: 5px;
+    font-size: 12px;
     border-bottom:1px solid #303744;
 
 }
@@ -1379,4 +1379,25 @@ table{
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+/*====================================================
+    TABELA PAGAMENTOS (ESPECÍFICO)
+====================================================*/
+.tabela-estilo-pagamentos thead th {
+    color: #9DA5B4;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #303744;
+}
+
+.tabela-estilo-pagamentos input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    padding: 13px 15px
+    accent-color: #34D16A; /* Deixa o check verdinho no padrão do seu site */
 }
