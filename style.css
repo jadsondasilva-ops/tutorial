@@ -446,6 +446,8 @@ nav a:hover{
 
     border-radius:12px;
 
+    letter-spacing: 1.5px;
+
     padding: 15px;
 
     text-align:center;
@@ -1397,24 +1399,24 @@ table{
     height: 16px;
     cursor: pointer;
     padding: 13px 15px;
-    accent-color: #34D16A; /* Deixa o check verdinho no padrão do seu site */
+    accent-color: #34D16A; 
 }
 
 /*====================================================
     CABEÇALHOS DOS BLOCOS (DISTRIBUIÇÃO E PAGAMENTOS)
 ====================================================*/
 .cabecalho-bloco {
-    background: #242A35; /* Um tom ligeiramente mais claro que o fundo do card (#1D222D) para destacar */
+    background: #242A35; 
     padding: 12px;
-    border-radius: 8px; /* Bordas arredondadas para manter o visual moderno */
-    margin-bottom: 20px; /* Espaçamento que empurra o gráfico/tabela para baixo, separando-os */
-    text-align: center; /* Centraliza o texto perfeitamente */
-    border: 1px solid #303744; /* Borda bem sutil para dar acabamento */
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    text-align: center; 
+    border: 1px solid #303744; 
 }
 
 .cabecalho-bloco h2 {
-    margin-bottom: 0; /* Remove a margem original do h2 do card */
-    color: #5FAEFF; /* Mantém o azul que você já usava[cite: 3] */
+    margin-bottom: 0; 
+    color: #5FAEFF; 
     font-size: 16px;
-    letter-spacing: 1.5px; /* Dá um leve espaçamento entre as letras, deixando mais elegante */
+    letter-spacing: 1.5px; 
 }
