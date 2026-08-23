@@ -30,8 +30,8 @@ const pagamentos = Object.values(dados)
     .map(item => ({
         descricao: item.descricao,
         valor: Number(item.valor),
-        vencimento: "02/08",
-        pago: true
+        vencimento: "",
+        pago: false
 }));
 
 //==================================================
@@ -92,6 +92,8 @@ function salvarDados() {
 
     localStorage.setItem("lancamentos", JSON.stringify(lancamentos));
 
+    localStorage.setItem("pagamentos", JSON.stringify(pagamentos));
+
 }
 
 function carregarDados() {
@@ -100,6 +102,7 @@ function carregarDados() {
     const saldoSalvo = localStorage.getItem("saldoTotal");
     const orcamentoSalvo = localStorage.getItem("orcamento");
     const lancamentosSalvos = localStorage.getItem("lancamentos");
+    const pagamentosSalvos = localStorage.getItem("pagamentos");
 
     if (dadosSalvos) {
         Object.assign(dados, JSON.parse(dadosSalvos));
@@ -114,7 +117,25 @@ function carregarDados() {
     }
 
     if (lancamentosSalvos) {
-    lancamentos = JSON.parse(lancamentosSalvos);
+        lancamentos = JSON.parse(lancamentosSalvos);
+    }
+
+    if (pagamentosSalvos) {
+        const pagamentosCarregados = JSON.parse(pagamentosSalvos);
+
+        pagamentosCarregados.forEach((pagamento, indice) => {
+
+            if (pagamentos[indice]) {
+
+                pagamentos[indice].vencimento =
+                    pagamento.vencimento || "";
+
+                pagamentos[indice].pago =
+                    pagamento.pago || false;
+
+            }
+
+        });
     }
 
 }
@@ -390,92 +411,417 @@ function renderizarTabela(nomeTabela, idTabela){
 }
 
 //==================================================
-// DESENHAR TABELA DE PAGAMENTOS (COM SELEÇÃO)
-//==================================================
-
-//==================================================
-// DESENHAR TABELA DE PAGAMENTOS (COM SELEÇÃO)
-//==================================================
-
-//==================================================
-// DESENHAR TABELA DE PAGAMENTOS (COM SELEÇÃO)
+// DESENHAR TABELA DE PAGAMENTOS
 //==================================================
 
 function renderizarTabelaPagamentos() {
-    // Alvo ESPECÍFICO: Apenas a tabela que está no painel direito, ignorando a tabela de baixo
-    const tbody = document.querySelector(".painelDireito #tbPagamentos");
+
+    const tbody =
+        document.querySelector(".painelDireito #tbPagamentos");
+
     if (!tbody) return;
-    
+
     tbody.innerHTML = "";
+
     const MAX_LINHAS = 10;
 
-    // 1. Cria as opções da seta. 
-    let opcoesHTML = `<option value="" style="background: #2B3240; color: #FFF;">Selecione...</option>`;
-    
-    // O array 'pagamentos' já é um const válido, então apenas o iteramos
+    //==================================================
+    // OPÇÕES DA LISTA
+    //==================================================
+
+    let opcoesHTML =
+        `<option value="" style="background:#2B3240;color:#FFF;">
+            Selecione...
+        </option>`;
+
     pagamentos.forEach((item, index) => {
-        opcoesHTML += `<option value="${index}" style="background: #2B3240; color: #FFF;">${item.descricao}</option>`;
+
+        opcoesHTML += `
+            <option
+                value="${index}"
+                style="background:#2B3240;color:#FFF;">
+                ${item.descricao}
+            </option>
+        `;
+
     });
 
-    // 2. Constrói a tabela limpa com larguras fixas para não quebrar o layout
-    for (let i = 0; i < MAX_LINHAS; i++) {
+    //==================================================
+    // CRIAR LINHAS
+    //==================================================
+
+    for(let i = 0; i < MAX_LINHAS; i++){
+
         tbody.innerHTML += `
-        <tr class="linhaPagamento" data-indice="${i}">
-            <td style="padding: 5px; width: 45%;">
-                <select class="selectPagamento" style="width: 100%; border: none; background: #2B3240; padding: 6px; border-radius: 5px; color: #FFF; outline: none; cursor: pointer; font-family: inherit; font-size: 12px;">
-                    ${opcoesHTML}
-                </select>
-            </td>
-            <td class="valorPagamento valor" style="text-align: right; padding: 5px; width: 25%;"></td>
-            <td class="vencimentoPagamento" style="text-align: center; padding: 5px; width: 15%;"></td>
-            <td style="text-align: center; padding: 5px; width: 15%;">
-                <input type="checkbox" class="checkPagamento" disabled style="opacity: 0.3; accent-color: #34D16A; cursor: pointer; width: 16px; height: 16px;">
-            </td>
-        </tr>
+
+            <tr
+                class="linhaPagamento"
+                data-indice="${i}">
+
+                <td style="padding:5px;width:45%;">
+
+                    <select
+                        class="selectPagamento"
+                        style="
+                            width:100%;
+                            border:none;
+                            background:#2B3240;
+                            padding:6px;
+                            border-radius:5px;
+                            color:#FFF;
+                            outline:none;
+                            cursor:pointer;
+                            font-family:inherit;
+                            font-size:12px;
+                        ">
+
+                        ${opcoesHTML}
+
+                    </select>
+
+                </td>
+
+
+                <td
+                    class="valorPagamento valor"
+                    style="
+                        text-align:right;
+                        padding:5px;
+                        width:25%;
+                    ">
+                </td>
+
+
+                <td
+                    class="vencimentoPagamento"
+                    style="
+                        text-align:center;
+                        padding:5px;
+                        width:15%;
+                        cursor:pointer;
+                    ">
+                </td>
+
+
+                <td
+                    style="
+                        text-align:center;
+                        padding:5px;
+                        width:15%;
+                    ">
+
+                    <input
+                        type="checkbox"
+                        class="checkPagamento"
+                        disabled
+                        style="
+                            opacity:0.3;
+                            accent-color:#34D16A;
+                            cursor:pointer;
+                            width:16px;
+                            height:16px;
+                        ">
+
+                </td>
+
+            </tr>
+
         `;
+
     }
 
-    // 3. Inteligência: preenche os dados ao escolher uma opção
-    document.querySelectorAll(".painelDireito .selectPagamento").forEach(select => {
-        select.addEventListener("change", (e) => {
-            const pagamentoIndex = e.target.value;
-            const tr = e.target.closest("tr");
-            
-            const tdValor = tr.querySelector(".valorPagamento");
-            const tdVencimento = tr.querySelector(".vencimentoPagamento");
-            const checkbox = tr.querySelector(".checkPagamento");
 
-            if (pagamentoIndex !== "") {
-                const item = pagamentos[pagamentoIndex];
-                tdValor.innerHTML = `R$ ${item.valor.toFixed(2)}`;
-                tdVencimento.innerHTML = item.vencimento;
-                
+    //==================================================
+    // SELECIONAR PAGAMENTO
+    //==================================================
+
+    document
+        .querySelectorAll(".painelDireito .selectPagamento")
+        .forEach(select => {
+
+            select.addEventListener("change", e => {
+
+                const pagamentoIndex =
+                    e.target.value;
+
+                const tr =
+                    e.target.closest("tr");
+
+                const tdValor =
+                    tr.querySelector(".valorPagamento");
+
+                const tdVencimento =
+                    tr.querySelector(".vencimentoPagamento");
+
+                const checkbox =
+                    tr.querySelector(".checkPagamento");
+
+
+                //==========================================
+                // NENHUM PAGAMENTO
+                //==========================================
+
+                if(pagamentoIndex === ""){
+
+                    tdValor.innerHTML = "";
+
+                    tdVencimento.innerHTML = "";
+
+                    checkbox.disabled = true;
+
+                    checkbox.style.opacity = "0.3";
+
+                    checkbox.checked = false;
+
+                    return;
+
+                }
+
+
+                //==========================================
+                // PAGAMENTO SELECIONADO
+                //==========================================
+
+                const item =
+                    pagamentos[pagamentoIndex];
+
+
+                tdValor.innerHTML =
+                    `R$ ${item.valor.toFixed(2)}`;
+
+
+                //==========================================
+                // VENCIMENTO
+                //==========================================
+
+                if(item.vencimento){
+
+                    const data =
+                        new Date(
+                            item.vencimento + "T00:00:00"
+                        );
+
+                    tdVencimento.innerHTML =
+                        data.toLocaleDateString("pt-BR");
+
+                }else{
+
+                    tdVencimento.innerHTML = "";
+
+                }
+
+
+                //==========================================
+                // CHECKBOX
+                //==========================================
+
                 checkbox.disabled = false;
-                checkbox.style.opacity = "1";
-                checkbox.checked = item.pago;
-            } else {
-                tdValor.innerHTML = "";
-                tdVencimento.innerHTML = "";
-                checkbox.disabled = true;
-                checkbox.style.opacity = "0.3";
-                checkbox.checked = false;
-            }
-        });
-    });
 
-    // 4. Salva o checkbox no banco de dados quando clicado
-    document.querySelectorAll(".painelDireito .checkPagamento").forEach(checkbox => {
-        checkbox.addEventListener("change", (e) => {
-            const tr = e.target.closest("tr");
-            const select = tr.querySelector(".selectPagamento");
-            
-            if(select.value !== "") {
-                const indice = select.value;
-                pagamentos[indice].pago = e.target.checked;
-                salvarDados(); 
-            }
+                checkbox.style.opacity = "1";
+
+                checkbox.checked = item.pago;
+
+            });
+
         });
-    });
+
+
+    //==================================================
+    // EDITAR VENCIMENTO
+    //==================================================
+
+    document
+        .querySelectorAll(".painelDireito .vencimentoPagamento")
+        .forEach(td => {
+
+            td.addEventListener("click", () => {
+
+                const tr =
+                    td.closest("tr");
+
+                const select =
+                    tr.querySelector(".selectPagamento");
+
+
+                // Não existe pagamento selecionado
+                if(select.value === ""){
+
+                    return;
+
+                }
+
+
+                const indice =
+                    Number(select.value);
+
+                const pagamento =
+                    pagamentos[indice];
+
+
+                //==========================================
+                // EVITA CRIAR DOIS INPUTS
+                //==========================================
+
+                if(td.querySelector("input")){
+
+                    return;
+
+                }
+
+
+                //==========================================
+                // CRIA INPUT DE DATA
+                //==========================================
+
+                const input =
+                    document.createElement("input");
+
+
+                input.type = "date";
+
+                input.value =
+                    pagamento.vencimento || "";
+
+
+                input.style.width = "100%";
+                input.style.boxSizing = "border-box";
+                input.style.background = "#2B3240";
+                input.style.color = "#FFF";
+                input.style.border = "1px solid #66B3FF";
+                input.style.borderRadius = "5px";
+                input.style.padding = "5px";
+                input.style.outline = "none";
+                input.style.fontFamily = "inherit";
+                input.style.fontSize = "12px";
+
+
+                td.innerHTML = "";
+
+                td.appendChild(input);
+
+                input.focus();
+
+
+                //==========================================
+                // SALVAR
+                //==========================================
+
+                let salvo = false;
+
+
+                function salvarVencimento(){
+
+                    // Impede o blur e Enter de salvar duas vezes
+                    if(salvo){
+
+                        return;
+
+                    }
+
+                    salvo = true;
+
+
+                    pagamentos[indice].vencimento =
+                        input.value;
+
+
+                    salvarDados();
+
+
+                    //======================================
+                    // MOSTRAR NOVAMENTE A DATA
+                    //======================================
+
+                    if(input.value){
+
+                        const data =
+                            new Date(
+                                input.value + "T00:00:00"
+                            );
+
+                        td.innerHTML =
+                            data.toLocaleDateString("pt-BR");
+
+                    }else{
+
+                        td.innerHTML = "";
+
+                    }
+
+                }
+
+
+                //==========================================
+                // ENTER
+                //==========================================
+
+                input.addEventListener(
+                    "keydown",
+                    e => {
+
+                        if(e.key === "Enter"){
+
+                            e.preventDefault();
+
+                            salvarVencimento();
+
+                            input.blur();
+
+                        }
+
+                    }
+                );
+
+
+                //==========================================
+                // CLIQUE FORA
+                //==========================================
+
+                input.addEventListener(
+                    "blur",
+                    salvarVencimento
+                );
+
+            });
+
+        });
+
+
+    //==================================================
+    // CHECKBOX DE PAGAMENTO
+    //==================================================
+
+    document
+        .querySelectorAll(".painelDireito .checkPagamento")
+        .forEach(checkbox => {
+
+            checkbox.addEventListener("change", e => {
+
+                const tr =
+                    e.target.closest("tr");
+
+                const select =
+                    tr.querySelector(".selectPagamento");
+
+
+                if(select.value !== ""){
+
+                    const indice =
+                        Number(select.value);
+
+
+                    pagamentos[indice].pago =
+                        e.target.checked;
+
+
+                    salvarDados();
+
+                }
+
+            });
+
+        });
+
 }
 
 function configurarExclusao() {
