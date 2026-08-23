@@ -23,20 +23,16 @@ const dados = {
         { descricao: "BBAS3", valor: 950 },
         { descricao: "VALE3", valor: 800 }
     ],
-
-    pagamentos: [
-        { descricao: "Aluguel", valor: 800.00, vencimento: "02/08", pago: true },
-        { descricao: "Cartão Cmpt.", valor: 800.00, vencimento: "-", pago: true },
-        { descricao: "Telefone", valor: 139.88, vencimento: "10/08", pago: true },
-        { descricao: "Luz", valor: 90.95, vencimento: "08/08", pago: true },
-        { descricao: "IPVA (8/10)", valor: 84.69, vencimento: "15/08", pago: true },
-        { descricao: "Academia", valor: 113.69, vencimento: "-", pago: true },
-        { descricao: "Garagem", valor: 160.00, vencimento: "01/08", pago: true },
-        { descricao: "Dízimo", valor: 100.00, vencimento: "-", pago: true },
-        { descricao: "Carnê", valor: 579.07, vencimento: "13/08", pago: false }
-    ]
-
 };
+
+const pagamentos = Object.values(dados)
+    .flat()
+    .map(item => ({
+        descricao: item.descricao,
+        valor: Number(item.valor),
+        vencimento: "02/08",
+        pago: true
+}));
 
 //==================================================
 // LANÇAMENTOS
@@ -394,55 +390,90 @@ function renderizarTabela(nomeTabela, idTabela){
 }
 
 //==================================================
-// DESENHAR TABELA DE PAGAMENTOS
+// DESENHAR TABELA DE PAGAMENTOS (COM SELEÇÃO)
+//==================================================
+
+//==================================================
+// DESENHAR TABELA DE PAGAMENTOS (COM SELEÇÃO)
+//==================================================
+
+//==================================================
+// DESENHAR TABELA DE PAGAMENTOS (COM SELEÇÃO)
 //==================================================
 
 function renderizarTabelaPagamentos() {
-    const tbody = document.getElementById("tbPagamentos");
+    // Alvo ESPECÍFICO: Apenas a tabela que está no painel direito, ignorando a tabela de baixo
+    const tbody = document.querySelector(".painelDireito #tbPagamentos");
     if (!tbody) return;
     
     tbody.innerHTML = "";
-    const MAX_LINHAS = 10; // Quantidade de linhas visíveis
+    const MAX_LINHAS = 10;
 
-    // Garante que a array exista (caso o localStorage esteja desatualizado)
-    if (!dados.pagamentos) dados.pagamentos = [];
+    // 1. Cria as opções da seta. 
+    let opcoesHTML = `<option value="" style="background: #2B3240; color: #FFF;">Selecione...</option>`;
+    
+    // O array 'pagamentos' já é um const válido, então apenas o iteramos
+    pagamentos.forEach((item, index) => {
+        opcoesHTML += `<option value="${index}" style="background: #2B3240; color: #FFF;">${item.descricao}</option>`;
+    });
 
+    // 2. Constrói a tabela limpa com larguras fixas para não quebrar o layout
     for (let i = 0; i < MAX_LINHAS; i++) {
-        const item = dados.pagamentos[i];
-
-        if (item) {
-            const checked = item.pago ? "checked" : "";
-            tbody.innerHTML += `
-            <tr class="linhaComExclusao" data-tabela="pagamentos" data-indice="${i}">
-                <td>${item.descricao}</td>
-                <td class="valor">R$ ${item.valor.toFixed(2)}</td>
-                <td style="text-align: center;">${item.vencimento}</td>
-                <td style="text-align: center;">
-                    <input type="checkbox" class="checkPagamento" data-indice="${i}" ${checked}>
-                </td>
-            </tr>
-            `;
-        } else {
-            // Linha vazia
-            tbody.innerHTML += `
-            <tr class="linhaVazia">
-                <td>&nbsp;</td>
-                <td></td>
-                <td></td>
-                <td style="text-align: center;">
-                    <input type="checkbox" disabled style="opacity: 0.3;">
-                </td>
-            </tr>
-            `;
-        }
+        tbody.innerHTML += `
+        <tr class="linhaPagamento" data-indice="${i}">
+            <td style="padding: 5px; width: 45%;">
+                <select class="selectPagamento" style="width: 100%; border: none; background: #2B3240; padding: 6px; border-radius: 5px; color: #FFF; outline: none; cursor: pointer; font-family: inherit; font-size: 12px;">
+                    ${opcoesHTML}
+                </select>
+            </td>
+            <td class="valorPagamento valor" style="text-align: right; padding: 5px; width: 25%;"></td>
+            <td class="vencimentoPagamento" style="text-align: center; padding: 5px; width: 15%;"></td>
+            <td style="text-align: center; padding: 5px; width: 15%;">
+                <input type="checkbox" class="checkPagamento" disabled style="opacity: 0.3; accent-color: #34D16A; cursor: pointer; width: 16px; height: 16px;">
+            </td>
+        </tr>
+        `;
     }
 
-    // Adiciona evento para salvar a mudança do checkbox automaticamente
-    document.querySelectorAll(".checkPagamento").forEach(checkbox => {
+    // 3. Inteligência: preenche os dados ao escolher uma opção
+    document.querySelectorAll(".painelDireito .selectPagamento").forEach(select => {
+        select.addEventListener("change", (e) => {
+            const pagamentoIndex = e.target.value;
+            const tr = e.target.closest("tr");
+            
+            const tdValor = tr.querySelector(".valorPagamento");
+            const tdVencimento = tr.querySelector(".vencimentoPagamento");
+            const checkbox = tr.querySelector(".checkPagamento");
+
+            if (pagamentoIndex !== "") {
+                const item = pagamentos[pagamentoIndex];
+                tdValor.innerHTML = `R$ ${item.valor.toFixed(2)}`;
+                tdVencimento.innerHTML = item.vencimento;
+                
+                checkbox.disabled = false;
+                checkbox.style.opacity = "1";
+                checkbox.checked = item.pago;
+            } else {
+                tdValor.innerHTML = "";
+                tdVencimento.innerHTML = "";
+                checkbox.disabled = true;
+                checkbox.style.opacity = "0.3";
+                checkbox.checked = false;
+            }
+        });
+    });
+
+    // 4. Salva o checkbox no banco de dados quando clicado
+    document.querySelectorAll(".painelDireito .checkPagamento").forEach(checkbox => {
         checkbox.addEventListener("change", (e) => {
-            const indice = e.target.dataset.indice;
-            dados.pagamentos[indice].pago = e.target.checked;
-            salvarDados();
+            const tr = e.target.closest("tr");
+            const select = tr.querySelector(".selectPagamento");
+            
+            if(select.value !== "") {
+                const indice = select.value;
+                pagamentos[indice].pago = e.target.checked;
+                salvarDados(); 
+            }
         });
     });
 }
@@ -538,16 +569,25 @@ function configurarDuploClique() {
             itemEditadoCategoria = linha.dataset.tabela;
             itemEditadoIndice = Number(linha.dataset.indice);
 
-            const item = dados[itemEditadoCategoria][itemEditadoIndice];
-
+            let item;
+          
+            try {
+              item = dados[itemEditadoCategoria][itemEditadoIndice];
+            } 
+            catch (erro) {
+              item = pagamentos[itemEditadoIndice];
+            }
+            console.log(itemEditadoCategoria)
+            console.log(itemEditadoIndice)
             // Muda o título do modal e preenche os campos
-            document.querySelector("#modal .janela h2").innerText = "Editar Despesa";
-            descricao.value = item.descricao;
-            valor.value = item.valor;
-            categoria.value = itemEditadoCategoria;
+              document.querySelector("#modal .janela h2").innerText = "Editar Despesa";
+              descricao.value = item.descricao;
+              valor.value = item.valor;
+              categoria.value = itemEditadoCategoria;
+  
+              modal.classList.remove("oculto");
+              descricao.focus();
 
-            modal.classList.remove("oculto");
-            descricao.focus();
         });
     });
 }
