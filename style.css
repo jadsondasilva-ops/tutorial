@@ -54,7 +54,7 @@ nav ul{
 
     list-style:none;
 
-    gap:35px;
+    gap:0;
 
 }
 
@@ -66,6 +66,14 @@ nav a{
 
     transition:.3s;
 
+}
+
+nav li {
+    padding: 0 17.5px;
+}
+
+nav li + li {
+    border-left: 2px solid #fff;
 }
 
 nav a:hover{

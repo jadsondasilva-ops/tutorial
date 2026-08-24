@@ -82,7 +82,30 @@ const orcamento = {
 
 };
 
+//==================================================
+// SINCRONIZAR PAGAMENTOS
+//==================================================
+function sincronizarPagamentos() {
+    const pagamentosAtuais = [...pagamentos];
+    
+    pagamentos.length = 0;
+    
+    Object.values(dados).flat().forEach(item => {
+        const existente = pagamentosAtuais.find(p => p.descricao === item.descricao);
+        
+        pagamentos.push({
+            descricao: item.descricao,
+            valor: Number(item.valor),
+            vencimento: existente ? existente.vencimento : "",
+            pago: existente ? existente.pago : false
+        });
+    });
+}
+
 function salvarDados() {
+
+    sincronizarPagamentos();
+
 
     localStorage.setItem("dados", JSON.stringify(dados));
 
@@ -122,21 +145,13 @@ function carregarDados() {
 
     if (pagamentosSalvos) {
         const pagamentosCarregados = JSON.parse(pagamentosSalvos);
-
-        pagamentosCarregados.forEach((pagamento, indice) => {
-
-            if (pagamentos[indice]) {
-
-                pagamentos[indice].vencimento =
-                    pagamento.vencimento || "";
-
-                pagamentos[indice].pago =
-                    pagamento.pago || false;
-
-            }
-
-        });
+        
+        
+        pagamentos.push(...pagamentosCarregados);
     }
+    
+    
+    sincronizarPagamentos();
 
 }
 
