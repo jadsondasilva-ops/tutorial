@@ -1428,3 +1428,40 @@ table{
     font-size: 16px;
     letter-spacing: 1.5px; 
 }
+
+/*====================================================
+    BOTÃO EXCLUIR/LIMPAR PAGAMENTO
+====================================================*/
+.linhaPagamento td {
+    position: relative; 
+}
+
+.btnExcluirPagamento {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: #b83a3a;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 10px;
+    
+    position: absolute;
+    right: -15px; 
+    top: 50%;
+    transform: translateY(-50%);
+    
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+    pointer-events: none; 
+}
+
+.btnExcluirPagamento:hover {
+    background: #ff4444;
+}
+
+.linhaPagamento:hover .btnExcluirPagamento {
+    opacity: 1;
+    pointer-events: auto;
+}
