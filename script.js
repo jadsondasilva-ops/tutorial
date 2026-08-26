@@ -89,22 +89,34 @@ const orcamento = {
 };
 
 //==================================================
-// SINCRONIZAR PAGAMENTOS
+// SINCRONIZAR PAGAMENTOS (COM FILTRO ANTI-DUPLICATAS)
 //==================================================
 function sincronizarPagamentos() {
     const pagamentosAtuais = [...pagamentos];
     
     pagamentos.length = 0;
     
+    // Cria uma memória temporária para impedir nomes repetidos
+    const descricoesVistas = new Set();
+    
     Object.values(dados).flat().forEach(item => {
-        const existente = pagamentosAtuais.find(p => p.descricao === item.descricao);
+        const nomeItem = item.descricao.trim();
         
-        pagamentos.push({
-            descricao: item.descricao,
-            valor: Number(item.valor),
-            vencimento: existente ? existente.vencimento : "",
-            pago: existente ? existente.pago : false
-        });
+        // Só adiciona na lista se o nome ainda não foi visto
+        if (!descricoesVistas.has(nomeItem)) {
+            
+            descricoesVistas.add(nomeItem);
+            
+            const existente = pagamentosAtuais.find(p => p.descricao === nomeItem);
+            
+            pagamentos.push({
+                descricao: nomeItem,
+                valor: Number(item.valor),
+                vencimento: existente ? existente.vencimento : "",
+                pago: existente ? existente.pago : false
+            });
+            
+        }
     });
 }
 
@@ -1183,7 +1195,7 @@ function atualizarGrafico() {
                 legend: {
                     position: "bottom",
                     labels: {
-                        color: "#9DA5B4", 
+                        color: document.body.classList.contains("light-mode") ? "#555" : "#9DA5B4", 
                         usePointStyle: true, 
                         padding: 25, 
                         font: {
@@ -1410,6 +1422,30 @@ function atualizarTudo(){
     atualizarTotaisLancados();
 
 }
+
+//==================================================
+// MODO CLARO (LIGA / DESLIGA)
+//==================================================
+const btnConfiguracoes = document.getElementById("btnConfiguracoes");
+
+// Ao carregar a página, checa se o usuário tinha deixado no modo claro
+if (localStorage.getItem("modoClaro") === "true") {
+    document.body.classList.add("light-mode");
+}
+
+btnConfiguracoes.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    
+    // Liga ou desliga a classe master no <body>
+    document.body.classList.toggle("light-mode");
+    
+    // Salva a nova preferência na memória
+    const isLightMode = document.body.classList.contains("light-mode");
+    localStorage.setItem("modoClaro", isLightMode);
+    
+    // Recarrega o gráfico para atualizar a cor da letra
+    atualizarGrafico();
+});
 
 //==================================================
 // START

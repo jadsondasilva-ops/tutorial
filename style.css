@@ -1465,3 +1465,108 @@ table{
     opacity: 1;
     pointer-events: auto;
 }
+
+/*====================================================
+    MODO CLARO (LIGHT MODE)
+====================================================*/
+body.light-mode {
+    background: #F0F2F5;
+    color: #333;
+}
+
+body.light-mode nav {
+    background: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+body.light-mode nav a {
+    color: #555;
+}
+
+body.light-mode nav a:hover {
+    color: #2E7DFF;
+}
+
+body.light-mode nav li + li {
+    border-left: 2px solid #585858;
+}
+
+/* Fundos brancos para os painéis */
+body.light-mode .painel, 
+body.light-mode .card, 
+body.light-mode .janela, 
+body.light-mode .grafico, 
+body.light-mode .saldoGeral, 
+body.light-mode .paginaFinanceiro,
+body.light-mode .subcategoria {
+    background: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Áreas acinzentadas / Cabeçalhos */
+body.light-mode .painel footer,
+body.light-mode .cabecalho-bloco,
+body.light-mode .transferencia,
+body.light-mode .cabecalhoLancamentos,
+body.light-mode .filtrosLancamentos,
+body.light-mode .tabelaLancamentos thead,
+body.light-mode .resumoLancamentos {
+    background: #F8F9FA;
+    color: #333;
+    border-color: #E0E0E0;
+}
+
+/* Bordas das tabelas e divisórias */
+body.light-mode .painel tbody tr, 
+body.light-mode .cartoes td, 
+body.light-mode .pagamentos td, 
+body.light-mode .tabela-estilo-pagamentos thead th, 
+body.light-mode .linhaComExclusao,
+body.light-mode .tabelaLancamentos th,
+body.light-mode .tabelaLancamentos tbody tr,
+body.light-mode .transferencia {
+    border-color: #585858;
+}
+
+/* Sobrescrevendo Inputs e Selects */
+body.light-mode input, 
+body.light-mode select,
+body.light-mode #editarSaldo {
+    background: #F0F2F5 !important;
+    color: #333 !important;
+    border: 1px solid #CCC !important;
+}
+
+body.light-mode select option {
+    background: #FFFFFF !important;
+    color: #333 !important;
+}
+
+/* Ajustes de textos sutis */
+body.light-mode .saldoGeral span, 
+body.light-mode .tabela-estilo-pagamentos thead th,
+body.light-mode .cabecalhoLancamentos span,
+body.light-mode .resumoLancamentos span {
+    color: #777;
+}
+
+body.light-mode .tabelaLancamentos td {
+    color: #444;
+}
+
+/* Efeitos de Hover e Drag and Drop */
+body.light-mode .tabelaLancamentos tbody tr:hover {
+    background: #F9F9F9;
+}
+
+body.light-mode .drag-over {
+    background: #F0F2F5;
+}
+
+body.light-mode .arrastando {
+    background: #E0E0E0;
+}
+
+body.light-mode .modal {
+    background: rgba(0,0,0,0.6);
+}
