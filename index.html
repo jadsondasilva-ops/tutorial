@@ -1,739 +1,202 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>JPN Dashboard</title>
-
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
-
-    <!--========================-->
-    <!-- NAVBAR                 -->
-    <!--========================-->
-
     <nav>
-
-        <div class="logo">
-
-            JPNFinance
-
-        </div>
-
+        <div class="logo">JPNFinance</div>
         <ul>
-
             <li><a href="#" id ="linkInicio">Início</a></li>
             <li><a href="#" id="linkFinanceiro">Lançamentos</a></li>
             <li><a href="#" id="linkEntradaSaida">Entrada e Saída</a></li>
             <li><a href="#">Relatórios</a></li>
             <li><a href="#" id="btnConfiguracoes">Configurações</a></li>
-
         </ul>
-
     </nav>
-
-    <!--========================-->
-    <!-- DASHBOARD              -->
-    <!--========================-->
-
     <main class="dashboard">
-
-        <!--========================-->
-        <!-- PRIMEIRA LINHA         -->
-        <!--========================-->
-
         <section class="linhaSuperior">
-
-            <!-- ESQUERDA -->
-
             <section class="financeiroContainer">
-
-                <!-- SALDO -->
-
                 <div class="saldoGeral">
-
                     <span>SALDO TOTAL</span>
-
                     <div class="saldoEdicao">
-
-                        <h1 id="saldo">
-                            R$ 0,00
-                        </h1>
-
-                        <input
-                            type="number"
-                            id="editarSaldo"
-                            class="oculto">
-
+                        <h1 id="saldo">R$ 0,00</h1>
+                        <input type="number" id="editarSaldo" class="oculto">
                     </div>
-
                 </div>
-
-                <!-- TRÊS COLUNAS -->
-
                 <section class="financeiro">
-
-                    <!-- ESSENCIAIS -->
-
                     <article class="painel essenciais">
-
                         <header class="cabecalhoPainel">
-
                             <div>
-
                                 <h2>Essenciais</h2>
-
-                                <span id="totalEssenciais">
-                                    R$ 0,00
-                                </span>
-
+                                <span id="totalEssenciais">R$ 0,00</span>
                             </div>
-
-                            <button
-                                class="btnAdicionar"
-                                data-categoria="essenciais">
-
-                                +
-
-                            </button>
-
+                            <button class="btnAdicionar" data-categoria="essenciais">+</button>
                         </header>
-
-                        <table>
-
-                            <tbody id="tbEssenciais">
-
-                            </tbody>
-
-                        </table>
-
-                        <footer>
-
-                            <span id="saldoEssenciais">
-                                R$ 0,00
-                            </span>
-
-                        </footer>
-
+                        <div class="tabela-wrapper">
+                            <table><tbody id="tbEssenciais"></tbody></table>
+                        </div>
+                        <footer><span id="saldoEssenciais">R$ 0,00</span></footer>
                         <div class="transferencia">
-
-                            <input
-                                type="number"
-                                id="valorEssenciais"
-                                placeholder="Valor">
-
+                            <input type="number" id="valorEssenciais" placeholder="Valor">
                             <select id="origemEssenciais">
-
-                                <option value="ocasionais">
-                                    Ocasionais
-                                </option>
-
-                                <option value="investimentos">
-                                    Investimentos
-                                </option>
-
+                                <option value="ocasionais">Ocasionais</option>
+                                <option value="investimentos">Investimentos</option>
                             </select>
-
-                            <button
-                                class="btnTransferir"
-                                data-destino="essenciais">
-
-                                Transferir
-
-                            </button>
-
+                            <button class="btnTransferir" data-destino="essenciais">Transferir</button>
                         </div>
-
                     </article>
-
-                    <!-- OCASIONAIS -->
-
                     <article class="painel ocasionais">
-
                         <header class="cabecalhoPainel">
-
                             <div>
-
                                 <h2>Ocasionais</h2>
-
-                                <span id="totalOcasionais">
-                                    R$ 0,00
-                                </span>
-
+                                <span id="totalOcasionais">R$ 0,00</span>
                             </div>
-
-                            <button
-                                class="btnAdicionar"
-                                data-categoria="ocasionais">
-
-                                +
-
-                            </button>
-
+                            <button class="btnAdicionar" data-categoria="ocasionais">+</button>
                         </header>
-
-                        <table>
-
-                            <tbody id="tbOcasionais">
-
-                            </tbody>
-
-                        </table>
-
-                        <footer>
-
-                            <span id="saldoOcasionais">
-                                R$ 0,00
-                            </span>
-
-                        </footer>
-
+                        <div class="tabela-wrapper">
+                            <table><tbody id="tbOcasionais"></tbody></table>
+                        </div>
+                        <footer><span id="saldoOcasionais">R$ 0,00</span></footer>
                         <div class="transferencia">
-
-                            <input
-                                type="number"
-                                id="valorOcasionais"
-                                placeholder="Valor">
-
+                            <input type="number" id="valorOcasionais" placeholder="Valor">
                             <select id="origemOcasionais">
-
-                                <option value="essenciais">
-                                    Essenciais
-                                </option>
-
-                                <option value="investimentos">
-                                    Investimentos
-                                </option>
-
+                                <option value="essenciais">Essenciais</option>
+                                <option value="investimentos">Investimentos</option>
                             </select>
-
-                            <button
-                                class="btnTransferir"
-                                data-destino="ocasionais">
-
-                                Transferir
-
-                            </button>
-
+                            <button class="btnTransferir" data-destino="ocasionais">Transferir</button>
                         </div>
-
                     </article>
-
-                    <!-- INVESTIMENTOS -->
-
                     <article class="painel investimentos">
-
                         <header class="cabecalhoPainel">
-
                             <div>
-
                                 <h2>Investimentos</h2>
-
-                                <span id="totalInvestimentos">
-                                    R$ 0,00
-                                </span>
-
+                                <span id="totalInvestimentos">R$ 0,00</span>
                             </div>
-
-                            <button
-                                class="btnAdicionar"
-                                data-categoria="investimentos">
-
-                                +
-
-                            </button>
-
+                            <button class="btnAdicionar" data-categoria="investimentos">+</button>
                         </header>
-
-                        <table>
-
-                            <tbody id="tbInvestimentos">
-
-                            </tbody>
-
-                        </table>
-
-                        <footer>
-
-                            <span id="saldoInvestimentos">
-                                R$ 0,00
-                            </span>
-
-                        </footer>
-
-                        <div class="transferencia">
-
-                            <input
-                                type="number"
-                                id="valorInvestimentos"
-                                placeholder="Valor">
-
-                            <select id="origemInvestimentos">
-
-                                <option value="essenciais">
-                                    Essenciais
-                                </option>
-
-                                <option value="ocasionais">
-                                    Ocasionais
-                                </option>
-
-                            </select>
-
-                            <button
-                                class="btnTransferir"
-                                data-destino="investimentos">
-
-                                Transferir
-
-                            </button>
-
+                        <div class="tabela-wrapper">
+                            <table><tbody id="tbInvestimentos"></tbody></table>
                         </div>
-
+                        <footer><span id="saldoInvestimentos">R$ 0,00</span></footer>
+                        <div class="transferencia">
+                            <input type="number" id="valorInvestimentos" placeholder="Valor">
+                            <select id="origemInvestimentos">
+                                <option value="essenciais">Essenciais</option>
+                                <option value="ocasionais">Ocasionais</option>
+                            </select>
+                            <button class="btnTransferir" data-destino="investimentos">Transferir</button>
+                        </div>
                     </article>
-
-        </section>
-
-      <section class="linhaMeio">
-        <article class="cartoes card">
-
-                <h2>
-
-                    Cartões
-
-                </h2>
-
-                <table>
-
-                    <tbody id="tbCartoes">
-
-                    </tbody>
-
-                </table>
-
-            </article>
-
-            <article class="pagamentos card">
-
-                <h2>
-
-                    Pagamentos
-
-                </h2>
-
-                <table>
-
-                    <tbody id="tbPagamentosInferior">
-
-                    </tbody>
-
-                </table>
-
-            </article>
-            
-      </section>
-          
-    </section>
-
-            <!-- DIREITA (AGRUPANDO GRÁFICO E PAGAMENTOS) -->
+                </section>
+                <section class="linhaMeio">
+                    <article class="cartoes card">
+                        <h2>Cartões</h2>
+                        <div class="tabela-wrapper">
+                            <table><tbody id="tbCartoes"></tbody></table>
+                        </div>
+                    </article>
+                    <article class="pagamentos card">
+                        <h2>Pagamentos</h2>
+                        <div class="tabela-wrapper">
+                            <table><tbody id="tbPagamentosInferior"></tbody></table>
+                        </div>
+                    </article>
+                </section>
+            </section>
             <aside class="painelDireito">
-
                 <article class="grafico card">
-                    <header class="cabecalho-bloco">
-                        <h2>DISTRIBUIÇÃO</h2>
-                    </header>
+                    <header class="cabecalho-bloco"><h2>DISTRIBUIÇÃO</h2></header>
                     <canvas id="graficoPizza"></canvas>
                 </article>
-
                 <article class="pagamentos card">
-                    <header class="cabecalho-bloco">
-                        <h2>PAGAMENTOS</h2>
-                    </header>
-                    <table class="tabela-estilo-pagamentos">
-                        <!-- Restante da tabela continua igual... -->
-                        <thead>
-                            <tr>
-                                <th style="text-align: center;">Descrição</th>
-                                <th style="text-align: center;">Valor</th>
-                                <th style="text-align: center;">Venc.</th>
-                                <th style="text-align: center;">Pago?</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbPagamentos">
-                            <!-- Gerado via JS -->
-                        </tbody>
-                    </table>
+                    <header class="cabecalho-bloco"><h2>PAGAMENTOS</h2></header>
+                    <div class="tabela-wrapper">
+                        <table class="tabela-estilo-pagamentos">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Descrição</th>
+                                    <th style="text-align: center;">Valor</th>
+                                    <th style="text-align: center;">Venc.</th>
+                                    <th style="text-align: center;">Pago?</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbPagamentos"></tbody>
+                        </table>
+                    </div>
                 </article>
-
-
             </aside>
-
         </section>
-
-        <!--========================-->
-        <!-- SEGUNDA LINHA          -->
-        <!--========================-->
-
-        
-
     </main>
 
-    <!--========================-->
-    <!-- PÁGINA FINANCEIRO      -->
-    <!--========================-->
-
     <section id="paginaFinanceiro" class="paginaFinanceiro oculto">
-
         <div class="painelLancamentos">
-
-            <!-- CABEÇALHO -->
-
             <header class="cabecalhoLancamentos">
-
                 <div>
                     <h1>Lançamentos</h1>
                     <span>Despesas registradas no mês</span>
                 </div>
-
-                <button class="btnNovoLancamento" id="btnNovoLancamento">
-                    + Novo lançamento
-                </button>
-
+                <button class="btnNovoLancamento" id="btnNovoLancamento">+ Novo lançamento</button>
             </header>
-
-
-            <!-- FILTROS -->
-
             <div class="filtrosLancamentos">
-
                 <select id="filtroMes">
-
                     <option value="08">Agosto 2026</option>
                     <option value="07">Julho 2026</option>
                     <option value="06">Junho 2026</option>
-
                 </select>
-
                 <select id="filtroCategoria">
-
-                    <option value="todas">
-                        Todas as categorias
-                    </option>
-
-                    <option value="essenciais">
-                        Essenciais
-                    </option>
-
-                    <option value="ocasionais">
-                        Ocasionais
-                    </option>
-
-                    <option value="investimentos">
-                        Investimentos
-                    </option>
-
+                    <option value="todas">Todas as categorias</option>
+                    <option value="essenciais">Essenciais</option>
+                    <option value="ocasionais">Ocasionais</option>
+                    <option value="investimentos">Investimentos</option>
                 </select>
-
             </div>
-
-
-            <!-- TABELA -->
-
             <div class="tabelaLancamentos">
-
                 <table>
-
                     <thead>
-
                         <tr>
-
-                            <th>Data</th>
-                            <th>Subcategoria</th>
-                            <th>Descrição</th>
-                            <th>Cartão</th>
-                            <th>Pagamento</th>
-                            <th>Valor</th>
-                            <th></th>
-
+                            <th>Data</th><th>Subcategoria</th><th>Descrição</th><th>Cartão</th><th>Pagamento</th><th>Valor</th><th></th>
                         </tr>
-
                     </thead>
-
-                    <tbody id="tbLancamentos">
-
-                        <tr>
-
-                            <td>13/08/2026</td>
-
-                            <td>
-                                <span class="categoria essencial">
-                                    Alimentação
-                                </span>
-                            </td>
-
-                            <td>Marmita</td>
-
-                            <td>Santander</td>
-
-                            <td>Débito</td>
-
-                            <td class="valorLancamento">
-                                R$ 50,00
-                            </td>
-
-                            <td class="acoesLancamento">
-
-                                <button class="btnExcluir">
-                                    ×
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>12/08/2026</td>
-
-                            <td>
-                                <span class="categoria ocasional">
-                                    Lazer
-                                </span>
-                            </td>
-
-                            <td>Cinema</td>
-
-                            <td>Nubank</td>
-
-                            <td>Crédito</td>
-
-                            <td class="valorLancamento">
-                                R$ 35,00
-                            </td>
-
-                            <td class="acoesLancamento">
-
-                                <button class="btnExcluir">
-                                    ×
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
+                    <tbody id="tbLancamentos"></tbody>
                 </table>
-
             </div>
-
-
-            <!-- RODAPÉ -->
-
             <footer class="resumoLancamentos">
-
                 <span>Total do mês</span>
-
-                <strong id="totalLancamentos">
-                    R$ 0,00
-                </strong>
-
+                <strong id="totalLancamentos">R$ 0,00</strong>
             </footer>
-
         </div>
-
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-    <div id="modal" class="modal oculto">
-
-        <div class="janela">
-
-            <h2>Nova Despesa</h2>
-
-            <label>Descrição</label>
-
-            <input
-                type="text"
-                id="descricao">
-
-            <label>Valor</label>
-
-            <input
-                type="number"
-                id="valor">
-
-            <label>Categoria</label>
-
-            <select id="categoria">
-
-                <option value="essenciais">
-                    Essenciais
-                </option>
-
-                <option value="ocasionais">
-                    Ocasionais
-                </option>
-
-                <option value="investimentos">
-                    Investimentos
-                </option>
-
-            </select>
-
-            <div class="botoes">
-
-                <button id="cancelar">
-
-                    Cancelar
-
-                </button>
-
-                <button id="salvar">
-
-                    Salvar
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div id="modalNovoLancamento" class="modal oculto">
-
-        <div class="janela">
-
-            <h2>Novo lançamento</h2>
-
-            <label>Data</label>
-
-            <input
-                type="date"
-                id="dataNovoLancamento">
-
-            <label>Subcategoria</label>
-
-            <input
-                type="text"
-                id="subcategoriaNovoLancamento"
-                list="listaSubcategorias"
-                placeholder="Pesquisar subcategoria"
-                autocomplete="off">
-
-            <datalist id="listaSubcategorias"></datalist>
-            <label>Descrição</label>
-
-            <input
-                type="text"
-                id="descricaoNovoLancamento"
-                placeholder="Descrição">
-
-            <label>Cartão</label>
-
-            <input
-                type="text"
-                id="cartaoNovoLancamento"
-                placeholder="Cartão">
-
-            <label>Pagamento</label>
-
-            <select id="pagamentoNovoLancamento">
-
-                <option value="Débito">
-                    Débito
-                </option>
-
-                <option value="Crédito">
-                    Crédito
-                </option>
-
-                <option value="Pix">
-                    Pix
-                </option>
-
-                <option value="Dinheiro">
-                    Dinheiro
-                </option>
-
-            </select>
-
-            <label>Valor</label>
-
-            <input
-                type="number"
-                id="valorNovoLancamento"
-                placeholder="0,00"
-                step="0.01"
-                min="0">
-
-            <div class="botoes">
-
-                <button id="cancelarNovoLancamento">
-                    Cancelar
-                </button>
-
-                <button id="salvarNovoLancamento">
-                    Lançar
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-<!--========================-->
-    <!-- PÁGINA ENTRADA E SAÍDA -->
-    <!--========================-->
     <section id="paginaEntradaSaida" class="paginaFinanceiro oculto">
         <div class="painelLancamentos">
-            
-            <!-- CABEÇALHO (No mesmo padrão do Financeiro) -->
             <header class="cabecalhoLancamentos">
                 <div>
                     <h1>Entrada e Saída</h1>
                     <span>Fluxo de caixa detalhado por categoria</span>
                 </div>
             </header>
-
-            <!-- TABELA -->
             <div class="tabelaLancamentos">
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="2" style="text-align: center; font-size: 14px; color: #34D16A; border-bottom: 2px solid #34D16A;">
-                                ENTRADAS
-                            </th>
-                            <th colspan="2" style="text-align: center; font-size: 14px; color: #FF7272; border-bottom: 2px solid #FF7272;">
-                                SAÍDAS
-                            </th>
+                            <th colspan="2" style="text-align: center; font-size: 14px; color: #34D16A; border-bottom: 2px solid #34D16A;">ENTRADAS</th>
+                            <th colspan="2" style="text-align: center; font-size: 14px; color: #FF7272; border-bottom: 2px solid #FF7272;">SAÍDAS</th>
                         </tr>
                         <tr>
-                            <th style="text-align: left;">Descrição</th>
-                            <th style="text-align: right;">Valor</th>
-                            <th style="text-align: left;">Descrição</th>
-                            <th style="text-align: right;">Valor</th>
+                            <th style="text-align: left;">Descrição</th><th style="text-align: right;">Valor</th>
+                            <th style="text-align: left;">Descrição</th><th style="text-align: right;">Valor</th>
                         </tr>
                     </thead>
-                    <tbody id="tbEntradaSaida">
-                        <!-- Gerado via JS -->
-                    </tbody>
+                    <tbody id="tbEntradaSaida"></tbody>
                 </table>
             </div>
-
-            <!-- RODAPÉ (No mesmo padrão do Financeiro) -->
             <footer class="resumoLancamentos">
                 <div>
                     <span>Total Entradas:</span>
@@ -743,20 +206,59 @@
                     <span>Total Saídas:</span>
                     <strong id="totalSaidaES" style="color: #FF7272; margin-left: 10px;">R$ 0,00</strong>
                 </div>
-                
             </footer>
             <footer class="resumoLancamentos">
-            <div>
+                <div>
                     <span>Saldo Líquido:</span>
                     <strong id="saldoFinalES" style="margin-left: 10px;">R$ 0,00</strong>
                 </div>
-              
             </footer>
         </div>
     </section>
 
+    <div id="modal" class="modal oculto">
+        <div class="janela">
+            <h2>Nova Despesa</h2>
+            <label>Descrição</label><input type="text" id="descricao">
+            <label>Valor</label><input type="number" id="valor">
+            <label>Categoria</label>
+            <select id="categoria">
+                <option value="essenciais">Essenciais</option>
+                <option value="ocasionais">Ocasionais</option>
+                <option value="investimentos">Investimentos</option>
+            </select>
+            <div class="botoes">
+                <button id="cancelar">Cancelar</button>
+                <button id="salvar">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalNovoLancamento" class="modal oculto">
+        <div class="janela">
+            <h2>Novo lançamento</h2>
+            <label>Data</label><input type="date" id="dataNovoLancamento">
+            <label>Subcategoria</label>
+            <input type="text" id="subcategoriaNovoLancamento" list="listaSubcategorias" placeholder="Pesquisar subcategoria" autocomplete="off">
+            <datalist id="listaSubcategorias"></datalist>
+            <label>Descrição</label><input type="text" id="descricaoNovoLancamento" placeholder="Descrição">
+            <label>Cartão</label><input type="text" id="cartaoNovoLancamento" placeholder="Cartão">
+            <label>Pagamento</label>
+            <select id="pagamentoNovoLancamento">
+                <option value="Débito">Débito</option>
+                <option value="Crédito">Crédito</option>
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+            </select>
+            <label>Valor</label><input type="number" id="valorNovoLancamento" placeholder="0,00" step="0.01" min="0">
+            <div class="botoes">
+                <button id="cancelarNovoLancamento">Cancelar</button>
+                <button id="salvarNovoLancamento">Lançar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-
 </body>
-
 </html>

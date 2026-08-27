@@ -3,7 +3,6 @@
 //==================================================
 
 const dados = {
-
     essenciais: [
         { descricao: "Aluguel", valor: 800 },
         { descricao: "Luz", valor: 170 },
@@ -11,13 +10,11 @@ const dados = {
         { descricao: "Internet", valor: 110 },
         { descricao: "Celular", valor: 65 }
     ],
-
     ocasionais: [
         { descricao: "Cinema", valor: 90 },
         { descricao: "Lazer", valor: 200 },
         { descricao: "Restaurante", valor: 170 }
     ],
-
     investimentos: [
         { descricao: "WEGE3", valor: 1400 },
         { descricao: "BBAS3", valor: 950 },
@@ -51,27 +48,15 @@ let slotsPagamentos = new Array(10).fill("");
 //==================================================
 
 function carregarSubcategorias(){
-
-    const lista =
-        document.getElementById("listaSubcategorias");
-
+    const lista = document.getElementById("listaSubcategorias");
     lista.innerHTML = "";
-
     for(const categoria in dados){
-
         dados[categoria].forEach(item => {
-
-            const opcao =
-                document.createElement("option");
-
+            const opcao = document.createElement("option");
             opcao.value = item.descricao;
-
             lista.appendChild(opcao);
-
         });
-
     }
-
 }
 
 //==================================================
@@ -79,13 +64,10 @@ function carregarSubcategorias(){
 //==================================================
 
 let saldoTotal = 6150;
-
 const orcamento = {
-
     essenciais: saldoTotal * 0.50,
     ocasionais: saldoTotal * 0.30,
     investimentos: saldoTotal * 0.20
-
 };
 
 //==================================================
@@ -93,54 +75,34 @@ const orcamento = {
 //==================================================
 function sincronizarPagamentos() {
     const pagamentosAtuais = [...pagamentos];
-    
     pagamentos.length = 0;
-    
-    // Cria uma memória temporária para impedir nomes repetidos
     const descricoesVistas = new Set();
-    
     Object.values(dados).flat().forEach(item => {
         const nomeItem = item.descricao.trim();
-        
-        // Só adiciona na lista se o nome ainda não foi visto
         if (!descricoesVistas.has(nomeItem)) {
-            
             descricoesVistas.add(nomeItem);
-            
             const existente = pagamentosAtuais.find(p => p.descricao === nomeItem);
-            
             pagamentos.push({
                 descricao: nomeItem,
                 valor: Number(item.valor),
                 vencimento: existente ? existente.vencimento : "",
                 pago: existente ? existente.pago : false
             });
-            
         }
     });
 }
 
 function salvarDados() {
-
     sincronizarPagamentos();
-
-
     localStorage.setItem("dados", JSON.stringify(dados));
-
     localStorage.setItem("saldoTotal", saldoTotal);
-
     localStorage.setItem("orcamento", JSON.stringify(orcamento));
-
     localStorage.setItem("lancamentos", JSON.stringify(lancamentos));
-
     localStorage.setItem("pagamentos", JSON.stringify(pagamentos));
-
     localStorage.setItem("slotsPagamentos", JSON.stringify(slotsPagamentos));
-
 }
 
 function carregarDados() {
-
     const dadosSalvos = localStorage.getItem("dados");
     const saldoSalvo = localStorage.getItem("saldoTotal");
     const orcamentoSalvo = localStorage.getItem("orcamento");
@@ -148,35 +110,16 @@ function carregarDados() {
     const pagamentosSalvos = localStorage.getItem("pagamentos");
     const slotsSalvos = localStorage.getItem("slotsPagamentos");
 
-    if (dadosSalvos) {
-        Object.assign(dados, JSON.parse(dadosSalvos));
-    }
-
-    if (saldoSalvo) {
-        saldoTotal = Number(saldoSalvo);
-    }
-
-    if (orcamentoSalvo) {
-        Object.assign(orcamento, JSON.parse(orcamentoSalvo));
-    }
-
-    if (lancamentosSalvos) {
-        lancamentos = JSON.parse(lancamentosSalvos);
-    }
-
+    if (dadosSalvos) Object.assign(dados, JSON.parse(dadosSalvos));
+    if (saldoSalvo) saldoTotal = Number(saldoSalvo);
+    if (orcamentoSalvo) Object.assign(orcamento, JSON.parse(orcamentoSalvo));
+    if (lancamentosSalvos) lancamentos = JSON.parse(lancamentosSalvos);
     if (pagamentosSalvos) {
         const pagamentosCarregados = JSON.parse(pagamentosSalvos);
-        
-        
         pagamentos.push(...pagamentosCarregados);
     }
-
-    if (slotsSalvos) {
-        slotsPagamentos = JSON.parse(slotsSalvos);
-    }
-    
+    if (slotsSalvos) slotsPagamentos = JSON.parse(slotsSalvos);
     sincronizarPagamentos();
-
 }
 
 //==================================================
@@ -189,125 +132,75 @@ let itemEditadoIndice = null;
 //==================================================
 // ELEMENTOS HTML
 //==================================================
-
 const modal = document.getElementById("modal");
-
 const descricao = document.getElementById("descricao");
-
 const valor = document.getElementById("valor");
-
 const categoria = document.getElementById("categoria");
-
 const btnSalvar = document.getElementById("salvar");
-
 const btnCancelar = document.getElementById("cancelar");
-
 const saldo = document.getElementById("saldo");
-
 const editarSaldo = document.getElementById("editarSaldo");
-
 const botoesAdicionar = document.querySelectorAll(".btnAdicionar");
-
 const linkFinanceiro = document.getElementById("linkFinanceiro");
-
 const paginaFinanceiro = document.getElementById("paginaFinanceiro");
-
 const linkInicio = document.getElementById("linkInicio");
-
-//==================================================
-// ELEMENTOS - NOVO LANÇAMENTO
-//==================================================
-
-const btnNovoLancamento =
-    document.getElementById("btnNovoLancamento");
-
-const modalNovoLancamento =
-    document.getElementById("modalNovoLancamento");
-
-const dataNovoLancamento =
-    document.getElementById("dataNovoLancamento");
-
-const cancelarNovoLancamento =
-    document.getElementById("cancelarNovoLancamento");
+const btnNovoLancamento = document.getElementById("btnNovoLancamento");
+const modalNovoLancamento = document.getElementById("modalNovoLancamento");
+const dataNovoLancamento = document.getElementById("dataNovoLancamento");
+const cancelarNovoLancamento = document.getElementById("cancelarNovoLancamento");
+const salvarNovoLancamento = document.getElementById("salvarNovoLancamento");
+const subcategoriaNovoLancamento = document.getElementById("subcategoriaNovoLancamento");
+const descricaoNovoLancamento = document.getElementById("descricaoNovoLancamento");
+const cartaoNovoLancamento = document.getElementById("cartaoNovoLancamento");
+const pagamentoNovoLancamento = document.getElementById("pagamentoNovoLancamento");
+const valorNovoLancamento = document.getElementById("valorNovoLancamento");
+const tbLancamentos = document.getElementById("tbLancamentos");
+const botoesTransferir = document.querySelectorAll(".btnTransferir");
 
 //==================================================
 // ABA FINANCEIRO
 //==================================================
-
 linkFinanceiro.addEventListener("click", (evento) => {
-
     evento.preventDefault();
-
     document.querySelector(".dashboard").classList.add("oculto");
-
     paginaFinanceiro.classList.remove("oculto");
-
-}); //* TORNAR EM FUNÇÃO PARA NO FUTURO SERVIR PARA ALTERNAR AUTO.//
+});
 
 //==================================================
 // NOVO LANÇAMENTO - ABRIR
 //==================================================
-
 btnNovoLancamento.addEventListener("click", () => {
-
     const hoje = new Date();
-
     const ano = hoje.getFullYear();
-
-    const mes = String(
-        hoje.getMonth() + 1
-    ).padStart(2, "0");
-
-    const dia = String(
-        hoje.getDate()
-    ).padStart(2, "0");
-
-    dataNovoLancamento.value =
-        `${ano}-${mes}-${dia}`;
-
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoje.getDate()).padStart(2, "0");
+    dataNovoLancamento.value = `${ano}-${mes}-${dia}`;
     modalNovoLancamento.classList.remove("oculto");
-
 });
 
 //==================================================
 // NOVO LANÇAMENTO - FECHAR MODAL
 //==================================================
-
 cancelarNovoLancamento.addEventListener("click", () => {
-
     modalNovoLancamento.classList.add("oculto");
-
 });
 
 //==================================================
 // RETORNO INÍCIO
 //==================================================
-
 linkInicio.addEventListener("click", (evento) => {
-
     evento.preventDefault();
-
     document.querySelector(".dashboard").classList.remove("oculto");
-
     paginaFinanceiro.classList.add("oculto");
-
 });
-
-//==================================================
-// TRANSFERÊNCIA
-//==================================================
-
-const botoesTransferir = document.querySelectorAll(".btnTransferir");
 
 //==================================================
 // ABRIR MODAL (NOVA DESPESA)
 //==================================================
-
 botoesAdicionar.forEach(botao => {
     botao.addEventListener("click", () => {
-        modoEdicao = false; // Garante que é um item novo
+        modoEdicao = false;
         document.querySelector("#modal .janela h2").innerText = "Nova Despesa";
-
         modal.classList.remove("oculto");
         categoria.value = botao.dataset.categoria;
         descricao.value = "";
@@ -319,104 +212,58 @@ botoesAdicionar.forEach(botao => {
 //==================================================
 // FECHAR
 //==================================================
-
 btnCancelar.addEventListener("click", fecharModal);
-
-function fecharModal(){
-
-    modal.classList.add("oculto");
-
-}
+function fecharModal(){ modal.classList.add("oculto"); }
 
 //==================================================
 // EDITAR SALDO
 //==================================================
-
 saldo.addEventListener("click", () => {
-
     saldo.classList.add("oculto");
-
     editarSaldo.classList.remove("oculto");
-
     editarSaldo.value = saldoTotal;
-
     editarSaldo.focus();
-
     editarSaldo.select();
-
 });
 
 function salvarSaldo(){
-
     const novoValor = Number(editarSaldo.value);
-
     if(!isNaN(novoValor) && novoValor > 0 && novoValor != saldoTotal){
-
         saldoTotal = novoValor;
-
         orcamento.essenciais = saldoTotal * 0.50;
-
         orcamento.ocasionais = saldoTotal * 0.30;
-
         orcamento.investimentos = saldoTotal * 0.20;
-
         salvarDados();
-
     }
-
     editarSaldo.classList.add("oculto");
-
     saldo.classList.remove("oculto");
-
     atualizarTudo();
-
 }
 
 editarSaldo.addEventListener("keydown", e => {
-
-    if(e.key === "Enter"){
-
-        salvarSaldo();
-
-    }
-
+    if(e.key === "Enter") salvarSaldo();
 });
-
 editarSaldo.addEventListener("blur", salvarSaldo);
 
 //==================================================
 // DESENHAR TABELA
 //==================================================
-
 function renderizarTabela(nomeTabela, idTabela){
-
     const tbody = document.getElementById(idTabela);
-
     tbody.innerHTML = "";
-
     const MAX_LINHAS = 15;
-
     for(let i = 0; i < MAX_LINHAS; i++){
-
         const item = dados[nomeTabela][i];
-
         if(item){
-
-            // 1. Filtra os lançamentos que pertencem a esta subcategoria
             const lancamentosFiltrados = lancamentos.filter(l => 
                 l.subcategoria.toLowerCase() === item.descricao.toLowerCase()
             );
-
             let valorFuturo = "";
-
-            // 2. Se houver lançamentos, calcula o valor restante (Total - Lançamentos)
             if(lancamentosFiltrados.length > 0){
                 const totalGasto = lancamentosFiltrados.reduce((acc, l) => acc + l.valor, 0);
                 const restante = item.valor - totalGasto;
                 valorFuturo = `R$ ${restante.toFixed(2)}`;
             }
-
-            // Dentro da função renderizarTabela, no trecho do `tbody.innerHTML +=`
             tbody.innerHTML += `
             <tr class="linhaComExclusao" data-tabela="${nomeTabela}" data-indice="${i}" draggable="true" style="cursor: grab;">
                 <td>${item.descricao}</td>
@@ -425,95 +272,36 @@ function renderizarTabela(nomeTabela, idTabela){
                 <td class="acoes"><button class="btnExcluir">✕</button></td>
             </tr>
             `;
-
         }else{
-
-            // Mantém as linhas vazias intactas
-            tbody.innerHTML += `
-            <tr class="linhaVazia">
-
-                <td>&nbsp;</td>
-
-                <td></td>
-
-                <td></td>
-
-                <td></td>
-
-            </tr>
-            `;
-
+            tbody.innerHTML += `<tr class="linhaVazia"><td>&nbsp;</td><td></td><td></td><td></td></tr>`;
         }
-
     }
-
 }
 
 //==================================================
 // DESENHAR TABELA DE PAGAMENTOS
 //==================================================
-
 function renderizarTabelaPagamentos() {
-
-    const tbody =
-        document.querySelector(".painelDireito #tbPagamentos");
-
+    const tbody = document.querySelector(".painelDireito #tbPagamentos");
     if (!tbody) return;
-
     tbody.innerHTML = "";
-
     const MAX_LINHAS = 10;
-
-    //==================================================
-    // OPÇÕES DA LISTA
-    //==================================================
-
-    let opcoesHTML =
-        `<option value="" style="background:#2B3240;color:#FFF;">
-            Selecione...
-        </option>`;
-
-    pagamentos.forEach((item, index) => {
-
-        opcoesHTML += `
-            <option
-                value="${index}"
-                style="background:#2B3240;color:#FFF;">
-                ${item.descricao}
-            </option>
-        `;
-
-    });
-
-    //==================================================
-    // CRIAR LINHAS COM MEMÓRIA
-    //==================================================
     for(let i = 0; i < MAX_LINHAS; i++){
         const descricaoSalva = slotsPagamentos[i] || "";
         let itemSelecionado = null;
         let indiceSelecionado = "";
-
-        // Constrói as opções do <select> para esta linha
         let opcoesHTML = `<option value="" style="background:#2B3240;color:#FFF;">Selecione...</option>`;
-        
         pagamentos.forEach((item, index) => {
             const selected = (item.descricao === descricaoSalva) ? "selected" : "";
             if (selected) {
                 itemSelecionado = item;
                 indiceSelecionado = index;
             }
-            opcoesHTML += `
-                <option value="${index}" style="background:#2B3240;color:#FFF;" ${selected}>
-                    ${item.descricao}
-                </option>
-            `;
+            opcoesHTML += `<option value="${index}" style="background:#2B3240;color:#FFF;" ${selected}>${item.descricao}</option>`;
         });
-
-        // Prepara os valores iniciais caso a linha já tenha um pagamento selecionado
         let valorHTML = "";
         let vencimentoHTML = "";
         let checkHTML = `<input type="checkbox" class="checkPagamento" disabled style="opacity:0.3;accent-color:#34D16A;cursor:pointer;width:16px;height:16px;">`;
-
         if (itemSelecionado) {
             valorHTML = `R$ ${itemSelecionado.valor.toFixed(2)}`;
             if (itemSelecionado.vencimento) {
@@ -522,7 +310,6 @@ function renderizarTabelaPagamentos() {
             }
             checkHTML = `<input type="checkbox" class="checkPagamento" style="opacity:1;accent-color:#34D16A;cursor:pointer;width:16px;height:16px;" ${itemSelecionado.pago ? "checked" : ""}>`;
         }
-
         tbody.innerHTML += `
             <tr class="linhaPagamento" data-indice="${i}">
                 <td style="padding:5px;width:45%;">
@@ -530,295 +317,108 @@ function renderizarTabelaPagamentos() {
                         ${opcoesHTML}
                     </select>
                 </td>
-                <td class="valorPagamento valor" style="text-align:right; padding:5px; width:25%;">
-                    ${valorHTML}
-                </td>
-                <td class="vencimentoPagamento" style="text-align:center; padding:5px; width:15%; cursor:pointer;">
-                    ${vencimentoHTML}
-                </td>
+                <td class="valorPagamento valor" style="text-align:right; padding:5px; width:25%;">${valorHTML}</td>
+                <td class="vencimentoPagamento" style="text-align:center; padding:5px; width:15%; cursor:pointer;">${vencimentoHTML}</td>
                 <td style="text-align:center; padding:5px; width:15%;">
                     ${checkHTML}
-                    <!-- NOVO BOTÃO AQUI -->
                     <button class="btnExcluirPagamento" title="Limpar linha">✕</button>
                 </td>
             </tr>
         `;
     }
-
-
-    //==================================================
-    // SELECIONAR PAGAMENTO
-    //==================================================
     document.querySelectorAll(".painelDireito .selectPagamento").forEach(select => {
         select.addEventListener("change", e => {
             const pagamentoIndex = e.target.value;
             const tr = e.target.closest("tr");
-            const indiceLinha = Number(tr.dataset.indice); // Descobre qual linha é
-            
+            const indiceLinha = Number(tr.dataset.indice);
             const tdValor = tr.querySelector(".valorPagamento");
             const tdVencimento = tr.querySelector(".vencimentoPagamento");
             const checkbox = tr.querySelector(".checkPagamento");
-
-            // NENHUM PAGAMENTO
             if(pagamentoIndex === ""){
-                slotsPagamentos[indiceLinha] = ""; // Apaga da memória
+                slotsPagamentos[indiceLinha] = "";
                 tdValor.innerHTML = "";
                 tdVencimento.innerHTML = "";
                 checkbox.disabled = true;
                 checkbox.style.opacity = "0.3";
                 checkbox.checked = false;
-                salvarDados(); // Salva a alteração
+                salvarDados();
                 return;
             }
-
-            // PAGAMENTO SELECIONADO
             const item = pagamentos[pagamentoIndex];
-            slotsPagamentos[indiceLinha] = item.descricao; // Grava a descrição na memória
+            slotsPagamentos[indiceLinha] = item.descricao;
             tdValor.innerHTML = `R$ ${item.valor.toFixed(2)}`;
-
             if(item.vencimento){
                 const data = new Date(item.vencimento + "T00:00:00");
                 tdVencimento.innerHTML = data.toLocaleDateString("pt-BR");
             }else{
                 tdVencimento.innerHTML = "";
             }
-
             checkbox.disabled = false;
             checkbox.style.opacity = "1";
             checkbox.checked = item.pago;
-            
-            salvarDados(); // Salva a alteração
+            salvarDados();
         });
     });
-
-
-    //==================================================
-    // EDITAR VENCIMENTO
-    //==================================================
-
-    document
-        .querySelectorAll(".painelDireito .vencimentoPagamento")
-        .forEach(td => {
-
-            td.addEventListener("click", () => {
-
-                const tr =
-                    td.closest("tr");
-
-                const select =
-                    tr.querySelector(".selectPagamento");
-
-
-                // Não existe pagamento selecionado
-                if(select.value === ""){
-
-                    return;
-
+    document.querySelectorAll(".painelDireito .vencimentoPagamento").forEach(td => {
+        td.addEventListener("click", () => {
+            const tr = td.closest("tr");
+            const select = tr.querySelector(".selectPagamento");
+            if(select.value === "") return;
+            const indice = Number(select.value);
+            const pagamento = pagamentos[indice];
+            if(td.querySelector("input")) return;
+            const input = document.createElement("input");
+            input.type = "date";
+            input.value = pagamento.vencimento || "";
+            input.style.width = "100%"; input.style.boxSizing = "border-box"; input.style.background = "#2B3240"; input.style.color = "#FFF"; input.style.border = "1px solid #66B3FF"; input.style.borderRadius = "5px"; input.style.padding = "5px"; input.style.outline = "none"; input.style.fontFamily = "inherit"; input.style.fontSize = "12px";
+            td.innerHTML = "";
+            td.appendChild(input);
+            input.focus();
+            let salvo = false;
+            function salvarVencimento(){
+                if(salvo) return;
+                salvo = true;
+                pagamentos[indice].vencimento = input.value;
+                salvarDados();
+                if(input.value){
+                    const data = new Date(input.value + "T00:00:00");
+                    td.innerHTML = data.toLocaleDateString("pt-BR");
+                }else{
+                    td.innerHTML = "";
                 }
-
-
-                const indice =
-                    Number(select.value);
-
-                const pagamento =
-                    pagamentos[indice];
-
-
-                //==========================================
-                // EVITA CRIAR DOIS INPUTS
-                //==========================================
-
-                if(td.querySelector("input")){
-
-                    return;
-
-                }
-
-
-                //==========================================
-                // CRIA INPUT DE DATA
-                //==========================================
-
-                const input =
-                    document.createElement("input");
-
-
-                input.type = "date";
-
-                input.value =
-                    pagamento.vencimento || "";
-
-
-                input.style.width = "100%";
-                input.style.boxSizing = "border-box";
-                input.style.background = "#2B3240";
-                input.style.color = "#FFF";
-                input.style.border = "1px solid #66B3FF";
-                input.style.borderRadius = "5px";
-                input.style.padding = "5px";
-                input.style.outline = "none";
-                input.style.fontFamily = "inherit";
-                input.style.fontSize = "12px";
-
-
-                td.innerHTML = "";
-
-                td.appendChild(input);
-
-                input.focus();
-
-
-                //==========================================
-                // SALVAR
-                //==========================================
-
-                let salvo = false;
-
-
-                function salvarVencimento(){
-
-                    // Impede o blur e Enter de salvar duas vezes
-                    if(salvo){
-
-                        return;
-
-                    }
-
-                    salvo = true;
-
-
-                    pagamentos[indice].vencimento =
-                        input.value;
-
-
-                    salvarDados();
-
-
-                    //======================================
-                    // MOSTRAR NOVAMENTE A DATA
-                    //======================================
-
-                    if(input.value){
-
-                        const data =
-                            new Date(
-                                input.value + "T00:00:00"
-                            );
-
-                        td.innerHTML =
-                            data.toLocaleDateString("pt-BR");
-
-                    }else{
-
-                        td.innerHTML = "";
-
-                    }
-
-                }
-
-
-                //==========================================
-                // ENTER
-                //==========================================
-
-                input.addEventListener(
-                    "keydown",
-                    e => {
-
-                        if(e.key === "Enter"){
-
-                            e.preventDefault();
-
-                            salvarVencimento();
-
-                            input.blur();
-
-                        }
-
-                    }
-                );
-
-
-                //==========================================
-                // CLIQUE FORA
-                //==========================================
-
-                input.addEventListener(
-                    "blur",
-                    salvarVencimento
-                );
-
-            });
-
+            }
+            input.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); salvarVencimento(); input.blur(); } });
+            input.addEventListener("blur", salvarVencimento);
         });
-
-
-    //==================================================
-    // CHECKBOX DE PAGAMENTO
-    //==================================================
-
-    document
-        .querySelectorAll(".painelDireito .checkPagamento")
-        .forEach(checkbox => {
-
-            checkbox.addEventListener("change", e => {
-
-                const tr =
-                    e.target.closest("tr");
-
-                const select =
-                    tr.querySelector(".selectPagamento");
-
-
-                if(select.value !== ""){
-
-                    const indice =
-                        Number(select.value);
-
-
-                    pagamentos[indice].pago =
-                        e.target.checked;
-
-
-                    salvarDados();
-
-                }
-
-            });
-
+    });
+    document.querySelectorAll(".painelDireito .checkPagamento").forEach(checkbox => {
+        checkbox.addEventListener("change", e => {
+            const tr = e.target.closest("tr");
+            const select = tr.querySelector(".selectPagamento");
+            if(select.value !== ""){
+                const indice = Number(select.value);
+                pagamentos[indice].pago = e.target.checked;
+                salvarDados();
+            }
         });
-    
-    //==================================================
-    // BOTÃO DE EXCLUIR / LIMPAR LINHA
-    //==================================================
+    });
     document.querySelectorAll(".painelDireito .btnExcluirPagamento").forEach(botao => {
         botao.addEventListener("click", e => {
             const tr = e.target.closest("tr");
             const select = tr.querySelector(".selectPagamento");
-            
-            // Se já estiver vazio ("Selecione..."), não faz nada
             if (select.value === "") return;
-            
-            // Muda o valor para vazio e aciona o evento de 'change'
-            // Isso fará o sistema limpar os dados, apagar da memória e salvar automaticamente!
             select.value = "";
             select.dispatchEvent(new Event("change"));
         });
     });   
-
 }
 
 function configurarExclusao() {
-    // Agora selecionamos apenas o botão, não mais a linha inteira
     document.querySelectorAll(".btnExcluir").forEach(botao => {
         botao.addEventListener("click", (e) => {
-            
-            // Encontra a linha "Pai" (tr) que contém o botão
             const linha = e.target.closest("tr");
-            
             const tabela = linha.dataset.tabela;
             const indice = Number(linha.dataset.indice);
-
             dados[tabela].splice(indice, 1);
             salvarDados();
             atualizarTudo();
@@ -827,60 +427,39 @@ function configurarExclusao() {
 }
 
 //==================================================
-// DRAG AND DROP (REORDENAR LINHAS)
+// DRAG AND DROP
 //==================================================
-
 let linhaArrastada = null;
-
 function configurarDragAndDrop() {
     const linhas = document.querySelectorAll(".linhaComExclusao[draggable='true']");
-
     linhas.forEach(linha => {
-        // Ao começar a arrastar
         linha.addEventListener("dragstart", function(e) {
             linhaArrastada = this;
             e.dataTransfer.effectAllowed = "move";
-            // Usa um pequeno delay para a linha original ficar com aspecto "fantasma"
             setTimeout(() => this.classList.add("arrastando"), 0);
         });
-
-        // Ao soltar ou cancelar
         linha.addEventListener("dragend", function() {
             linhaArrastada = null;
             this.classList.remove("arrastando");
         });
-
-        // Quando passa por cima de outra linha
         linha.addEventListener("dragover", function(e) {
-            e.preventDefault(); // Obrigatório para permitir o "Drop"
-            // Garante que só mostre o efeito visual se arrastar dentro da mesma tabela
+            e.preventDefault();
             if (linhaArrastada && this.dataset.tabela === linhaArrastada.dataset.tabela && this !== linhaArrastada) {
                 this.classList.add("drag-over");
             }
         });
-
-        // Quando sai de cima de outra linha
         linha.addEventListener("dragleave", function() {
             this.classList.remove("drag-over");
         });
-
-        // Quando solta a linha no novo destino
         linha.addEventListener("drop", function(e) {
             e.preventDefault();
             this.classList.remove("drag-over");
-
-            // Valida se o drop é válido (na mesma tabela e numa linha diferente)
             if (linhaArrastada && this.dataset.tabela === linhaArrastada.dataset.tabela && this !== linhaArrastada) {
-                
                 const tabela = this.dataset.tabela;
                 const indexOrigem = Number(linhaArrastada.dataset.indice);
                 const indexDestino = Number(this.dataset.indice);
-
-                // Reordena os itens no array 'dados'
                 const itemMovido = dados[tabela].splice(indexOrigem, 1)[0];
                 dados[tabela].splice(indexDestino, 0, itemMovido);
-
-                // Salva no localStorage e reconstrói a interface
                 salvarDados();
                 atualizarTudo();
             }
@@ -891,33 +470,21 @@ function configurarDragAndDrop() {
 //==================================================
 // DUPLO CLIQUE PARA EDITAR
 //==================================================
-
 function configurarDuploClique() {
     document.querySelectorAll(".linhaComExclusao").forEach(linha => {
         linha.addEventListener("dblclick", () => {
             modoEdicao = true;
             itemEditadoCategoria = linha.dataset.tabela;
             itemEditadoIndice = Number(linha.dataset.indice);
-
             let item;
-          
-            try {
-              item = dados[itemEditadoCategoria][itemEditadoIndice];
-            } 
-            catch (erro) {
-              item = pagamentos[itemEditadoIndice];
-            }
-            console.log(itemEditadoCategoria)
-            console.log(itemEditadoIndice)
-            // Muda o título do modal e preenche os campos
-              document.querySelector("#modal .janela h2").innerText = "Editar Despesa";
-              descricao.value = item.descricao;
-              valor.value = item.valor;
-              categoria.value = itemEditadoCategoria;
-  
-              modal.classList.remove("oculto");
-              descricao.focus();
-
+            try { item = dados[itemEditadoCategoria][itemEditadoIndice]; } 
+            catch (erro) { item = pagamentos[itemEditadoIndice]; }
+            document.querySelector("#modal .janela h2").innerText = "Editar Despesa";
+            descricao.value = item.descricao;
+            valor.value = item.valor;
+            categoria.value = itemEditadoCategoria;
+            modal.classList.remove("oculto");
+            descricao.focus();
         });
     });
 }
@@ -925,160 +492,68 @@ function configurarDuploClique() {
 //==================================================
 // TRANSFERIR ORÇAMENTO
 //==================================================
-
 function transferirOrcamento(origem, destino, valor){
-
-    if(valor <= 0){
-
-        alert("Informe um valor válido.");
-
-        return;
-
-    }
-
-    if(orcamento[origem] < valor){
-
-        alert("A categoria de origem não possui orçamento suficiente.");
-
-        return;
-
-    }
-
+    if(valor <= 0){ alert("Informe um valor válido."); return; }
+    if(orcamento[origem] < valor){ alert("A categoria de origem não possui orçamento suficiente."); return; }
     orcamento[origem] -= valor;
-
     orcamento[destino] += valor;
-
     salvarDados();
-
     atualizarTudo();
-
 }
-
-//==================================================
-// EVENTO DOS BOTÕES DE TRANSFERÊNCIA
-//==================================================
-
 botoesTransferir.forEach(botao => {
-
     botao.addEventListener("click", () => {
-
         const destino = botao.dataset.destino;
-
-        const valor = Number(
-            document.getElementById(
-                "valor" +
-                destino.charAt(0).toUpperCase() +
-                destino.slice(1)
-            ).value
-        );
-
-        const origem = document.getElementById(
-            "origem" +
-            destino.charAt(0).toUpperCase() +
-            destino.slice(1)
-        ).value;
-
-        transferirOrcamento(origem, destino, valor);
-
-        document.getElementById(
-            "valor" +
-            destino.charAt(0).toUpperCase() +
-            destino.slice(1)
-        ).value = "";
-
+        const valorId = "valor" + destino.charAt(0).toUpperCase() + destino.slice(1);
+        const origemId = "origem" + destino.charAt(0).toUpperCase() + destino.slice(1);
+        const valorNum = Number(document.getElementById(valorId).value);
+        const origem = document.getElementById(origemId).value;
+        transferirOrcamento(origem, destino, valorNum);
+        document.getElementById(valorId).value = "";
     });
-
 });
 
 //==================================================
 // TOTAIS
 //==================================================
-
 function atualizarTotais(){
-
-    let gastosEssenciais = 0;
-    let gastosOcasionais = 0;
-    let gastosInvestimentos = 0;
-
+    let gastosEssenciais = 0; let gastosOcasionais = 0; let gastosInvestimentos = 0;
     dados.essenciais.forEach(item => gastosEssenciais += item.valor);
     dados.ocasionais.forEach(item => gastosOcasionais += item.valor);
     dados.investimentos.forEach(item => gastosInvestimentos += item.valor);
-
-    // Cabeçalho = orçamento disponível da categoria
-
-    document.getElementById("totalEssenciais").innerHTML =
-        "R$ " + orcamento.essenciais.toFixed(2);
-
-    document.getElementById("totalOcasionais").innerHTML =
-        "R$ " + orcamento.ocasionais.toFixed(2);
-
-    document.getElementById("totalInvestimentos").innerHTML =
-        "R$ " + orcamento.investimentos.toFixed(2);
-
-    // Rodapé = saldo restante
-
-    document.getElementById("saldoEssenciais").innerHTML =
-        "R$ " + (orcamento.essenciais - gastosEssenciais).toFixed(2);
-
-    document.getElementById("saldoOcasionais").innerHTML =
-        "R$ " + (orcamento.ocasionais - gastosOcasionais).toFixed(2);
-
-    document.getElementById("saldoInvestimentos").innerHTML =
-        "R$ " + (orcamento.investimentos - gastosInvestimentos).toFixed(2);
-
-    // Saldo Geral
-
-    document.getElementById("saldo").innerHTML =
-        "R$ " + saldoTotal.toFixed(2);
-
+    document.getElementById("totalEssenciais").innerHTML = "R$ " + orcamento.essenciais.toFixed(2);
+    document.getElementById("totalOcasionais").innerHTML = "R$ " + orcamento.ocasionais.toFixed(2);
+    document.getElementById("totalInvestimentos").innerHTML = "R$ " + orcamento.investimentos.toFixed(2);
+    document.getElementById("saldoEssenciais").innerHTML = "R$ " + (orcamento.essenciais - gastosEssenciais).toFixed(2);
+    document.getElementById("saldoOcasionais").innerHTML = "R$ " + (orcamento.ocasionais - gastosOcasionais).toFixed(2);
+    document.getElementById("saldoInvestimentos").innerHTML = "R$ " + (orcamento.investimentos - gastosInvestimentos).toFixed(2);
+    document.getElementById("saldo").innerHTML = "R$ " + saldoTotal.toFixed(2);
 }
 
 function atualizarTotaisLancados(){
-
     let gastosLancados = 0;
-
     lancamentos.forEach(item => gastosLancados += item.valor);
-
-    // Rodapé = saldo restante
-
-    document.getElementById("totalLancamentos").innerHTML =
-        "R$ " + (gastosLancados).toFixed(2);
+    const totalLancamentosElem = document.getElementById("totalLancamentos");
+    if(totalLancamentosElem) totalLancamentosElem.innerHTML = "R$ " + (gastosLancados).toFixed(2);
 }
 
 //==================================================
-// SALVAR ITEM (NOVO OU EDIÇÃO)
+// SALVAR ITEM
 //==================================================
-
 btnSalvar.addEventListener("click", () => {
-    if(descricao.value.trim() === ""){
-        alert("Digite uma descrição.");
-        return;
-    }
-
-    if(valor.value === ""){
-        alert("Digite um valor.");
-        return;
-    }
-
+    if(descricao.value.trim() === ""){ alert("Digite uma descrição."); return; }
+    if(valor.value === ""){ alert("Digite um valor."); return; }
     if (modoEdicao) {
-        // --- MODO EDIÇÃO ---
         const novaCategoria = categoria.value;
         const novoValor = Number(valor.value);
         const novaDescricao = descricao.value.trim();
         const descricaoAntiga = dados[itemEditadoCategoria][itemEditadoIndice].descricao;
-
-        // 1. Atualiza os dados
         if (novaCategoria === itemEditadoCategoria) {
-            // Se manteve na mesma categoria
             dados[itemEditadoCategoria][itemEditadoIndice].descricao = novaDescricao;
             dados[itemEditadoCategoria][itemEditadoIndice].valor = novoValor;
         } else {
-            // Se mudou de categoria (ex: de Essencial para Ocasional)
             dados[itemEditadoCategoria].splice(itemEditadoIndice, 1);
             dados[novaCategoria].push({ descricao: novaDescricao, valor: novoValor });
         }
-
-        // 2. Atualiza o histórico de lançamentos caso o nome ou categoria tenham mudado
         if (descricaoAntiga !== novaDescricao || novaCategoria !== itemEditadoCategoria) {
             lancamentos.forEach(l => {
                 if (l.subcategoria.toLowerCase() === descricaoAntiga.toLowerCase()) {
@@ -1088,100 +563,48 @@ btnSalvar.addEventListener("click", () => {
             });
             renderizarLancamentos();
         }
-        
     } else {
-        // --- MODO NOVO ITEM ---
-        dados[categoria.value].push({
-            descricao: descricao.value.trim(),
-            valor: Number(valor.value)
-        });
+        dados[categoria.value].push({ descricao: descricao.value.trim(), valor: Number(valor.value) });
     }
-
-    carregarSubcategorias(); // Atualiza a lista de opções de lançamentos
+    carregarSubcategorias();
     salvarDados();
     atualizarTudo();
     fecharModal();
 });
 
 //==================================================
-// ATUALIZAR GRÁFICOS
+// GRÁFICO
 //==================================================
-
 let graficoPizza = null;
-
 function atualizarGrafico() {
-
-    let gastosEssenciais = 0;
-    let gastosOcasionais = 0;
-    let gastosInvestimentos = 0;
-
+    let gastosEssenciais = 0; let gastosOcasionais = 0; let gastosInvestimentos = 0;
     dados.essenciais.forEach(item => gastosEssenciais += item.valor);
     dados.ocasionais.forEach(item => gastosOcasionais += item.valor);
     dados.investimentos.forEach(item => gastosInvestimentos += item.valor);
-
     const ctx = document.getElementById("graficoPizza");
-    
-    console.log(graficoPizza);
-    console.log(typeof graficoPizza);
-    
-    if (graficoPizza) {
-        graficoPizza.destroy();
-    }
-
+    if(!ctx) return;
+    if (graficoPizza) graficoPizza.destroy();
     graficoPizza = new Chart(ctx, {
-
-        type: "doughnut", // Mudamos de "pie" para "doughnut"
-
+        type: "doughnut",
         data: {
-
-            labels: [
-                "  ESSENCIAIS",
-                "  OCASIONAIS",
-                "  INVESTIMENTOS"
-            ],
-
+            labels: ["  ESSENCIAIS", "  OCASIONAIS", "  INVESTIMENTOS"],
             datasets: [{
-
-                data: [
-                    orcamento.essenciais,
-                    orcamento.ocasionais,
-                    orcamento.investimentos
-                ],
-
-                backgroundColor: [
-                    "#E53935",
-                    "#FB8C00",
-                    "#4A90E2"
-                ],
-                
-                
+                data: [orcamento.essenciais, orcamento.ocasionais, orcamento.investimentos],
+                backgroundColor: ["#E53935", "#FB8C00", "#4A90E2"],
                 borderWidth: 0,
-                hoverOffset: 8, // A fatia "pula" ao passar o mouse
-                borderRadius: 4 // Arredonda levemente as pontas das fatias
-
+                hoverOffset: 8,
+                borderRadius: 4
             }]
-
         },
-
         options: {
-
             cutout: '70%', 
             radius: "90%",
             responsive: true,
-
             plugins: {
-
                 tooltip: {
                     padding: 16,
-                    
-                    titleFont: {
-                        family: "'Inter', sans-serif",
-                        size: 14
-                    },
-                    bodyFont: {
-                        family: "'Inter', sans-serif",
-                        size: 14
-                    },
+                    titleFont: { family: "'Inter', sans-serif", size: 14 },
+                    bodyFont: { family: "'Inter', sans-serif", size: 14 },
                     callbacks: {
                         label: function(context){
                             const total = context.dataset.data.reduce((a,b)=>a+b,0);
@@ -1191,324 +614,170 @@ function atualizarGrafico() {
                         }
                     }
                 },
-
                 legend: {
                     position: "bottom",
                     labels: {
                         color: document.body.classList.contains("light-mode") ? "#555" : "#9DA5B4", 
                         usePointStyle: true, 
                         padding: 25, 
-                        font: {
-                            family: "'Inter', sans-serif", 
-                            size: 12
-                        }
+                        font: { family: "'Inter', sans-serif", size: 12 }
                     }
                 }
             }
         }
     });
-
 }
 
-//==================================================
-// IDENTIFICAR CATEGORIA DA SUBCATEGORIA
-//==================================================
-
 function identificarCategoria(subcategoria){
-
     for(const categoria in dados){
-
-        const existe = dados[categoria].some(item =>
-            item.descricao.toLowerCase() ===
-            subcategoria.toLowerCase()
-        );
-
-        if(existe){
-
-            return categoria;
-
-        }
-
+        const existe = dados[categoria].some(item => item.descricao.toLowerCase() === subcategoria.toLowerCase());
+        if(existe) return categoria;
     }
-
     return null;
-
 }
 
 //==================================================
 // DESENHAR LANÇAMENTOS
 //==================================================
-
 function renderizarLancamentos(){
-
+    if(!tbLancamentos) return;
     tbLancamentos.innerHTML = "";
-
     lancamentos.forEach((lancamento, indice) => {
-
-        const data = new Date(
-            lancamento.data + "T00:00:00"
-        );
-
-        const dataFormatada =
-            data.toLocaleDateString("pt-BR");
-
+        const data = new Date(lancamento.data + "T00:00:00");
+        const dataFormatada = data.toLocaleDateString("pt-BR");
         tbLancamentos.innerHTML += `
-
             <tr>
-
-                <td>
-                    ${dataFormatada}
-                </td>
-
-                <td>
-
-                    <span class="subcategoria ${lancamento.categoria}">
-                        ${lancamento.subcategoria}
-                    </span>
-
-                </td>
-
-                <td>
-                    ${lancamento.descricao}
-                </td>
-
-                <td>
-                    ${lancamento.cartao}
-                </td>
-
-                <td>
-                    ${lancamento.pagamento}
-                </td>
-
-                <td class="valorLancamento">
-
-                    R$ ${lancamento.valor.toFixed(2)}
-
-                </td>
-
-                <td class="acoesLancamento">
-
-                    <button
-                        class="btnExcluirLancamento"
-                        data-indice="${indice}">
-
-                        ×
-
-                    </button>
-
-                </td>
-
+                <td>${dataFormatada}</td>
+                <td><span class="subcategoria ${lancamento.categoria}">${lancamento.subcategoria}</span></td>
+                <td>${lancamento.descricao}</td>
+                <td>${lancamento.cartao}</td>
+                <td>${lancamento.pagamento}</td>
+                <td class="valorLancamento">R$ ${lancamento.valor.toFixed(2)}</td>
+                <td class="acoesLancamento"><button class="btnExcluirLancamento" data-indice="${indice}">×</button></td>
             </tr>
-
         `;
-
     });
-
-    //==================================================
-    // NOVO: CONFIGURAR BOTÕES DE EXCLUIR LANÇAMENTO
-    //==================================================
     document.querySelectorAll(".btnExcluirLancamento").forEach(botao => {
-
         botao.addEventListener("click", () => {
-
-            // Pega o índice do lançamento que está no HTML do botão
             const indice = Number(botao.dataset.indice);
-
-            // Remove 1 item do array 'lancamentos' a partir do índice selecionado
             lancamentos.splice(indice, 1);
-
-            // Salva as alterações no navegador
             salvarDados();
-
-            // Atualiza a tabela de lançamentos e o total da página
             renderizarLancamentos();
             atualizarTotaisLancados();
-
-            // Atualiza o Dashboard principal (recalculando a coluna "futuro")
             atualizarTudo();
-
         });
-
     });
-
 }
 
-//==================================================
-// NOVO LANÇAMENTO
-//==================================================
-
-salvarNovoLancamento.addEventListener("click", () => {
-
-    if(dataNovoLancamento.value === ""){
-        alert("Informe a data.");
-        return;
-    }
-
-    if(subcategoriaNovoLancamento.value.trim() === ""){
-        alert("Informe a subcategoria.");
-        return;
-    }
-
-    if(descricaoNovoLancamento.value.trim() === ""){
-        alert("Informe a descrição.");
-        return;
-    }
-
-    if(valorNovoLancamento.value === ""){
-        alert("Informe o valor.");
-        return;
-    }
-
-    // Variáveis importantes que estavam faltando:
-    const subcategoria = subcategoriaNovoLancamento.value.trim();
-    const categoriaLancamento = identificarCategoria(subcategoria);
-
-    if(!categoriaLancamento){
-        alert("Subcategoria não encontrada.");
-        return;
-    }
-
-    const novoLancamento = {
-
-        data: dataNovoLancamento.value,
-        categoria: categoriaLancamento,
-        subcategoria: subcategoria,
-        descricao: descricaoNovoLancamento.value,
-        cartao: cartaoNovoLancamento.value,
-        pagamento: pagamentoNovoLancamento.value,
-        valor: Number(valorNovoLancamento.value)
-
-    };
-
-    lancamentos.push(novoLancamento);
-
-    salvarDados();
-
-    renderizarLancamentos();
-
-    atualizarTotaisLancados();
-
-    atualizarTudo(); 
-
-    modalNovoLancamento.classList.add("oculto");
-
-});
-
+if(salvarNovoLancamento){
+    salvarNovoLancamento.addEventListener("click", () => {
+        if(dataNovoLancamento.value === ""){ alert("Informe a data."); return; }
+        if(subcategoriaNovoLancamento.value.trim() === ""){ alert("Informe a subcategoria."); return; }
+        if(descricaoNovoLancamento.value.trim() === ""){ alert("Informe a descrição."); return; }
+        if(valorNovoLancamento.value === ""){ alert("Informe o valor."); return; }
+        const subcategoria = subcategoriaNovoLancamento.value.trim();
+        const categoriaLancamento = identificarCategoria(subcategoria);
+        if(!categoriaLancamento){ alert("Subcategoria não encontrada."); return; }
+        const novoLancamento = {
+            data: dataNovoLancamento.value,
+            categoria: categoriaLancamento,
+            subcategoria: subcategoria,
+            descricao: descricaoNovoLancamento.value,
+            cartao: cartaoNovoLancamento.value,
+            pagamento: pagamentoNovoLancamento.value,
+            valor: Number(valorNovoLancamento.value)
+        };
+        lancamentos.push(novoLancamento);
+        salvarDados();
+        renderizarLancamentos();
+        atualizarTotaisLancados();
+        atualizarTudo(); 
+        modalNovoLancamento.classList.add("oculto");
+    });
+}
 
 //==================================================
 // ATUALIZAR TUDO
 //==================================================
-
 function atualizarTudo(){
-
     renderizarTabela("essenciais","tbEssenciais");
-
     renderizarTabela("ocasionais","tbOcasionais");
-
     renderizarTabela("investimentos","tbInvestimentos");
-
     renderizarTabelaPagamentos();
-
     atualizarGrafico();
-
     configurarExclusao();
-
     configurarDragAndDrop();
-
     configurarDuploClique();
-
     atualizarTotais();
-
     atualizarTotaisLancados();
-
+    renderizarEntradaSaida();
 }
 
 //==================================================
-// MODO CLARO (LIGA / DESLIGA)
+// MODO CLARO
 //==================================================
 const btnConfiguracoes = document.getElementById("btnConfiguracoes");
-
-// Ao carregar a página, checa se o usuário tinha deixado no modo claro
 if (localStorage.getItem("modoClaro") === "true") {
     document.body.classList.add("light-mode");
 }
-
 btnConfiguracoes.addEventListener("click", (evento) => {
     evento.preventDefault();
-    
-    // Liga ou desliga a classe master no <body>
     document.body.classList.toggle("light-mode");
-    
-    // Salva a nova preferência na memória
     const isLightMode = document.body.classList.contains("light-mode");
     localStorage.setItem("modoClaro", isLightMode);
-    
-    // Recarrega o gráfico para atualizar a cor da letra
     atualizarGrafico();
 });
 
 //==================================================
-// ELEMENTOS DE NAVEGAÇÃO E ABA ENTRADA E SAÍDA
+// ENTRADA E SAÍDA
 //==================================================
-const linkEntradaSaida = document.getElementById("linkEntradaSaida"); // Certifique-se de que o <a> no nav tem esse ID
+const linkEntradaSaida = document.getElementById("linkEntradaSaida");
 const paginaEntradaSaida = document.getElementById("paginaEntradaSaida");
 
-// NAVEGAR PARA ENTRADA E SAÍDA
-linkEntradaSaida.addEventListener("click", (evento) => {
-    evento.preventDefault();
-    document.querySelector(".dashboard").classList.add("oculto");
-    paginaFinanceiro.classList.add("oculto");
-    paginaEntradaSaida.classList.remove("oculto");
-    
-    renderizarEntradaSaida();
-});
+if(linkEntradaSaida){
+    linkEntradaSaida.addEventListener("click", (evento) => {
+        evento.preventDefault();
+        document.querySelector(".dashboard").classList.add("oculto");
+        if(paginaFinanceiro) paginaFinanceiro.classList.add("oculto");
+        paginaEntradaSaida.classList.remove("oculto");
+        renderizarEntradaSaida();
+    });
+}
+if(linkFinanceiro){
+    linkFinanceiro.addEventListener("click", (evento) => {
+        evento.preventDefault();
+        document.querySelector(".dashboard").classList.add("oculto");
+        if(paginaEntradaSaida) paginaEntradaSaida.classList.add("oculto");
+        paginaFinanceiro.classList.remove("oculto");
+    });
+}
+if(linkInicio){
+    linkInicio.addEventListener("click", (evento) => {
+        evento.preventDefault();
+        if(paginaFinanceiro) paginaFinanceiro.classList.add("oculto");
+        if(paginaEntradaSaida) paginaEntradaSaida.classList.add("oculto");
+        document.querySelector(".dashboard").classList.remove("oculto");
+    });
+}
 
-// NAVEGAR PARA FINANCEIRO (Atualizado)
-linkFinanceiro.addEventListener("click", (evento) => {
-    evento.preventDefault();
-    document.querySelector(".dashboard").classList.add("oculto");
-    paginaEntradaSaida.classList.add("oculto");
-    paginaFinanceiro.classList.remove("oculto");
-});
-
-// NAVEGAR PARA INÍCIO (Atualizado)
-linkInicio.addEventListener("click", (evento) => {
-    evento.preventDefault();
-    paginaFinanceiro.classList.add("oculto");
-    paginaEntradaSaida.classList.add("oculto");
-    document.querySelector(".dashboard").classList.remove("oculto");
-});
-
-//==================================================
-// RENDERIZAR TABELA ENTRADA E SAÍDA
-//==================================================
 function renderizarEntradaSaida() {
     const tbody = document.getElementById("tbEntradaSaida");
+    if(!tbody) return;
     tbody.innerHTML = "";
-
-    // 1. Array de Entradas (Puxando o Saldo Total)
-    const entradas = [
-        { descricao: "Soldo Total", valor: saldoTotal, classe: "entrada" }
-    ];
-
-    // 2. Array de Saídas (Agrupando os dados e herdando as classes css)
+    const entradas = [{ descricao: "Saldo Total", valor: saldoTotal, classe: "entrada" }];
     const saidas = [];
     dados.essenciais.forEach(item => saidas.push({ ...item, classe: "essencial" }));
     dados.ocasionais.forEach(item => saidas.push({ ...item, classe: "ocasional" }));
     dados.investimentos.forEach(item => saidas.push({ ...item, classe: "investimento" }));
-
+    
     const maxLinhas = Math.max(entradas.length, saidas.length);
-    let totalEntrada = 0;
-    let totalSaida = 0;
-
-    // 3. Gerar Linhas (lado a lado na mesma TR)
+    let totalEntrada = 0; let totalSaida = 0;
+    
     for (let i = 0; i < maxLinhas; i++) {
         const entrada = entradas[i];
         const saida = saidas[i];
         const tr = document.createElement("tr");
         let html = "";
-
-        // COLUNAS DE ENTRADA
         if (entrada) {
             html += `
                 <td class="bg-dark-${entrada.classe}" style="text-align: left;">${entrada.descricao}</td>
@@ -1518,8 +787,6 @@ function renderizarEntradaSaida() {
         } else {
             html += `<td class="borda-direita"></td><td class="borda-direita"></td>`;
         }
-
-        // COLUNAS DE SAÍDA
         if (saida) {
             html += `
                 <td class="bg-dark-${saida.classe}" style="text-align: left;">${saida.descricao}</td>
@@ -1529,29 +796,24 @@ function renderizarEntradaSaida() {
         } else {
             html += `<td></td><td></td>`;
         }
-
         tr.innerHTML = html;
         tbody.appendChild(tr);
     }
-
-    // 4. Atualizar Valores do Rodapé
-    document.getElementById("totalEntradaES").innerText = `R$ ${totalEntrada.toFixed(2)}`;
-    document.getElementById("totalSaidaES").innerText = `R$ ${totalSaida.toFixed(2)}`;
+    const totalEntradaES = document.getElementById("totalEntradaES");
+    const totalSaidaES = document.getElementById("totalSaidaES");
+    if(totalEntradaES) totalEntradaES.innerText = `R$ ${totalEntrada.toFixed(2)}`;
+    if(totalSaidaES) totalSaidaES.innerText = `R$ ${totalSaida.toFixed(2)}`;
     
     const saldoLiquido = totalEntrada - totalSaida;
     const elSaldo = document.getElementById("saldoFinalES");
-    elSaldo.innerText = `R$ ${saldoLiquido.toFixed(2)}`;
-    elSaldo.style.color = saldoLiquido >= 0 ? "#34D16A" : "#FF7272"; // Verde se positivo, vermelho se negativo
+    if(elSaldo){
+        elSaldo.innerText = `R$ ${saldoLiquido.toFixed(2)}`;
+        elSaldo.style.color = saldoLiquido >= 0 ? "#34D16A" : "#FF7272";
+    }
 }
 
-//==================================================
 // START
-//==================================================
-
 carregarDados();
-
 carregarSubcategorias();
-
 renderizarLancamentos();
-
 atualizarTudo();

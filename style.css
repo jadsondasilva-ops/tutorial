@@ -1,1606 +1,189 @@
-/*====================================================
-    RESET
-====================================================*/
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body {
-    background: #111318;
-    font-family: 'Inter', sans-serif; /* Nova fonte moderna */
-    color: #FFF;
-    -webkit-font-smoothing: antialiased; /* Deixa a fonte mais suave no navegador */
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/*====================================================
-    NAVBAR
-====================================================*/
-
-nav{
-
-    height:70px;
-
-    background:#1B1F27;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 40px;
-
-    box-shadow:0 4px 30px rgba(0,0,0, 0.4);
-
-}
-
-.logo{
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    color:#4DA3FF;
-
-}
-
-nav ul{
-
-    display:flex;
-
-    list-style:none;
-
-    gap:0;
-
-}
-
-nav a{
-
-    text-decoration:none;
-
-    color:white;
-
-    transition:.3s;
-
-}
-
-nav li {
-    padding: 0 17.5px;
-}
-
-nav li + li {
-    border-left: 2px solid #fff;
-}
-
-nav a:hover{
-
-    color:#4DA3FF;
-
-}
-
-/*====================================================
-    DASHBOARD
-====================================================*/
-
-.dashboard{
-
-    width:96%;
-
-    margin:25px auto;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:25px;
-
-}
-
-/*====================================================
-    PRIMEIRA LINHA
-====================================================*/
-
-.linhaSuperior{
-
-    display:flex;
-
-    gap:20px;
-
-    align-items:flex-start;
-
-}
-
-/*====================================================
-    TRÊS COLUNAS FINANCEIRAS
-====================================================*/
-
-.financeiro{
-
-    flex:3;
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:18px;
-
-}
-
-/*====================================================
-    PAINÉIS
-====================================================*/
-
-.painel{
-
-    background:#1D222D;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
-    min-height:640px;
-
-    display:flex;
-
-    flex-direction:column;
-
-
-}
-
-/*====================================================
-    CABEÇALHO
-====================================================*/
-
-.painel header{
-
-    text-align:center;
-
-    padding:10px;
-
-    color:white;
-
-}
-
-.painel header h2{
-
-    font-size:18px;
-
-}
-
-.painel header span{
-
-    display:block;
-
-    margin-top:4px;
-
-    font-size:14px;
-
-}
-
-/*====================================================
-    CORES
-====================================================*/
-
-.essenciais header{
-
-    background:#D76B6B;
-
-}
-
-.ocasionais header{
-
-    background:#D8A15C;
-
-}
-
-.investimentos header{
-
-    background:#6B87D8;
-
-}
-
-/*====================================================
-    TABELA
-====================================================*/
-
-.painel table{
-
-    width:100%;
-    flex:1;
-    border-collapse:collapse;
-
-}
-
-.painel tbody tr {
-
-    height: 30px;
-
-    border-bottom: 1px dashed #3B4353;
-
-    position: relative;
-
-}
-
-.painel td{
-
-    padding:2px 2px 2px 9px;
-    font-size:12px;
-
-}
-
-.valor{
-
-    text-align:right;
-    color:#FF7272;
-    font-weight:bold;
-
-}
-
-.linhaVazia td{
-
-    color:transparent;
-
-}
-
-.acoes {
-
-    position: absolute;
-
-    right: 5px; /* Distância do botão até a borda direita */
-
-    top: 0;
-
-    bottom: 0;
-
-    width: 30px;
-
-    padding: 0 !important;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-}
-
-.btnExcluir {
-    width: 24px;
-    height: 24px;
-    border: none;
-    border-radius: 50%;
-    background: #b83a3a;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 11px;
-    
-    /* Posicionamento absoluto para ficar "flutuando" */
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%); /* Centraliza verticalmente */
-    
-    z-index: 10; /* Garante que ele fique acima do texto */
-    opacity: 0; 
-    transition: opacity 0.3s ease; 
-    pointer-events: none; 
-}
-
-.btnExcluir:hover {
-    background: #ff4444;
-}
-
-/*====================================================
-    ANIMAÇÃO DE DESLIZE DA LINHA (HOVER)
-====================================================*/
-
-/* 1. Desliza o texto das outras colunas 10px para a esquerda */
-.painel tbody tr:hover .btnExcluir {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* 2. Mostra o botão e traz ele para a posição original */
-.painel tbody tr:hover .btnExcluir {
-    
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-    
-}
-
-/*====================================================
-    RODAPÉ
-====================================================*/
-
-.painel footer{
-
-    text-align:center;
-
-    padding:10px;
-
-    font-weight:bold;
-
-    background:#171B22;
-
-}
-
-/*====================================================
-    BORDAS COLORIDAS
-====================================================*/
-
-.essenciais{
-
-    border-left:6px solid #E53935;
-
-}
-
-.ocasionais{
-
-    border-left:6px solid #FB8C00;
-
-}
-
-.investimentos{
-
-    border-left:6px solid #4A90E2;
-
-}
-
-/*====================================================
-    GRÁFICO
-====================================================*/
-
-.grafico {
-
-    background: #1D222D;
-
-    border-radius: 12px;
-
-    padding: 20px;
-    
-    box-shadow: 0 10px 20px rgba(0,0,0,.25);
-}
-
-.grafico h2{
-
-    text-align:center;
-
-    margin-bottom:20px;
-
-}
-
-#graficoPizza{
-
-    width:100%;
-
-    height:340px;
-
-}
-
-
-/*====================================================
-    SEGUNDA LINHA
-====================================================*/
-
-.linhaMeio{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:20px;
-
-}
-
-
-/*====================================================
-    CARDS
-====================================================*/
-
-.card{
-
-    background:#1D222D;
-
-    border-radius:12px;
-
-    padding:20px;
-
-    box-shadow:0 8px 32px rgba(0, 0, 0, 0.3);
-
-    transition:.25s;
-
-}
-
-.card:hover{
-
-    transform:translateY(-5px);
-
-}
-
-.card h2{
-
-    margin-bottom:15px;
-
-    color:#5FAEFF;
-
-}
-
-
-/*====================================================
-    SALDO
-====================================================*/
-
-.financeiroContainer{
-
-    flex:3;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-.saldoGeral{
-
-    background:#1D222D;
-
-    border-radius:12px;
-
-    letter-spacing: 1.5px;
-
-    padding: 15px;
-
-    text-align:center;
-
-    box-shadow:0 8px 24px rgba(0, 0, 0, 0.4);
-
-}
-
-.saldoGeral span{
-
-    display:block;
-
-    color:#DDD;
-
-    font-size:15px;
-
-    margin-bottom:10px;
-
-}
-
-.saldoGeral h1{
-
-    color:#34D16A;
-
-    font-size:40px;
-
-}
-
-/*====================================================
-    EDIÇÃO DO SALDO
-====================================================*/
-
-.saldoEdicao{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-#saldo{
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-#saldo:hover{
-
-    color:#66B3FF;
-
-}
-
-#editarSaldo{
-
-    width:220px;
-
-    font-size:52px;
-
-    font-weight:bold;
-
-    text-align:center;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:8px;
-
-    background:#2B3240;
-
-    color:#34D16A;
-
-    padding:4px 8px;
-
-}
-
-
-/*====================================================
-    CARTÕES
-====================================================*/
-
-.cartoes table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-.cartoes td{
-
-    padding:10px;
-
-    border-bottom:1px solid #303744;
-
-}
-
-
-/*====================================================
-    PAGAMENTOS
-====================================================*/
-
-.pagamentos table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-.pagamentos td{
-
-    padding: 5px;
-    font-size: 12px;
-    border-bottom:1px solid #303744;
-
-}
-
-
-/*====================================================
-    TERCEIRA LINHA
-====================================================*/
-
-.linhaInferior{
-
-    display:grid;
-
-    grid-template-columns:2fr 1fr;
-
-    gap:20px;
-
-}
-
-
-/*====================================================
-    AGENDA
-====================================================*/
-
-.agenda iframe{
-
-    width:100%;
-
-    height:700px;
-
-    border:none;
-
-    border-radius:10px;
-
-}
-
-
-/*====================================================
-    META DA MOTO
-====================================================*/
-
-#graficoMoto{
-
-    width:100%;
-
-    height:320px;
-
-}
-
-
-/*====================================================
-    TABELAS
-====================================================*/
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-}
-
-/*====================================================
-    SCROLL
-====================================================*/
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#4A90E2;
-
-    border-radius:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#15181F;
-
-}
-
-
-/*====================================================
-    RESPONSIVO
-====================================================*/
-
-@media(max-width:1400px){
-
-    .linhaSuperior{
-
-        flex-direction:column;
-
-    }
-
-    .financeiro{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .grafico{
-
-        width:100%;
-
-    }
-
-    .linhaMeio{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .linhaInferior{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-@media(max-width:900px){
-
-    nav{
-
-        flex-direction:column;
-
-        height:auto;
-
-        padding:10px;
-
-        gap:20px;
-
-    }
-
-    nav ul{
-
-        flex-wrap:wrap;
-
-        justify-content:center;
-
-    }
-
-}
-
-/*====================================================
-    ADICIONAR
-====================================================*/
-
-.cabecalhoPainel{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:10px 15px;
-
-}
-
-.btnAdicionar{
-
-    width:34px;
-
-    height:34px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#2E7DFF;
-
-    color:white;
-
-    font-size:22px;
-
-    font-weight:bold;
-
-    transition:.25s;
-
-}
-
-.btnAdicionar:hover{
-
-    transform:scale(1.08);
-
-    background:#4B97FF;
-
-}
-
-/*====================================================
-    MODAL
-====================================================*/
-
-.modal{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.65);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:999;
-
-}
-
-.oculto{
-
-    display:none;
-
-}
-
-.janela{
-
-    width:420px;
-
-    background:#1D222D;
-
-    padding:25px;
-
-    border-radius:15px;
-
-}
-
-.janela h2{
-
-    margin-bottom:20px;
-
-}
-
-.janela label{
-
-    display:block;
-
-    margin-top:15px;
-
-}
-
-.janela input,
-.janela select{
-
-    width:100%;
-
-    padding:10px;
-
-    margin-top:6px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#2B3240;
-
-    color:white;
-
-}
-
-.botoes{
-
-    margin-top:25px;
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:10px;
-
-}
-
-.botoes button{
-
-    padding:10px 18px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-}
-
-/*====================================================*
-*TRANSFERÊNCIA DE ORÇAMENTO*
-*====================================================*/
-
-.transferencia{
-
-    padding:12px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-
-    background:#202631;
-
-    border-top:1px solid #303744;
-
-}
-
-.transferencia input,
-.transferencia select{
-
-    width:100%;
-
-    padding:8px 10px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#2B3240;
-
-    color:#FFF;
-
-    font-size:14px;
-
-}
-
-.btnTransferir{
-
-    padding:10px;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#2E7DFF;
-
-    color:white;
-
-    font-weight:bold;
-
-    transition:.25s;
-
-}
-
-.btnTransferir:hover{
-
-    background:#4B97FF;
-
-    transform:scale(1.02);
-
-}
-
-/*====================================================
-    PÁGINA FINANCEIRO
-====================================================*/
-
-.paginaFinanceiro {
-
-    width: 96%;
-
-    margin: 25px auto;
-
-    background: #1D222D;
-
-    border-radius: 12px;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,.30);
-
-    overflow: hidden;
-
-}
-
-
-/*====================================================
-    PAINEL DE LANÇAMENTOS
-====================================================*/
-
-.painelLancamentos {
-
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-/*====================================================
-    CABEÇALHO
-====================================================*/
-
-.cabecalhoLancamentos {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 20px 25px;
-
-    background: #1B1F27;
-
-    border-bottom: 1px solid #303744;
-
-}
-
-.cabecalhoLancamentos h1 {
-
-    font-size: 24px;
-
-    margin-bottom: 5px;
-
-}
-
-.cabecalhoLancamentos span {
-
-    color: #9DA5B4;
-
-    font-size: 13px;
-
-}
-
-
-/*====================================================
-    BOTÃO NOVO LANÇAMENTO
-====================================================*/
-
-.btnNovoLancamento {
-
-    border: none;
-
-    border-radius: 8px;
-
-    padding: 11px 18px;
-
-    background: #2E7DFF;
-
-    color: white;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: .2s;
-
-}
-
-.btnNovoLancamento:hover {
-
-    background: #4B97FF;
-
-    transform: scale(1.03);
-
-}
-
-
-/*====================================================
-    FILTROS
-====================================================*/
-
-.filtrosLancamentos {
-
-    display: flex;
-
-    gap: 10px;
-
-    padding: 15px 25px;
-
-    background: #202631;
-
-    border-bottom: 1px solid #303744;
-
-}
-
-.filtrosLancamentos select {
-
-    padding: 9px 12px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    background: #2B3240;
-
-    color: white;
-
-    outline: none;
-
-}
-
-
-/*====================================================
-    TABELA
-====================================================*/
-
-.tabelaLancamentos {
-
-    width: 100%;
-
-    overflow-x: auto;
-
-}
-
-.tabelaLancamentos table {
-
-    width: 100%;
-
-    border-collapse: collapse;
-
-    table-layout: auto;
-
-}
-
-
-/* CABEÇALHO DA TABELA */
-
-.tabelaLancamentos thead {
-
-    background: #171B22;
-
-}
-
-.tabelaLancamentos th {
-
-    padding: 13px 15px;
-
-    color: #9DA5B4;
-
-    font-size: 12px;
-
-    text-transform: uppercase;
-
-    text-align: center;
-
-    border-bottom: 1px solid #303744;
-
-    white-space: nowrap;
-
-}
-
-
-/* LINHAS */
-
-.tabelaLancamentos tbody tr {
-
-    height: 42px;
-
-    border-bottom: 1px dashed #343C4A;
-
-    transition: .15s;
-
-}
-
-.tabelaLancamentos tbody tr:hover {
-
-    background: #242A35;
-
-}
-
-
-/* CÉLULAS */
-
-.tabelaLancamentos td {
-
-    padding: 8px 15px;
-
-    font-size: 13px;
-
-    text-align: center;
-
-    color: #E5E7EB;
-
-}
-
-
-/* VALOR */
-
-.valorLancamento {
-
-    text-align: right;
-
-    color: #FF7272 !important;
-
-    font-weight: bold;
-
-    white-space: nowrap;
-
-}
-
-
-/* AÇÕES */
-
-.acoesLancamento {
-
-    width: 50px;
-
-    text-align: center;
-
-}
-
-
-/*====================================================
-    CATEGORIAS
-====================================================*/
-
-.categoria {
-
-    display: inline-block;
-
-    padding: 4px 8px;
-
-    border-radius: 5px;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-}
-
-.categoria.essencial {
-
-    background: rgba(229,57,53,.15);
-
-    color: #FF7777;
-
-}
-
-.categoria.occasional {
-
-    background: rgba(251,140,0,.15);
-
-    color: #FFB454;
-
-}
-
-
-/*====================================================
-    RESUMO
-====================================================*/
-
-.resumoLancamentos {
-
-    display: flex;
-
-    justify-content: space-around;
-
-    align-items: stretch;
-
-    gap: 20px;
-
-    padding: 18px 25px;
-
-    background: #171B22;
-
-    border-top: 1px solid #303744;
-
-}
-
-.resumoLancamentos span {
-
-    color: #9DA5B4;
-
-    font-size: 13px;
-
-}
-
-.resumoLancamentos strong {
-
-    color: #34D16A;
-
-    font-size: 20px;
-
-}
-
-/*====================================================
-    SUBCATEGORIA - LANÇAMENTOS
-====================================================*/
-
-.subcategoria{
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    min-width:180px;
-
-    padding:4px 10px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-
-    background:#1D222D;
-
-}
-
-
-/* ESSENCIAIS */
-
-.subcategoria.essenciais{
-
-    border:2px solid #E53935;
-
-    text-align: center;
-
-    color:#E53935;
-
-}
-
-
-/* OCASIONAIS */
-
-.subcategoria.ocasionais{
-
-    border:2px solid #FB8C00;
-
-    color:#FB8C00;
-
-}
-
-
-/* INVESTIMENTOS */
-
-.subcategoria.investimentos{
-
-    border:2px solid #4A90E2;
-
-    color:#4A90E2;
-
-}
-
-
-/* SETA */
-
-.setaSubcategoria{
-
-    margin-left:10px;
-
-    font-size:12px;
-
-}
-
-/* A linha vira o container de posicionamento */
-.linhaComExclusao {
-    position: relative;
-    border-bottom: 1px dashed #3B4353;
-    transition: transform 0.3s ease;
-}
-
-/* Criamos o botão como um elemento virtual (pseudo-elemento) */
-.linhaComExclusao::after {
-    content: "✕";
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%) translateX(10px);
-    
-    width: 20px;
-    height: 20px;
-    background: #b83a3a;
-    color: white;
-    border-radius: 50%;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
-
-/*====================================================
-    DRAG AND DROP (ARRASTAR E SOLTAR)
-====================================================*/
-
-.linhaComExclusao:active {
-    cursor: grabbing !important;
-}
-
-.arrastando {
-    opacity: 0.4;
-    background: #242A35;
-}
-
-.drag-over {
-    border-top: 2px solid #4DA3FF; /* Cria uma linha azul indicando onde o item vai cair */
-    background: #1B1F27;
-}
-
-/*====================================================
-    PAINEL DIREITO (GRÁFICO + PAGAMENTOS)
-====================================================*/
-.painelDireito {
-    flex: 1;
-    min-width: 350px;
-    max-width: 590px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/*====================================================
-    TABELA PAGAMENTOS (ESPECÍFICO)
-====================================================*/
-.tabela-estilo-pagamentos thead th {
-    color: #9DA5B4;
-    font-size: 12px;
-    text-transform: uppercase;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #303744;
-}
-
-.tabela-estilo-pagamentos input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    padding: 13px 15px;
-    accent-color: #34D16A; 
-}
-
-/*====================================================
-    CABEÇALHOS DOS BLOCOS (DISTRIBUIÇÃO E PAGAMENTOS)
-====================================================*/
-.cabecalho-bloco {
-    background: #242A35; 
-    padding: 12px;
-    border-radius: 8px; 
-    margin-bottom: 20px; 
-    text-align: center; 
-    border: 1px solid #303744; 
-}
-
-.cabecalho-bloco h2 {
-    margin-bottom: 0; 
-    color: #5FAEFF; 
-    font-size: 16px;
-    letter-spacing: 1.5px; 
-}
-
-/*====================================================
-    BOTÃO EXCLUIR/LIMPAR PAGAMENTO
-====================================================*/
-.linhaPagamento td {
-    position: relative; 
-}
-
-.btnExcluirPagamento {
-    width: 20px;
-    height: 20px;
-    border: none;
-    border-radius: 50%;
-    background: #b83a3a;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 10px;
-    
-    position: absolute;
-    right: -15px; 
-    top: 50%;
-    transform: translateY(-50%);
-    
-    opacity: 0; 
-    transition: opacity 0.3s ease; 
-    pointer-events: none; 
-}
-
-.btnExcluirPagamento:hover {
-    background: #ff4444;
-}
-
-.linhaPagamento:hover .btnExcluirPagamento {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/*====================================================
-    MODO CLARO (LIGHT MODE)
-====================================================*/
-body.light-mode {
-    background: #F0F2F5;
-    color: #333;
-}
-
-body.light-mode nav {
-    background: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-body.light-mode nav a {
-    color: #555;
-}
-
-body.light-mode nav a:hover {
-    color: #2E7DFF;
-}
-
-body.light-mode nav li + li {
-    border-left: 2px solid #a8a8a8;
-}
-
-/* Fundos brancos para os painéis */
-body.light-mode .painel, 
-body.light-mode .card, 
-body.light-mode .janela, 
-body.light-mode .grafico, 
-body.light-mode .saldoGeral, 
-body.light-mode .paginaFinanceiro,
-body.light-mode .subcategoria {
-    background: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-/* Áreas acinzentadas / Cabeçalhos */
-body.light-mode .painel footer,
-body.light-mode .cabecalho-bloco,
-body.light-mode .transferencia,
-body.light-mode .cabecalhoLancamentos,
-body.light-mode .filtrosLancamentos,
-body.light-mode .tabelaLancamentos thead,
-body.light-mode .resumoLancamentos {
-    background: #F8F9FA;
-    color: #333;
-    border-color: #E0E0E0;
-}
-
-/* Bordas das tabelas e divisórias */
-body.light-mode .painel tbody tr, 
-body.light-mode .cartoes td, 
-body.light-mode .pagamentos td, 
-body.light-mode .tabela-estilo-pagamentos thead th, 
-body.light-mode .linhaComExclusao,
-body.light-mode .tabelaLancamentos th,
-body.light-mode .tabelaLancamentos tbody tr,
-body.light-mode .transferencia {
-    border-color: #a8a8a8;
-}
-
-/* Sobrescrevendo Inputs e Selects */
-body.light-mode input, 
-body.light-mode select,
-body.light-mode #editarSaldo {
-    background: #F0F2F5 !important;
-    color: #333 !important;
-    border: 1px solid #CCC !important;
-}
-
-body.light-mode select option {
-    background: #FFFFFF !important;
-    color: #333 !important;
-}
-
-/* Ajustes de textos sutis */
-body.light-mode .saldoGeral span, 
-body.light-mode .tabela-estilo-pagamentos thead th,
-body.light-mode .cabecalhoLancamentos span,
-body.light-mode .resumoLancamentos span {
-    color: #777;
-}
-
-body.light-mode .tabelaLancamentos td {
-    color: #444;
-}
-
-/* Efeitos de Hover e Drag and Drop */
-body.light-mode .tabelaLancamentos tbody tr:hover {
-    background: #F9F9F9;
-}
-
-body.light-mode .drag-over {
-    background: #F0F2F5;
-}
-
-body.light-mode .arrastando {
-    background: #E0E0E0;
-}
-
-body.light-mode .modal {
-    background: rgba(0,0,0,0.6);
-}
-/*====================================================
-    CORES: TABELA ENTRADA E SAÍDA (DARK MODE)
-====================================================*/
-.bg-dark-entrada {
-    background: rgba(52, 209, 106, 0.08) !important;
-    color: #34D16A !important;
-}
-
-.bg-dark-essencial {
-    background: rgba(229, 57, 53, 0.12) !important;
-    color: #FF7777 !important;
-}
-
-.bg-dark-ocasional {
-    background: rgba(251, 140, 0, 0.12) !important;
-    color: #FFB454 !important;
-}
-
-.bg-dark-investimento {
-    background: rgba(74, 144, 226, 0.12) !important;
-    color: #5FAEFF !important;
-}
-
-/* Bordas sutis para separar os lados */
-.tabelaLancamentos td.borda-direita {
-    border-right: 1px solid #303744;
-}
-
-/*====================================================
-    CORES: TABELA ENTRADA E SAÍDA (LIGHT MODE)
-====================================================*/
+*{ margin:0; padding:0; box-sizing:border-box; }
+body { background: #111318; font-family: 'Inter', sans-serif; color: #FFF; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+nav{ height:70px; background:#1B1F27; display:flex; justify-content:space-between; align-items:center; padding:0 40px; box-shadow:0 4px 30px rgba(0,0,0, 0.4); }
+.logo{ font-size:28px; font-weight:bold; color:#4DA3FF; }
+nav ul{ display:flex; list-style:none; gap:0; }
+nav a{ text-decoration:none; color:white; transition:.3s; }
+nav li { padding: 0 17.5px; }
+nav li + li { border-left: 2px solid #fff; }
+nav a:hover{ color:#4DA3FF; }
+.dashboard{ width:96%; margin:25px auto; display:flex; flex-direction:column; gap:25px; }
+.linhaSuperior{ display:flex; gap:20px; align-items:flex-start; }
+.financeiro{ flex:3; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.painel{ background:#1D222D; border-radius:12px; overflow:hidden; min-height:640px; display:flex; flex-direction:column; }
+.painel header{ text-align:center; padding:10px; color:white; }
+.painel header h2{ font-size:18px; }
+.painel header span{ display:block; margin-top:4px; font-size:14px; }
+.essenciais header{ background:#D76B6B; } .ocasionais header{ background:#D8A15C; } .investimentos header{ background:#6B87D8; }
+.tabela-wrapper { width: 100%; overflow-x: auto; flex: 1; }
+.painel table{ width:100%; border-collapse:collapse; min-width: 320px; }
+.painel tbody tr { height: 30px; border-bottom: 1px dashed #3B4353; position: relative; }
+.painel td{ padding:2px 2px 2px 9px; font-size:12px; }
+.valor{ text-align:right; color:#FF7272; font-weight:bold; }
+.linhaVazia td{ color:transparent; }
+.acoes { position: absolute; right: 5px; top: 0; bottom: 0; width: 30px; padding: 0 !important; display: flex; align-items: center; justify-content: center; }
+.btnExcluir { width: 24px; height: 24px; border: none; border-radius: 50%; background: #b83a3a; color: white; cursor: pointer; font-weight: bold; font-size: 11px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.btnExcluir:hover { background: #ff4444; }
+.painel tbody tr:hover .btnExcluir { opacity: 1; transform: translateX(0); pointer-events: auto; }
+.painel footer{ text-align:center; padding:10px; font-weight:bold; background:#171B22; }
+.essenciais{ border-left:6px solid #E53935; } .ocasionais{ border-left:6px solid #FB8C00; } .investimentos{ border-left:6px solid #4A90E2; }
+.grafico { background: #1D222D; border-radius: 12px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,.25); }
+.grafico h2{ text-align:center; margin-bottom:20px; }
+#graficoPizza{ width:100%; height:340px; }
+.linhaMeio{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.card{ background:#1D222D; border-radius:12px; padding:20px; box-shadow:0 8px 32px rgba(0, 0, 0, 0.3); transition:.25s; }
+.card:hover{ transform:translateY(-5px); }
+.card h2{ margin-bottom:15px; color:#5FAEFF; }
+.financeiroContainer{ flex:3; display:flex; flex-direction:column; gap:18px; width: 100%; overflow: hidden; }
+.saldoGeral{ background:#1D222D; border-radius:12px; letter-spacing: 1.5px; padding: 15px; text-align:center; box-shadow:0 8px 24px rgba(0, 0, 0, 0.4); }
+.saldoGeral span{ display:block; color:#DDD; font-size:15px; margin-bottom:10px; }
+.saldoGeral h1{ color:#34D16A; font-size:40px; }
+.saldoEdicao{ display:flex; justify-content:center; align-items:center; }
+#saldo{ cursor:pointer; transition:.2s; } #saldo:hover{ color:#66B3FF; }
+#editarSaldo{ width:220px; font-size:52px; font-weight:bold; text-align:center; border:none; outline:none; border-radius:8px; background:#2B3240; color:#34D16A; padding:4px 8px; }
+.cartoes table{ width:100%; border-collapse:collapse; min-width: 300px; } .cartoes td{ padding:10px; border-bottom:1px solid #303744; }
+.pagamentos table{ width:100%; border-collapse:collapse; min-width: 300px; } .pagamentos td{ padding: 5px; font-size: 12px; border-bottom:1px solid #303744; }
+.linhaInferior{ display:grid; grid-template-columns:2fr 1fr; gap:20px; }
+.agenda iframe{ width:100%; height:700px; border:none; border-radius:10px; }
+#graficoMoto{ width:100%; height:320px; }
+table{ width:100%; border-collapse:collapse; }
+::-webkit-scrollbar{ width:8px; height: 8px;} ::-webkit-scrollbar-thumb{ background:#4A90E2; border-radius:10px; } ::-webkit-scrollbar-track{ background:#15181F; }
+
+/* Adicionar */
+.cabecalhoPainel{ display:flex; justify-content:space-between; align-items:center; padding:10px 15px; }
+.btnAdicionar{ width:34px; height:34px; border:none; border-radius:8px; cursor:pointer; background:#2E7DFF; color:white; font-size:22px; font-weight:bold; transition:.25s; }
+.btnAdicionar:hover{ transform:scale(1.08); background:#4B97FF; }
+.modal{ position:fixed; inset:0; background:rgba(0,0,0,.65); display:flex; justify-content:center; align-items:center; z-index:999; }
+.oculto{ display:none !important; }
+.janela{ width:90%; max-width: 420px; background:#1D222D; padding:25px; border-radius:15px; }
+.janela h2{ margin-bottom:20px; }
+.janela label{ display:block; margin-top:15px; }
+.janela input, .janela select{ width:100%; padding:10px; margin-top:6px; border:none; border-radius:8px; background:#2B3240; color:white; }
+.botoes{ margin-top:25px; display:flex; justify-content:flex-end; gap:10px; }
+.botoes button{ padding:10px 18px; border:none; border-radius:8px; cursor:pointer; }
+.transferencia{ padding:12px; display:flex; flex-direction:column; gap:8px; background:#202631; border-top:1px solid #303744; }
+.transferencia input, .transferencia select{ width:100%; padding:8px 10px; border:none; border-radius:8px; background:#2B3240; color:#FFF; font-size:14px; }
+.btnTransferir{ padding:10px; border:none; border-radius:8px; cursor:pointer; background:#2E7DFF; color:white; font-weight:bold; transition:.25s; }
+.btnTransferir:hover{ background:#4B97FF; transform:scale(1.02); }
+
+.paginaFinanceiro { width: 96%; margin: 25px auto; background: #1D222D; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,.30); overflow: hidden; }
+.painelLancamentos { width: 100%; display: flex; flex-direction: column; }
+.cabecalhoLancamentos { display: flex; justify-content: space-between; align-items: center; padding: 20px 25px; background: #1B1F27; border-bottom: 1px solid #303744; }
+.cabecalhoLancamentos h1 { font-size: 24px; margin-bottom: 5px; } .cabecalhoLancamentos span { color: #9DA5B4; font-size: 13px; }
+.btnNovoLancamento { border: none; border-radius: 8px; padding: 11px 18px; background: #2E7DFF; color: white; font-size: 14px; font-weight: bold; cursor: pointer; transition: .2s; }
+.btnNovoLancamento:hover { background: #4B97FF; transform: scale(1.03); }
+.filtrosLancamentos { display: flex; gap: 10px; padding: 15px 25px; background: #202631; border-bottom: 1px solid #303744; }
+.filtrosLancamentos select { padding: 9px 12px; border: none; border-radius: 7px; background: #2B3240; color: white; outline: none; }
+.tabelaLancamentos { width: 100%; overflow-x: auto; }
+.tabelaLancamentos table { width: 100%; border-collapse: collapse; table-layout: auto; min-width: 650px; }
+.tabelaLancamentos thead { background: #171B22; } .tabelaLancamentos th { padding: 13px 15px; color: #9DA5B4; font-size: 12px; text-transform: uppercase; text-align: center; border-bottom: 1px solid #303744; white-space: nowrap; }
+.tabelaLancamentos tbody tr { height: 42px; border-bottom: 1px dashed #343C4A; transition: .15s; }
+.tabelaLancamentos tbody tr:hover { background: #242A35; }
+.tabelaLancamentos td { padding: 8px 15px; font-size: 13px; text-align: center; color: #E5E7EB; }
+.valorLancamento { text-align: right; color: #FF7272 !important; font-weight: bold; white-space: nowrap; }
+.acoesLancamento { width: 50px; text-align: center; }
+.categoria { display: inline-block; padding: 4px 8px; border-radius: 5px; font-size: 11px; font-weight: bold; }
+.categoria.essencial { background: rgba(229,57,53,.15); color: #FF7777; } .categoria.occasional { background: rgba(251,140,0,.15); color: #FFB454; }
+.resumoLancamentos { display: flex; justify-content: space-around; align-items: stretch; gap: 20px; padding: 18px 25px; background: #171B22; border-top: 1px solid #303744; }
+.resumoLancamentos span { color: #9DA5B4; font-size: 13px; } .resumoLancamentos strong { color: #34D16A; font-size: 20px; }
+.subcategoria{ display:inline-flex; justify-content:center; min-width:180px; padding:4px 10px; border-radius:20px; font-weight:bold; background:#1D222D; }
+.subcategoria.essenciais{ border:2px solid #E53935; text-align: center; color:#E53935; }
+.subcategoria.ocasionais{ border:2px solid #FB8C00; color:#FB8C00; }
+.subcategoria.investimentos{ border:2px solid #4A90E2; color:#4A90E2; }
+.setaSubcategoria{ margin-left:10px; font-size:12px; }
+.linhaComExclusao { position: relative; border-bottom: 1px dashed #3B4353; transition: transform 0.3s ease; }
+.linhaComExclusao::after { content: "✕"; position: absolute; right: 10px; top: 50%; transform: translateY(-50%) translateX(10px); width: 20px; height: 20px; background: #b83a3a; color: white; border-radius: 50%; font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: all 0.3s ease; pointer-events: none; }
+.linhaComExclusao:active { cursor: grabbing !important; }
+.arrastando { opacity: 0.4; background: #242A35; }
+.drag-over { border-top: 2px solid #4DA3FF; background: #1B1F27; }
+
+.painelDireito { flex: 1; width: 100%; max-width: 590px; display: flex; flex-direction: column; gap: 20px; }
+.tabela-estilo-pagamentos { min-width: 320px; }
+.tabela-estilo-pagamentos thead th { color: #9DA5B4; font-size: 12px; text-transform: uppercase; padding-bottom: 10px; border-bottom: 1px solid #303744; }
+.tabela-estilo-pagamentos input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; padding: 13px 15px; accent-color: #34D16A; }
+.cabecalho-bloco { background: #242A35; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #303744; }
+.cabecalho-bloco h2 { margin-bottom: 0; color: #5FAEFF; font-size: 16px; letter-spacing: 1.5px; }
+.linhaPagamento td { position: relative; }
+.btnExcluirPagamento { width: 20px; height: 20px; border: none; border-radius: 50%; background: #b83a3a; color: white; cursor: pointer; font-weight: bold; font-size: 10px; position: absolute; right: -15px; top: 50%; transform: translateY(-50%); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.btnExcluirPagamento:hover { background: #ff4444; }
+.linhaPagamento:hover .btnExcluirPagamento { opacity: 1; pointer-events: auto; }
+
+/* Modo Claro */
+body.light-mode { background: #F0F2F5; color: #333; }
+body.light-mode nav { background: #FFFFFF; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+body.light-mode nav a { color: #555; } body.light-mode nav a:hover { color: #2E7DFF; }
+body.light-mode nav li + li { border-left: 2px solid #a8a8a8; }
+body.light-mode .painel, body.light-mode .card, body.light-mode .janela, body.light-mode .grafico, body.light-mode .saldoGeral, body.light-mode .paginaFinanceiro, body.light-mode .subcategoria { background: #FFFFFF; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+body.light-mode .painel footer, body.light-mode .cabecalho-bloco, body.light-mode .transferencia, body.light-mode .cabecalhoLancamentos, body.light-mode .filtrosLancamentos, body.light-mode .tabelaLancamentos thead, body.light-mode .resumoLancamentos { background: #F8F9FA; color: #333; border-color: #E0E0E0; }
+body.light-mode .painel tbody tr, body.light-mode .cartoes td, body.light-mode .pagamentos td, body.light-mode .tabela-estilo-pagamentos thead th, body.light-mode .linhaComExclusao, body.light-mode .tabelaLancamentos th, body.light-mode .tabelaLancamentos tbody tr, body.light-mode .transferencia { border-color: #a8a8a8; }
+body.light-mode input, body.light-mode select, body.light-mode #editarSaldo { background: #F0F2F5 !important; color: #333 !important; border: 1px solid #CCC !important; }
+body.light-mode select option { background: #FFFFFF !important; color: #333 !important; }
+body.light-mode .saldoGeral span, body.light-mode .tabela-estilo-pagamentos thead th, body.light-mode .cabecalhoLancamentos span, body.light-mode .resumoLancamentos span { color: #777; }
+body.light-mode .tabelaLancamentos td { color: #444; }
+body.light-mode .tabelaLancamentos tbody tr:hover { background: #F9F9F9; }
+body.light-mode .drag-over { background: #F0F2F5; } body.light-mode .arrastando { background: #E0E0E0; }
+body.light-mode .modal { background: rgba(0,0,0,0.6); }
+
+/* Cores: Entrada e Saída */
+.bg-dark-entrada { background: rgba(52, 209, 106, 0.08) !important; color: #34D16A !important; }
+.bg-dark-essencial { background: rgba(229, 57, 53, 0.12) !important; color: #FF7777 !important; }
+.bg-dark-ocasional { background: rgba(251, 140, 0, 0.12) !important; color: #FFB454 !important; }
+.bg-dark-investimento { background: rgba(74, 144, 226, 0.12) !important; color: #5FAEFF !important; }
+.tabelaLancamentos td.borda-direita { border-right: 1px solid #303744; }
 body.light-mode .bg-dark-entrada { background: rgba(52, 209, 106, 0.2) !important; color: #1e7a3d !important; }
 body.light-mode .bg-dark-essencial { background: rgba(229, 57, 53, 0.2) !important; color: #b71c1c !important; }
 body.light-mode .bg-dark-ocasional { background: rgba(251, 140, 0, 0.25) !important; color: #d84315 !important; }
 body.light-mode .bg-dark-investimento { background: rgba(74, 144, 226, 0.25) !important; color: #1565c0 !important; }
 body.light-mode .tabelaLancamentos td.borda-direita { border-right: 1px solid #a8a8a8; }
+
+
+/*====================================================
+    RESPONSIVIDADE COMPLETA (ATUALIZADA)
+====================================================*/
+
+@media(max-width:1400px){
+    .linhaSuperior{ flex-direction:column; }
+    .financeiro{ grid-template-columns:1fr; }
+    .grafico{ width:100%; }
+    .linhaMeio{ grid-template-columns:1fr; }
+    .linhaInferior{ grid-template-columns:1fr; }
+    .painelDireito { max-width: 100%; min-width: 100%; }
+}
+
+@media(max-width:900px){
+    nav{ flex-direction:column; height:auto; padding:15px; gap:15px; }
+    nav ul{ flex-wrap:wrap; justify-content:center; gap:10px; padding: 0;}
+    nav li { padding: 8px 12px; }
+    nav li + li { border-left: none; }
+    
+    .cabecalhoLancamentos { flex-direction: column; gap: 15px; text-align: center; }
+    .btnNovoLancamento { width: 100%; }
+    .resumoLancamentos { flex-direction: column; gap: 10px; align-items: center; text-align: center; }
+}
+
+@media(max-width:768px){
+    .dashboard, .paginaFinanceiro { width: 95%; margin: 15px auto; }
+    
+    .saldoGeral h1 { font-size: 32px; }
+    #editarSaldo { width: 100%; font-size: 32px; }
+    
+    /* Garante overflow das tabelas para evitar quebra de layout */
+    .filtrosLancamentos { flex-direction: column; }
+    .linhaPagamento td { font-size: 11px; padding: 3px; }
+}
+
+@media(max-width:480px){
+    .saldoGeral h1 { font-size: 26px; }
+    
+    .cabecalhoPainel { flex-direction: column; gap: 12px; text-align: center; }
+    .btnAdicionar { width: 100%; }
+    
+    .transferencia { flex-direction: column; }
+    .btnTransferir { width: 100%; }
+    
+    .botoes { flex-direction: column; width: 100%; }
+    .botoes button { width: 100%; }
+    
+    .janela { padding: 20px 15px; }
+    .card, .painel { padding-bottom: 10px; }
+}
