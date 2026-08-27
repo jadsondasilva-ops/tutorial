@@ -943,8 +943,6 @@ table{
 
     width: 96%;
 
-    min-height: calc(100vh - 95px);
-
     margin: 25px auto;
 
     background: #1D222D;
@@ -1233,9 +1231,9 @@ table{
 
     display: flex;
 
-    justify-content: flex-end;
+    justify-content: space-around;
 
-    align-items: center;
+    align-items: stretch;
 
     gap: 20px;
 
@@ -1488,7 +1486,7 @@ body.light-mode nav a:hover {
 }
 
 body.light-mode nav li + li {
-    border-left: 2px solid #585858;
+    border-left: 2px solid #a8a8a8;
 }
 
 /* Fundos brancos para os painéis */
@@ -1525,7 +1523,7 @@ body.light-mode .linhaComExclusao,
 body.light-mode .tabelaLancamentos th,
 body.light-mode .tabelaLancamentos tbody tr,
 body.light-mode .transferencia {
-    border-color: #585858;
+    border-color: #a8a8a8;
 }
 
 /* Sobrescrevendo Inputs e Selects */
@@ -1570,3 +1568,39 @@ body.light-mode .arrastando {
 body.light-mode .modal {
     background: rgba(0,0,0,0.6);
 }
+/*====================================================
+    CORES: TABELA ENTRADA E SAÍDA (DARK MODE)
+====================================================*/
+.bg-dark-entrada {
+    background: rgba(52, 209, 106, 0.08) !important;
+    color: #34D16A !important;
+}
+
+.bg-dark-essencial {
+    background: rgba(229, 57, 53, 0.12) !important;
+    color: #FF7777 !important;
+}
+
+.bg-dark-ocasional {
+    background: rgba(251, 140, 0, 0.12) !important;
+    color: #FFB454 !important;
+}
+
+.bg-dark-investimento {
+    background: rgba(74, 144, 226, 0.12) !important;
+    color: #5FAEFF !important;
+}
+
+/* Bordas sutis para separar os lados */
+.tabelaLancamentos td.borda-direita {
+    border-right: 1px solid #303744;
+}
+
+/*====================================================
+    CORES: TABELA ENTRADA E SAÍDA (LIGHT MODE)
+====================================================*/
+body.light-mode .bg-dark-entrada { background: rgba(52, 209, 106, 0.2) !important; color: #1e7a3d !important; }
+body.light-mode .bg-dark-essencial { background: rgba(229, 57, 53, 0.2) !important; color: #b71c1c !important; }
+body.light-mode .bg-dark-ocasional { background: rgba(251, 140, 0, 0.25) !important; color: #d84315 !important; }
+body.light-mode .bg-dark-investimento { background: rgba(74, 144, 226, 0.25) !important; color: #1565c0 !important; }
+body.light-mode .tabelaLancamentos td.borda-direita { border-right: 1px solid #a8a8a8; }

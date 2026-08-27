@@ -1448,6 +1448,103 @@ btnConfiguracoes.addEventListener("click", (evento) => {
 });
 
 //==================================================
+// ELEMENTOS DE NAVEGAÇÃO E ABA ENTRADA E SAÍDA
+//==================================================
+const linkEntradaSaida = document.getElementById("linkEntradaSaida"); // Certifique-se de que o <a> no nav tem esse ID
+const paginaEntradaSaida = document.getElementById("paginaEntradaSaida");
+
+// NAVEGAR PARA ENTRADA E SAÍDA
+linkEntradaSaida.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    document.querySelector(".dashboard").classList.add("oculto");
+    paginaFinanceiro.classList.add("oculto");
+    paginaEntradaSaida.classList.remove("oculto");
+    
+    renderizarEntradaSaida();
+});
+
+// NAVEGAR PARA FINANCEIRO (Atualizado)
+linkFinanceiro.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    document.querySelector(".dashboard").classList.add("oculto");
+    paginaEntradaSaida.classList.add("oculto");
+    paginaFinanceiro.classList.remove("oculto");
+});
+
+// NAVEGAR PARA INÍCIO (Atualizado)
+linkInicio.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    paginaFinanceiro.classList.add("oculto");
+    paginaEntradaSaida.classList.add("oculto");
+    document.querySelector(".dashboard").classList.remove("oculto");
+});
+
+//==================================================
+// RENDERIZAR TABELA ENTRADA E SAÍDA
+//==================================================
+function renderizarEntradaSaida() {
+    const tbody = document.getElementById("tbEntradaSaida");
+    tbody.innerHTML = "";
+
+    // 1. Array de Entradas (Puxando o Saldo Total)
+    const entradas = [
+        { descricao: "Soldo Total", valor: saldoTotal, classe: "entrada" }
+    ];
+
+    // 2. Array de Saídas (Agrupando os dados e herdando as classes css)
+    const saidas = [];
+    dados.essenciais.forEach(item => saidas.push({ ...item, classe: "essencial" }));
+    dados.ocasionais.forEach(item => saidas.push({ ...item, classe: "ocasional" }));
+    dados.investimentos.forEach(item => saidas.push({ ...item, classe: "investimento" }));
+
+    const maxLinhas = Math.max(entradas.length, saidas.length);
+    let totalEntrada = 0;
+    let totalSaida = 0;
+
+    // 3. Gerar Linhas (lado a lado na mesma TR)
+    for (let i = 0; i < maxLinhas; i++) {
+        const entrada = entradas[i];
+        const saida = saidas[i];
+        const tr = document.createElement("tr");
+        let html = "";
+
+        // COLUNAS DE ENTRADA
+        if (entrada) {
+            html += `
+                <td class="bg-dark-${entrada.classe}" style="text-align: left;">${entrada.descricao}</td>
+                <td class="bg-dark-${entrada.classe} borda-direita" style="text-align: right; font-weight: bold;">R$ ${entrada.valor.toFixed(2)}</td>
+            `;
+            totalEntrada += entrada.valor;
+        } else {
+            html += `<td class="borda-direita"></td><td class="borda-direita"></td>`;
+        }
+
+        // COLUNAS DE SAÍDA
+        if (saida) {
+            html += `
+                <td class="bg-dark-${saida.classe}" style="text-align: left;">${saida.descricao}</td>
+                <td class="bg-dark-${saida.classe}" style="text-align: right; font-weight: bold;">R$ ${saida.valor.toFixed(2)}</td>
+            `;
+            totalSaida += saida.valor;
+        } else {
+            html += `<td></td><td></td>`;
+        }
+
+        tr.innerHTML = html;
+        tbody.appendChild(tr);
+    }
+
+    // 4. Atualizar Valores do Rodapé
+    document.getElementById("totalEntradaES").innerText = `R$ ${totalEntrada.toFixed(2)}`;
+    document.getElementById("totalSaidaES").innerText = `R$ ${totalSaida.toFixed(2)}`;
+    
+    const saldoLiquido = totalEntrada - totalSaida;
+    const elSaldo = document.getElementById("saldoFinalES");
+    elSaldo.innerText = `R$ ${saldoLiquido.toFixed(2)}`;
+    elSaldo.style.color = saldoLiquido >= 0 ? "#34D16A" : "#FF7272"; // Verde se positivo, vermelho se negativo
+}
+
+//==================================================
 // START
 //==================================================
 

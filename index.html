@@ -33,7 +33,7 @@
 
             <li><a href="#" id ="linkInicio">Início</a></li>
             <li><a href="#" id="linkFinanceiro">Lançamentos</a></li>
-            <li><a href="#">Agenda</a></li>
+            <li><a href="#" id="linkEntradaSaida">Entrada e Saída</a></li>
             <li><a href="#">Relatórios</a></li>
             <li><a href="#" id="btnConfiguracoes">Configurações</a></li>
 
@@ -694,6 +694,66 @@
         </div>
 
     </div>
+<!--========================-->
+    <!-- PÁGINA ENTRADA E SAÍDA -->
+    <!--========================-->
+    <section id="paginaEntradaSaida" class="paginaFinanceiro oculto">
+        <div class="painelLancamentos">
+            
+            <!-- CABEÇALHO (No mesmo padrão do Financeiro) -->
+            <header class="cabecalhoLancamentos">
+                <div>
+                    <h1>Entrada e Saída</h1>
+                    <span>Fluxo de caixa detalhado por categoria</span>
+                </div>
+            </header>
+
+            <!-- TABELA -->
+            <div class="tabelaLancamentos">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="text-align: center; font-size: 14px; color: #34D16A; border-bottom: 2px solid #34D16A;">
+                                ENTRADAS
+                            </th>
+                            <th colspan="2" style="text-align: center; font-size: 14px; color: #FF7272; border-bottom: 2px solid #FF7272;">
+                                SAÍDAS
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: left;">Descrição</th>
+                            <th style="text-align: right;">Valor</th>
+                            <th style="text-align: left;">Descrição</th>
+                            <th style="text-align: right;">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbEntradaSaida">
+                        <!-- Gerado via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- RODAPÉ (No mesmo padrão do Financeiro) -->
+            <footer class="resumoLancamentos">
+                <div>
+                    <span>Total Entradas:</span>
+                    <strong id="totalEntradaES" style="color: #34D16A; margin-left: 10px;">R$ 0,00</strong>
+                </div>
+                <div>
+                    <span>Total Saídas:</span>
+                    <strong id="totalSaidaES" style="color: #FF7272; margin-left: 10px;">R$ 0,00</strong>
+                </div>
+                
+            </footer>
+            <footer class="resumoLancamentos">
+            <div>
+                    <span>Saldo Líquido:</span>
+                    <strong id="saldoFinalES" style="margin-left: 10px;">R$ 0,00</strong>
+                </div>
+              
+            </footer>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 
